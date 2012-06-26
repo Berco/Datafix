@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp" >
+
+    	
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ivAppDetailIcon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvAppName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/ivAppDetailIcon"
+                android:layout_centerVertical="true"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:text="AppName" />
+        </RelativeLayout>
+		
+		<RelativeLayout 
+		    android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+        	<TextView
+            	android:id="@+id/tvPackageName"
+ 		        android:layout_width="wrap_content"
+   		        android:layout_height="wrap_content"
+   		        android:layout_centerHorizontal="true"
+        	    android:text="package.name.here" />
+
+        	<TextView
+            	android:id="@+id/tvSizeOnYaffs"
+            	android:layout_below="@id/tvPackageName"
+            	android:layout_alignParentLeft="true"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="YaffsSizeHere" />
+
+        	<TextView
+            	android:id="@+id/tvSizeOnData"
+            	android:layout_below="@id/tvPackageName"
+            	android:layout_alignParentRight="true"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="DataSizeHere" />
+        </RelativeLayout>
+        
+        <LinearLayout
+            android:id="@+id/llAppDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ProgressBar
+                android:id="@+id/pbAppDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+         
+         <by.zatta.datafix.assist.TouchInterceptor
+             android:id="@android:id/list"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:fadeScrollbars="false"
+             android:layout_weight="1" />
+                
+   
+    
+    
+    <LinearLayout
+	    android:orientation="vertical" 		
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content"
+	    android:divider="?android:attr/dividerHorizontal"
+	    android:showDividers="middle" >
+
+		<View
+		    android:layout_width="match_parent"
+		    android:layout_height="5dip" />
+        
+		<LinearLayout
+		    style="?android:attr/buttonBarStyle"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
+
+		    <Button
+		        android:id="@+id/btnClearCaches"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="Clear caches" />
+		    
+		    <Button
+		        android:id="@+id/btnClearAllData"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="Clear data" />
+
+		    
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

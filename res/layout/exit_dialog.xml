@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:padding="4dip"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent"
+    android:divider="?android:attr/dividerHorizontal"
+	android:showDividers="middle"
+    >
+
+    <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="20dip"
+            android:layout_marginBottom="30dip"
+            android:gravity="top|center_horizontal"
+             />
+        
+	<LinearLayout
+		    style="?android:attr/buttonBarStyle"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
+
+		    <Button
+		        android:id="@+id/btnNoExit"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="Cancel" />
+
+		    <Button
+		        android:id="@+id/btnYesExit"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="Exit" />
+	</LinearLayout>
+
+</LinearLayout>

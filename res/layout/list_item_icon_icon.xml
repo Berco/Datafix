@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/iconLeft"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="24dip"
+            android:layout_height="24dip"
+            android:layout_alignParentLeft="true"
+            android:paddingRight="3dp"
+            android:paddingTop="3dp" />
+
+        <ImageView
+            android:id="@+id/iconRight"
+            android:src="@drawable/ic_launcher"
+            android:layout_width="24dip"
+            android:layout_height="24dip"
+            android:layout_alignParentRight="true"
+            android:paddingRight="3dp"
+            android:paddingTop="3dp" />
+
+        <ProgressBar
+        	android:id="@+id/pbYaffsProgressBar"
+        	style="?android:attr/progressBarStyleHorizontal"
+        	android:progressDrawable="@drawable/progress_bar_states"
+        	android:layout_below="@id/iconLeft"
+        	android:layout_alignParentLeft="true"
+        	android:layout_width="100dp"
+        	android:layout_height="wrap_content"
+        	android:max="100"
+        	android:progress="50" />
+        
+        <TextView
+            android:id="@+id/tvFolderSizeYaff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iconLeft"
+            android:layout_alignParentLeft="true"
+            android:singleLine="true"
+            android:text="25000" />
+        
+        <by.zatta.datafix.assist.RTLProgressBar 
+       		android:id="@+id/pbDataProgressBar"
+       		style="?android:attr/progressBarStyleHorizontal"
+       		android:progressDrawable="@drawable/progress_bar_states"
+       		android:layout_below="@id/iconRight"
+       		android:layout_alignParentRight="true"
+	    	android:layout_width="100dp"
+   			android:layout_height="wrap_content"
+   			android:max="100"
+    		android:progress="50" />
+        
+        <TextView
+            android:id="@+id/tvFolderSizeData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iconRight"
+            android:layout_alignParentRight="true"
+            android:singleLine="true"
+            android:text="28000" />
+        
+        <TextView
+            android:id="@+id/tvDatasFolderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="@+id/text"
+            android:textStyle="bold" />
+        
+</RelativeLayout>
+
