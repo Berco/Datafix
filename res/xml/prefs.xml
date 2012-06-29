@@ -24,6 +24,23 @@
 		android:summary="some used info about your system">
 	</Preference>
 	
+	<PreferenceScreen 
+	    android:title="Donate"
+		android:summary="paypal to Zatta"
+		android:key="donatePayPalZatta">
+    	<intent
+        	android:action="android.intent.action.VIEW"
+        	android:data="http://forum.xda-developers.com/donatetome.php?u=3366694"/>
+	</PreferenceScreen>
+	
+	<PreferenceScreen 
+	    android:title="Donate"
+		android:summary="paypal to Wendigogo"
+		android:key="donatePayPalWendigogo">
+    	<intent
+        	android:action="android.intent.action.VIEW"
+        	android:data="http://forum.xda-developers.com/donatetome.php?u=2655181"/>
+	</PreferenceScreen>
   
 	<PreferenceScreen 
 	    android:title="Visit XDA"
