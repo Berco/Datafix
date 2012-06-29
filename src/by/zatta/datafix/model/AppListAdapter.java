@@ -3,6 +3,7 @@ package by.zatta.datafix.model;
 import java.util.List;
 
 import by.zatta.datafix.R;
+import by.zatta.datafix.dialog.ShowInfoDialog;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,8 +52,8 @@ public class AppListAdapter extends ArrayAdapter<AppEntry> {
         if (item.getCacheBool().equals("true")) cache = true;
         if (item.getDataBool().equals("true")) data = true;
         
-        String total_size = readable(item.getTotalSize(), false);
-        String cache_size = readable(item.getCacheSize(), false);
+        String total_size = ShowInfoDialog.readable(item.getTotalSize(), false);
+        String cache_size = ShowInfoDialog.readable(item.getCacheSize(), false);
         int percent_total = (int)(((double)item.getTotalSize()/biggest)*98);
         
         
@@ -66,15 +67,6 @@ public class AppListAdapter extends ArrayAdapter<AppEntry> {
        
         
         return view;
-    }
-    
-    private String readable(Long bytes, boolean si) {
-    	int unit = si ? 1000 : 1024;
-        if (bytes < unit) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(unit));
-        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
-        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
-    }
-    
+    }    
     
 }

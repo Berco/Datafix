@@ -155,8 +155,8 @@ public class ShowInfoDialog extends DialogFragment {
 			Long free = datadata.getFreeSpace();
 			int percent = (int)(((double)free/total)*100);
 			
-			showSizes = readable(total, true)+" "+Long.toString(total);
-			showSizes = showSizes + " " + readable(free, true);
+			showSizes = readable(total, false);
+			showSizes = showSizes + " " + readable(free, false);
 			showSizes = showSizes + " " + Integer.toString(percent) + "%";
 			
 		}

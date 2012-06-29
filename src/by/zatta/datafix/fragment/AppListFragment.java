@@ -1,4 +1,3 @@
-
 package by.zatta.datafix.fragment;
 
 import java.io.File;
@@ -120,6 +119,7 @@ public class AppListFragment extends ListFragment
 					Boolean firstUse = getPrefs.getBoolean("showFirstUse", true);
 					if (firstUse) showFirstUse();
 				}
+				freeSpaceAvailable();
 	}
 	
 	public void upDateList(){
@@ -133,9 +133,9 @@ public class AppListFragment extends ListFragment
 				Long total = datadata.getTotalSpace();
 				Long free = datadata.getFreeSpace();
 				int freePercent = (int)(((double)free/total)*100);
-				String freeSpace = "/datadata has "+ ShowInfoDialog.readable(free, true)+ " free"+ '\n' + Integer.toString(freePercent) + "%";
+				String freeSpace = "/datadata has "+ ShowInfoDialog.readable(free, false)+ " free"+ '\n' + Integer.toString(freePercent) + "%";
 				
-				mProgressFree.setProgress(100-freePercent);
+				mProgressFree.setProgress(100 - freePercent);
 				mTvFreeSpace.setText(freeSpace);
 			}
 	}
