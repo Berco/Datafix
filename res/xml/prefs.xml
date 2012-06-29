@@ -9,6 +9,13 @@
 		android:key="showFirstUse"
 		android:summary="check to show">
 	</CheckBoxPreference>
+	
+  	<CheckBoxPreference
+		android:title="No notifications for new apps"
+		android:defaultValue="false"
+		android:key="disableNotifications"
+		android:summary="check to disable notifications">
+	</CheckBoxPreference>
     
     
 	

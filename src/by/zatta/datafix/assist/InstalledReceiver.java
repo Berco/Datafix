@@ -7,6 +7,8 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class InstalledReceiver extends BroadcastReceiver {
 	private NotificationManager mNotificationManager ;
@@ -15,7 +17,9 @@ public class InstalledReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		System.out.println("Datafix received Broadcast");
 		mNotificationManager = (NotificationManager) context.getSystemService("notification");
-		makeNotification(context);		
+		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		Boolean disabledNotifications = getPrefs.getBoolean("disableNotifications", false);
+		if (!disabledNotifications) makeNotification(context);		
 	}
 	
 private void makeNotification(Context context) {
