@@ -16,10 +16,10 @@
         <clip>
             <shape>
                 <gradient
-                        android:startColor="#234"
-                        android:centerColor="#234"
+                        android:startColor="#04b431"
+                        android:centerColor="#0b1f3c"
                         android:centerY="0.75"
-                        android:endColor="#a24"
+                        android:endColor="#06101d"
                         android:angle="270"
                 />
             </shape>
@@ -41,6 +41,6 @@
     </item>
     
     <!-- #144281 was de oude startcolor voor progress
-    	#3F9BBF is de oude ics kleur -->
+    	#3F9BBF is de oude ics kleur, nieuw = 33b5e5, end color #a24 -->
 
 </layer-list>
