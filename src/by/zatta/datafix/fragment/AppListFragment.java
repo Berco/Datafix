@@ -3,6 +3,7 @@ package by.zatta.datafix.fragment;
 import java.io.File;
 import java.util.List;
 
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.TouchInterceptor;
 import by.zatta.datafix.dialog.ConfirmDialog;
@@ -50,7 +51,8 @@ public class AppListFragment extends ListFragment
 	private TouchInterceptor.TickListener mTickListener =
 			    new TouchInterceptor.TickListener() {
 			        public void ticked(int item, int tick) {
-			            System.out.println("Ticklisten item: "+item + " box: " + tick);
+			        	if (BaseActivity.DEBUG)
+			        	System.out.println("Ticklisten item: "+item + " box: " + tick);
 			            AppEntry app = appList.get(item);
 			            switch (tick){
 			            case 2:
@@ -148,6 +150,7 @@ public class AppListFragment extends ListFragment
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
+		if (BaseActivity.DEBUG)
 		Log.i("BaseActivity", "Item clicked: " + id);
 		AppEntry item = (AppEntry) getListAdapter().getItem(position);
         mAppListener.onAppSelectedListener(item);

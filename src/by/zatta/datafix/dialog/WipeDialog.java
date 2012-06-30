@@ -1,5 +1,6 @@
 package by.zatta.datafix.dialog;
 
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import by.zatta.datafix.model.AppEntry;
@@ -92,7 +93,8 @@ public class WipeDialog extends DialogFragment implements View.OnClickListener{
 			manager.killBackgroundProcesses(mHandledApp.getPackName());
 			
 			ShellProvider.INSTANCE.getCommandOutput(scriptLine + " wipe_cache " + mHandledApp.getPackName());
-						
+			
+			if (BaseActivity.DEBUG)			
 			System.out.println("Dialog wiping cache");
 		}else
 		if (mMode.contentEquals("data")){
@@ -103,7 +105,8 @@ public class WipeDialog extends DialogFragment implements View.OnClickListener{
 			manager.killBackgroundProcesses(mHandledApp.getPackName());
 			
 			ShellProvider.INSTANCE.getCommandOutput(scriptLine + " wipe_data " + mHandledApp.getPackName());
-						
+			
+			if (BaseActivity.DEBUG)			
 			System.out.println("Dialog wiping data");
 			
 		}

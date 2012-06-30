@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import by.zatta.datafix.assist.TouchInterceptor;
@@ -46,8 +47,9 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 	private TouchInterceptor.TickListener mTickListener =
 			    new TouchInterceptor.TickListener() {
 			        public void ticked(int item, int tick) {
-			        	System.out.println("Ticklisten item: "+ item + " box: " + tick);
+			        	
 			        	DataEntry dataItem = dataList.get(item);
+			        	if (BaseActivity.DEBUG)
 			        	System.out.println("Ticklisten item: "+dataItem.getDataName() + " box: " + tick);
 			            
 			            switch (tick){
@@ -148,7 +150,8 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 			
 			//if the app fully resides in /data/data. Prefents nullpointers
 			if (total_yaffs[0].contains("du:") && !total_data[0].contains("du:")){
-	        	System.out.println("Yaffs no such file");
+				if (BaseActivity.DEBUG)
+				System.out.println("Yaffs no such file");
 	        	for (int i=0; i<total_data.length; i=i+2) {
 	                String name = total_data[i];
 	                String dataSize = total_data[i+1];
@@ -165,7 +168,8 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 	            }
 	        // if the app fully resides in /datadata. Prevents nullpointers
 			}else if (total_data[0].contains("du:") && !total_yaffs[0].contains("du:")){
-	        	System.out.println("Data no such file");
+				if (BaseActivity.DEBUG)
+				System.out.println("Data no such file");
 	        	for (int i=0; i<total_yaffs.length; i=i+2) {
 	        		String name = total_yaffs[i];
 	        		String yaffsSize = total_yaffs[i+1];

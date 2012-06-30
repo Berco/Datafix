@@ -9,22 +9,18 @@ public class RTLProgressBar extends ProgressBar {
 	
 	public RTLProgressBar(Context context, AttributeSet attrs, int defStyle) {
 	    super(context, attrs, defStyle);
-	    // TODO Auto-generated constructor stub
 	}
 
 	public RTLProgressBar(Context context, AttributeSet attrs) {
 	    super(context, attrs);
-	    // TODO Auto-generated constructor stub
 	}
 
 	public RTLProgressBar(Context context) {
 	    super(context);
-	    // TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected synchronized void onDraw(Canvas canvas) {
-	    // TODO Auto-generated method stub
 	     canvas.save(); 
 
 	        //now we change the matrix

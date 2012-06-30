@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import by.zatta.datafix.model.AppEntry;
@@ -210,9 +211,11 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 	        s.flush();
 	        s.close();
 	        
+	        if (BaseActivity.DEBUG){
 	        System.out.println("Wrote file:" + cache.getName() );
 	        System.out.println("Wrote file:" + data.getName() );
-	    }catch(IOException e){}
+	        }
+	     }catch(IOException e){}
 	   }    
 }
 

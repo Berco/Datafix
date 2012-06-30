@@ -37,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener{
+	public static final boolean DEBUG = false;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {

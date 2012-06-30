@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import by.zatta.datafix.BaseActivity;
+
 import android.util.Log;
 
 public enum ShellProvider {
@@ -16,7 +18,6 @@ public enum ShellProvider {
 	/**
 	 * 
 	 */
-	private static final boolean DEBUG = true;
 	private static final String EOF_MARK = "s1UZA1BJt9rWWGF1tYFh";
 
 	private class WorkerThread extends Thread {
@@ -114,7 +115,7 @@ public enum ShellProvider {
 			try {
 
 				if (process == null) {
-					if (DEBUG)
+					if (BaseActivity.DEBUG)
 						Log.d(TAG,
 								"No active shell process, initializing...");
 					init();
@@ -123,14 +124,14 @@ public enum ShellProvider {
 				if (process != null)
 					process.exitValue();
 					init();
-				if (DEBUG)
+				if (BaseActivity.DEBUG)
 					Log.w(TAG,
 							"No active shell process, initializing...");
 				if (process != null)
 					process.exitValue();
 
 			} catch (IllegalThreadStateException e) {
-				if (DEBUG)
+				if (BaseActivity.DEBUG)
 					Log.d(TAG, "Shell process running...");
 				return true;
 			}
@@ -147,7 +148,6 @@ public enum ShellProvider {
 		try {
 			command_queue.put("TERM");
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -173,10 +173,9 @@ public enum ShellProvider {
 		try {
 			output = output_queue.take();
 		} catch (InterruptedException e2) {
-			Log.d("ShellProvider",
-					"Interrupted while output_queue.take(): " + e2.toString());
+			Log.d("ShellProvider", "Interrupted while output_queue.take(): " + e2.toString());
 		}
-		if (DEBUG)
+		if (BaseActivity.DEBUG)
 			Log.d("ShellProvider", "get output: " + command + " -> \n" + output);
 		return output;
 	}

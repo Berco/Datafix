@@ -74,13 +74,4 @@ public class DataEntry implements Comparable<DataEntry>{
 				throw new IllegalArgumentException();
 	}
     
-//    @Override
-//   	public int compareTo(DataEntry o) {
-//
-//    	if(this.mDataName != null){
-//    		return this.mDataName.compareTo(o.getDataName());
-//    	}
-//    	else throw new IllegalArgumentException();
-//    }
-
 }

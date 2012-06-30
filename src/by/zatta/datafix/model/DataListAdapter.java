@@ -3,6 +3,7 @@ package by.zatta.datafix.model;
 import java.util.List;
 
 import by.zatta.datafix.R;
+import by.zatta.datafix.dialog.ShowInfoDialog;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -58,22 +59,12 @@ public class DataListAdapter extends ArrayAdapter<DataEntry> {
             ((ImageView)view.findViewById(R.id.iconRight)).setImageResource(R.drawable.notes);
         }
         ((TextView)view.findViewById(R.id.tvDatasFolderName)).setText(item.getDataName());
-        ((TextView)view.findViewById(R.id.tvFolderSizeYaff)).setText(readable(item.getYaffsSize(), true));
-        ((TextView)view.findViewById(R.id.tvFolderSizeData)).setText(readable(item.getDataSize(), true));
+        ((TextView)view.findViewById(R.id.tvFolderSizeYaff)).setText(ShowInfoDialog.readable(item.getYaffsSize(), false));
+        ((TextView)view.findViewById(R.id.tvFolderSizeData)).setText(ShowInfoDialog.readable(item.getDataSize(), false));
         ((ProgressBar)view.findViewById(R.id.pbYaffsProgressBar)).setProgress(percent_yaffs);
         ((ProgressBar)view.findViewById(R.id.pbDataProgressBar)).setProgress(percent_data);
        
         
         return view;
-    }
-    
-    private String readable(Long bytes, boolean si) {
-    	int unit = si ? 1000 : 1024;
-        if (bytes < unit) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(unit));
-        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
-        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
-    }
-    
-    
+    }    
 }

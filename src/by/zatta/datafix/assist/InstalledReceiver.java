@@ -1,5 +1,6 @@
 package by.zatta.datafix.assist;
 
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 
 import android.app.Notification;
@@ -15,7 +16,7 @@ public class InstalledReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		System.out.println("Datafix received Broadcast");
+		if (BaseActivity.DEBUG) System.out.println("Datafix received Broadcast");
 		mNotificationManager = (NotificationManager) context.getSystemService("notification");
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		Boolean disabledNotifications = getPrefs.getBoolean("disableNotifications", false);
