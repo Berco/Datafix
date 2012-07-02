@@ -74,7 +74,7 @@ fi
 size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
 size_lib=$(busybox du -sLc /data/data/*/lib|busybox tail -1|busybox cut -f1)
 
-if [ $(($size_data - $size_lib)) -gt 175000 ]; then
+if [ $(($size_total - $size_lib)) -gt 175000 ]; then
 	echo "Not enough space on $yaffs ;" &&
 	echo "Uninstall some apps before retrying." &&
 	echo "Aborting datafix ..." &&
@@ -104,6 +104,10 @@ elif [ ! -e "$datadata/.datafix_ng" -a ! -L "$datadata" ]; then
 	busybox rm -r "$yaffs/"*
 	busybox touch "$datadata/.datafix_ng"
 fi
+
+# Changing input field separator (IFS) to prevent space separated directories name
+SAVEIFS=$IFS
+IFS=$'\n'
 
 ####### Datafix part #######
 
@@ -185,3 +189,5 @@ for d in *; do
 		busybox rm -r "$d"
 	fi
 done
+####### Restoring Variables #######
+IFS=$SAVEIFS
