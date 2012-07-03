@@ -31,8 +31,12 @@ prepare_runtime()
 
 wipe_cache()
 {
+
 	# DRAWBACK FOR-DO USING  * IS TAKING EVERY WORD AS ENTRY. SO A NAME WITH
 	# A WHITE SPACE IN ITS NAME IS NOT GETTING HANDLED PROPERLY
+
+SAVEIFS=$IFS
+IFS=$'\n'
 		
 	cache="/data/data/$1/cache"
 	if [[ -L "$cache" || ! -d "$cache" ]]; then
@@ -42,20 +46,29 @@ wipe_cache()
 		echo "wiping data/data"			
 	fi
 	
-	cd "$cache" &&
-	for item in *; do
-		if [[  -d "$item" ]]; then
-			echo "$item is directory"
-			rm -rf $item
-		else
-			echo "$item is file"
-			rm -f $item
-		fi
-	done
+	# check if there really is a cache, else it will wipe unexpected stuff
+	if [-d "$cache"];then
+		cd "$cache" &&
+		for item in *; do
+			if [[  -d "$item" ]]; then
+				echo "$item is directory"
+				rm -rf $item
+			else
+				echo "$item is file"
+				rm -f $item
+			fi
+		done
+	fi
+	
+IFS=$SAVEIFS
 }
 
 wipe_data()
 {
+
+SAVEIFS=$IFS
+IFS=$'\n'
+
 	# DRAWBACK FOR-DO USING  * IS TAKING EVERY WORD AS ENTRY. SO A NAME WITH
 	# A WHITE SPACE IN ITS NAME IS NOT GETTING HANDLED PROPERLY
 	
@@ -107,6 +120,8 @@ wipe_data()
 			cd $basePath
 		fi
 	done
+	
+IFS=$SAVEIFS
 }
 
 for i
