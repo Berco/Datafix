@@ -178,7 +178,7 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 	                entries.add(entry);
 	            }
 	        // if the app fully resides in /datadata. Prevents nullpointers
-			}else if (total_data[0].contains("du:") && !total_yaffs[0].contains("du:")){
+			}else if ((total_data[0].contains("du:") || total_data[1].contains("no datafix yet")) && !total_yaffs[0].contains("du:")){
 				if (BaseActivity.DEBUG)
 				System.out.println("Data no such file");
 	        	for (int i=0; i<total_yaffs.length; i=i+2) {
