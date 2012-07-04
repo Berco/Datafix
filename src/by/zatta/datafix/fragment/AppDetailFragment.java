@@ -155,6 +155,9 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 				entries = new ArrayList<DataEntry>((total_yaffs.length)/2);
 			}
 			
+			if (BaseActivity.DEBUG)
+				System.out.println("lengte yaffs: " + total_yaffs.length + "en data: " + total_data.length);
+			
 			
 			//if the app fully resides in /data/data. Prefents nullpointers
 			if (total_yaffs[0].contains("du:") && !total_data[0].contains("du:")){

@@ -39,7 +39,7 @@ SAVEIFS=$IFS
 IFS=$'\n'
 		
 	cache="/data/data/$1/cache"
-	if [[ -L "$cache" || ! -d "$cache" ]]; then
+	if [[ -L "$cache" || ! -d "$cache" || -L "/data/data" ]]; then
 		echo "wiping yaffs" &&
 		cache="/datadata/$1/cache"
 	else
@@ -47,15 +47,15 @@ IFS=$'\n'
 	fi
 	
 	# check if there really is a cache, else it will wipe unexpected stuff
-	if [-d "$cache"];then
+	if [[ -d "$cache" ]]; then
 		cd "$cache" &&
 		for item in *; do
 			if [[  -d "$item" ]]; then
 				echo "$item is directory"
-				rm -rf $item
+				#rm -rf $item
 			else
 				echo "$item is file"
-				rm -f $item
+				#rm -f $item
 			fi
 		done
 	fi
