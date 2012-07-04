@@ -52,6 +52,11 @@ public class ShowInfoDialog extends DialogFragment {
 		String total = sizes[0] + " " + sizes[1];
 		String free = sizes[2] + " " + sizes[3];
 		String percent = sizes[4];
+		
+		Boolean fixed = getPrefs.getBoolean("fixed", false);
+		String alreadyFixed="";
+		if (fixed) alreadyFixed = "true"; else alreadyFixed = "false";
+		
 		if (tibuState.contains("true"))
 			tibuState = "You have Titanium installed and you have backupFollowSymlinks checked.";
 		if (tibuState.contains("false"))
@@ -69,7 +74,9 @@ public class ShowInfoDialog extends DialogFragment {
 				
 				"/datadata has:" + '\n' +
 				"  Total Space: " + total + '\n' +
-				"  Free Space:  " + free + " (" + percent + ")" 
+				"  Free Space:  " + free + " (" + percent + ")"  + '\n' + '\n' +
+				
+				"/data/data is a symlink: " + alreadyFixed 
 				
 				);
         tv.setText(about);
@@ -170,4 +177,11 @@ public class ShowInfoDialog extends DialogFragment {
         String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
         return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
+	
+	public static boolean isFixed(){
+		String fixed = ShellProvider.INSTANCE.getCommandOutput("[ -L \"/data/data\" ] && echo nofix");
+		if (fixed.contains("nofix")){
+			return false;
+		}else return true;
+	}
 }

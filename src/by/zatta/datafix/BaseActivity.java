@@ -37,7 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener{
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +200,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 	        editor.putString("tibuState", ShowInfoDialog.getTitaniumState());
 	        editor.putString("initDContent", ShowInfoDialog.getInitDContent());
 	        editor.putString("showSizes", ShowInfoDialog.showSizes());
+	        editor.putBoolean("fixed", ShowInfoDialog.isFixed());
 	        editor.commit();
 	    }
 	}

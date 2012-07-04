@@ -13,12 +13,13 @@ import by.zatta.datafix.dialog.WipeDialog;
 import by.zatta.datafix.model.AppEntry;
 import by.zatta.datafix.model.DataEntry;
 import by.zatta.datafix.model.DataListAdapter;
-import android.app.ActivityManager;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,11 +137,18 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 	
 	private List<DataEntry> loadData(){
 		try {
+			SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+			Boolean fixed = getPrefs.getBoolean("fixed", false);
+			
 			String[] total_yaffs = ShellProvider.INSTANCE.getCommandOutput("du -s /datadata/"+mHandledApp.getPackName()+"/*|sort | awk -F \"/\" '{ print $4, $1 }'").split(" ");
-			String[] total_data = ShellProvider.INSTANCE.getCommandOutput("du -s /data/data/"+mHandledApp.getPackName()+"/*|sort | awk -F \"/\" '{ print $5, $1 }'").split(" ");
+			String[] total_data = {"0", "no datafix yet" } ;
+			if (fixed)
+				total_data = ShellProvider.INSTANCE.getCommandOutput("du -s /data/data/"+mHandledApp.getPackName()+"/*|sort | awk -F \"/\" '{ print $5, $1 }'").split(" ");
+			
 			List<DataEntry> entries;
 			
 			//Little buggy. Might need to rethink this one
+			
 			if ((total_yaffs[0].contains("du:") && !total_data[0].contains("du:")) || total_data.length >= total_yaffs.length){
 				entries = new ArrayList<DataEntry>((total_data.length)/2);
 			}else{

@@ -42,13 +42,10 @@ import by.zatta.datafix.assist.ShellProvider;
         	String[] total=null;
         	String[] caches=null;
         	String[] ctxt=null;
-        	//if(ShellProvider.INSTANCE.isSuAvailable()) {
         		total= ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
         		caches = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*/cache|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
         		ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
-        		
-			//}
-        	
+        	        	
         	List<ApplicationInfo> apps = mPm.getInstalledApplications(
                     PackageManager.GET_UNINSTALLED_PACKAGES |
                     PackageManager.GET_DISABLED_COMPONENTS);
