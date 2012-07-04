@@ -42,10 +42,16 @@ import by.zatta.datafix.assist.ShellProvider;
         	String[] total=null;
         	String[] caches=null;
         	String[] ctxt=null;
+        	String[] dtxt=null;
         		total= ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
         		caches = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*/cache|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
         		ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
+        		dtxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/skip_apps.txt").split(" ");
         	        	
+        	if (ctxt[1].contains("No")){
+        		ctxt[0] = "com.android.providers.downloads"; ctxt[1]= "com.google.android.gm";
+        	}
+        	
         	List<ApplicationInfo> apps = mPm.getInstalledApplications(
                     PackageManager.GET_UNINSTALLED_PACKAGES |
                     PackageManager.GET_DISABLED_COMPONENTS);
@@ -75,8 +81,14 @@ import by.zatta.datafix.assist.ShellProvider;
             	}
     	    	for(int a = 0; a < ctxt.length ; a++){
     	    		if (entry.getPackName().equals(ctxt[a])){
-    	    	    //System.out.println("ctxt: "+ ctxt[a]);
+    	    	    //System.out.println("cache txt: "+ ctxt[a]);
     	    	    entry.setCacheBool("true");
+    	    		}
+            	}
+    	    	for(int a = 0; a < dtxt.length ; a++){
+    	    		if (entry.getPackName().equals(dtxt[a])){
+    	    	    //System.out.println("data txt: "+ dtxt[a]);
+    	    	    entry.setDataBool("true");
     	    		}
             	}
     	    	
