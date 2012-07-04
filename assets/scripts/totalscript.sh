@@ -16,6 +16,10 @@ prepare_runtime()
 		chmod 777 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
+	if [ ! -d "/data/local/datafix" ]; then
+		mkdir -p "/data/local/datafix"
+	fi
+	
 	cd /data/data/by.zatta.datafix/files
 	
 	cat move_cache.txt > /data/local/datafix/move_cache.txt
