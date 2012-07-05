@@ -56,10 +56,10 @@ IFS=$'\n'
 		for item in *; do
 			if [[  -d "$item" ]]; then
 				echo "$item is directory"
-				#rm -rf $item
+				rm -rf $item
 			else
 				echo "$item is file"
-				#rm -f $item
+				rm -f $item
 			fi
 		done
 	fi
