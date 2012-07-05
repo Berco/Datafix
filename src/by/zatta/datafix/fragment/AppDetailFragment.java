@@ -42,8 +42,6 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 	private ImageView mImage;
 	private TextView mTvAppName;
 	private TextView mTvPackName;
-	private TextView mTvYaffSize;
-	private TextView mTvDataSize;
 	private DataListAdapter mAdapter;		
 	private TouchInterceptor.TickListener mTickListener =
 			    new TouchInterceptor.TickListener() {
@@ -92,9 +90,7 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 		mImage = (ImageView) view.findViewById(R.id.ivAppDetailIcon);
 		mTvAppName = (TextView) view.findViewById(R.id.tvAppName);
 		mTvPackName = (TextView) view.findViewById(R.id.tvPackageName);
-		mTvYaffSize = (TextView) view.findViewById(R.id.tvSizeOnYaffs);
-		mTvDataSize = (TextView) view.findViewById(R.id.tvSizeOnData);
-	
+			
 		return view;
      }
 
@@ -108,9 +104,7 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 				mImage.setImageDrawable(mHandledApp.getIcon());
 				mTvAppName.setText(mHandledApp.getLabel());
 				mTvPackName.setText(mHandledApp.getPackName());
-				mTvYaffSize.setText("Total Size\n/datadata");
-				mTvDataSize.setText("Total Size\n/data/data");
-								
+												
 				dataList= loadData();
 				
 				setHasOptionsMenu(true);

@@ -3,5 +3,21 @@
 
     <string name="hello">Hello World, DatafixActivity!</string>
     <string name="app_name">Datafix</string>
-
+    
+    <!-- AppDetailFragment -->
+    <string name="YaffsSizeHere">Total Size\n/datadata</string>
+    <string name="DataSizeHere">Total Size\n/data/data</string>
+	<string name="btnClearCaches">Clear caches</string>
+	<string name="btnClearAllData">Clear data</string>
+	
+	<!-- AppListFragment -->
+	<string name="LoadingDataOneMoment">Loading application data \n \u0020\u0020\u0020\u0020 One moment please</string>
+	<string name="FreeSpaceBar">Free on /datadata:\u0020</string>
+	<string name="MoveBar">\u0020\u0020 Move to\n/data/data/</string>
+	<string name="CacheBar">Cache</string>
+	<string name="AllBar">All</string>
+	<string name="btnExit">Exit</string>
+	<string name="btnFlash">Install</string>
+	
+	
 </resources>

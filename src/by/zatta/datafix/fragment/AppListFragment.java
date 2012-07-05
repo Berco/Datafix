@@ -135,7 +135,7 @@ public class AppListFragment extends ListFragment
 				Long total = datadata.getTotalSpace();
 				Long free = datadata.getFreeSpace();
 				int freePercent = (int)(((double)free/total)*100);
-				String freeSpace = "/datadata has "+ ShowInfoDialog.readable(free, false)+ " free"+ '\n' + Integer.toString(freePercent) + "%";
+				String freeSpace = getString(R.string.FreeSpaceBar) + ShowInfoDialog.readable(free, false)+ '\n' + Integer.toString(freePercent) + "%";
 				
 				mProgressFree.setProgress(100 - freePercent);
 				mTvFreeSpace.setText(freeSpace);

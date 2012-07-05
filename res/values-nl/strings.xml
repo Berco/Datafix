@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, DatafixActivity!</string>
+    <string name="app_name">Datafix</string>
+    
+    <!-- AppDetailFragment -->
+    <string name="YaffsSizeHere">Totale grote\n/datadata</string>
+    <string name="DataSizeHere">Totale grote\n/data/data</string>
+	<string name="btnClearCaches">Wis caches</string>
+	<string name="btnClearAllData">Wis data</string>
+	
+	<!-- AppListFragment -->
+	<string name="LoadingDataOneMoment">Applicatie data laden \n \u0020\u0020\u0020 Een moment aub</string>
+	<string name="FreeSpaceBar">Vrij op /datadata:\u0020</string>
+	<string name="MoveBar">Verplaats naar\n\u0020\u0020\u0020\u0020/data/data/</string>
+	<string name="CacheBar">Cache</string>
+	<string name="AllBar">Alles</string>
+	<string name="btnExit">Afsluiten</string>
+	<string name="btnFlash">Installeren</string>
+	
+	
+</resources>
