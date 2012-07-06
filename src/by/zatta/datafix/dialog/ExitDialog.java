@@ -26,11 +26,11 @@ public class ExitDialog extends DialogFragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	getDialog().setTitle("EXIT");
+    	getDialog().setTitle(getString(R.string.ExitTitle));
         View v = inflater.inflate(R.layout.exit_dialog, container, false);
         
         View tv = v.findViewById(R.id.text);
-        ((TextView)tv).setText("Are you sure you want to exit?");
+        ((TextView)tv).setText(getString(R.string.RealyExit));
 
         
         Button NO = (Button)v.findViewById(R.id.btnNoExit);

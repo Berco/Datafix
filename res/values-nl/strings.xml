@@ -19,5 +19,23 @@
 	<string name="btnExit">Afsluiten</string>
 	<string name="btnFlash">Installeren</string>
 	
+	<!--  ConfirmDialog -->
+	<string name="btnNoInstall">Anuleer</string>
+	<string name="btnYesNoReboot">Maak bestanden \n Niet herstarten \n</string>
+	<string name="btnYesAndReboot">Maak bestanden \n En herstart \n</string>
+	<string name="cbCopyScript">Kopieer script naar init.d</string>
+	<string name="ConfirmTitle">Creeer / update bestanden</string>
+	<string name="TiBuChecked">Je hebt Titanium geinstalleerd en je hebt backupFollowSymlinks geactiveerd.</string>
+	<string name="TiBuNotChecked">Je hebt Titanium geinstalleerd en je moet backupFollowSymLinks activeren in zijn instellingen.</string>
+	<string name="TiBuNotPresent">Je hebt Titanium niet geinstalleerd. Mocht je dat doen, check dan backupFollowSymLinks in zijn instellingen.</string>
+	<string name="ToCache">Voeg toe aan move_cache.txt:</string>
+	<string name="NothingToCache">\u0020\u0020 Er gaan geen caches naar /data/data</string>
+	<string name="ToData">Voeg toe aan skip_apps.txt:</string>
+	<string name="NothingToData">\u0020\u0020 Geen app zal zijn data volledig hebben in /data/data</string>
 	
+	<!--   ExitDialog -->
+	<string name="btnNoExit">Annuleer</string>
+	<string name="btnYesExit">Afsluiten</string>
+	<string name="ExitTitle">AFSLUITEN</string>
+	<string name="RealyExit">Weet u zeker dat u wilt afsluiten?</string>
 </resources>

@@ -51,7 +51,10 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	getDialog().setTitle("Create / update files");
+    	
+    	// getString(R.string.FreeSpaceBar)
+    	
+    	getDialog().setTitle(getString(R.string.ConfirmTitle));
         View v = inflater.inflate(R.layout.confirm_dialog, container, false);
         
         TextView tv = (TextView) v.findViewById(R.id.text);
@@ -61,15 +64,15 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 		String tibuState = getPrefs.getString("tibuState", "undefined");
 		int color = 0;
 		if (tibuState.contains("true")){
-			tibuState = "You have Titanium installed and you have backupFollowSymlinks checked.";
+			tibuState = getString(R.string.TiBuChecked);
 			color = getResources().getColor(R.color.green);
 		}
 		if (tibuState.contains("false")){
-			tibuState = "You have Titanium installed and need to check backupFollowSymLinks in it's settings.";
+			tibuState = getString(R.string.TiBuNotChecked);
 			color = getResources().getColor(R.color.red);
 		}
 		if (tibuState.contains("null")){
-			tibuState = "You don't have Titanium Backup installed. Once you do, check backupFollowSymLinks in it's settings.";
+			tibuState = getString(R.string.TiBuNotPresent);
 			color = getResources().getColor(R.color.white);
 		}
 		tv.setTextColor(color);
@@ -94,26 +97,26 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     		if (ff.getCacheBool().equals("true")) cachefile = true;
     		if (ff.getDataBool().equals("true")) datafile = true;
     	}
-    	addFormField("Add to cache.txt:");
+    	addFormField(getString(R.string.ToCache));
     	if (cachefile){
     		for (AppEntry ff: fls){
     			if (ff.getCacheBool().equals("true"))
     				addFormField("  "+ ff.getPackName());
     		}
     	}else{
-    		addFormField("  No caches will go to /data/data");
+    		addFormField(getString(R.string.NothingToCache));
     	}
     	
     	addFormField("");
     	
-    	addFormField("Add to data.txt:");
+    	addFormField(getString(R.string.ToData));
     	if (datafile){	
     		for (AppEntry ff: fls){
     			if (ff.getDataBool().equals("true"))
     				addFormField("  "+ ff.getPackName());
     		}	
     	}else{
-    		addFormField("  No apps will fully reside in /data/data");
+    		addFormField(getString(R.string.NothingToData));
     	}
 	}
 

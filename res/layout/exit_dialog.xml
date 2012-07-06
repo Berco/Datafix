@@ -33,7 +33,7 @@
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1"
-		        android:text="Cancel" />
+		        android:text="@string/btnNoExit" />
 
 		    <Button
 		        android:id="@+id/btnYesExit"
@@ -41,7 +41,7 @@
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1"
-		        android:text="Exit" />
+		        android:text="@string/btnYesExit" />
 	</LinearLayout>
 
 </LinearLayout>
