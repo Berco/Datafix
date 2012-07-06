@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 
@@ -14,6 +15,7 @@ import by.zatta.datafix.fragment.AppListFragment;
 import by.zatta.datafix.fragment.AppListFragment.OnAppSelectedListener;
 import by.zatta.datafix.fragment.PrefFragment;
 import by.zatta.datafix.fragment.AppDetailFragment;
+import by.zatta.datafix.fragment.PrefFragment.OnLanguageListener;
 import by.zatta.datafix.model.AppEntry;
 import by.zatta.datafix.model.AppListLoader;
 
@@ -35,15 +37,20 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener{
+public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener, OnLanguageListener{
 	public static final boolean DEBUG = true;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        new PlantFiles().execute();
+        new PlantFiles().execute();        
+       
+        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		String language = getPrefs.getString("languagePref", "undefined");
+        if (!language.equals("undefined")) makeLocale(language);
         
         FragmentManager fm = getFragmentManager();
 
@@ -60,6 +67,15 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 		blowUp.inflate(R.menu.leftclick_optionchooser, menu);
 		return true;
 	}
+    
+    public void makeLocale(String language){
+        Locale locale = new Locale(language); 
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, 
+        getBaseContext().getResources().getDisplayMetrics());
+    }
     
     @Override
 	public void onAppSelectedListener(AppEntry app) {
@@ -84,6 +100,22 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
     	// TODO need to add a check for this one in onWipedListener
     	((AppDetailFragment) pref).upDateDetails();
     	((AppListFragment) list).upDateList();
+    	
+	}
+    
+    @Override
+	public void onLanguageListener(String language) {
+    	Toast.makeText(getBaseContext(), "activity received: "+language, Toast.LENGTH_SHORT).show();
+    	makeLocale(language);
+    	FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft = fm.beginTransaction();
+		fm.popBackStack();		
+		ft.replace(android.R.id.content, new PrefFragment(), "prefs");
+		ft.addToBackStack(null);
+		ft.commit();
+		
+		// TODO Auto-generated method stub
+		
 	}
 
     @Override

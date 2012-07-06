@@ -1,0 +1,58 @@
+<resources>
+
+    <string name="hello">"Bonjour tout le monde, DatafixActivity!"</string>
+    <string name="app_name">"Datafix"</string>
+    
+    <!-- AppDetailFragment -->
+    <string name="YaffsSizeHere">"Taille totale \n /datadata"</string>
+    <string name="DataSizeHere">"Taille totale \n /data/data"</string>
+	<string name="btnClearCaches">"Effacer le cache"</string>
+	<string name="btnClearAllData">"Effacer les données"</string>
+	
+	<!-- AppListFragment -->
+	<string name="LoadingDataOneMoment">"Chargement des données d'application \n \u0020 \u0020 \u0020 \u0020 Un instant s'il vous plaît"</string>
+	<string name="FreeSpaceBar">"Gratuit sur /datadata: \u0020"</string>
+	<string name="MoveBar">"\u0020 \u0020 Déplacer vers \n /data/data /"</string>
+	<string name="CacheBar">Cache"</string>
+	<string name="AllBar">"Tous"</string>
+	<string name="btnExit">"Sortie"</string>
+	<string name="btnFlash">"Installer"</string>
+	
+	<!--  ConfirmDialog -->
+	<string name="btnNoInstall">"Annuler"</string>
+	<string name="btnYesNoReboot">"Créer des fichiers \n Ne redémarre pas \n"</string>
+	<string name="btnYesAndReboot">"Créer des fichiers \n Et le redémarrage \n"</string>
+	<string name="cbCopyScript">"Copiez le script de init.d"</string>
+	<string name="ConfirmTitle">"Créer / mettre à jour les fichiers"</string>
+	<string name="TiBuChecked">"Vous avez de titane installé et que vous avez vérifié backupFollowSymlinks."</string>
+	<string name="TiBuNotChecked">"Vous avez installé et Titane besoin de vérifier backupFollowSymLinks dans ses paramètres."</string>
+	<string name="TiBuNotPresent">"Vous n'avez pas de sauvegarde de titane installé. Une fois que vous faites, vérifiez backupFollowSymLinks dans ses paramètres."</string>
+	<string name="ToCache">"Ajouter à move_cache.txt:"</string>
+	<string name="NothingToCache">"\u0020\u0020 caches Pas ira à, de données ou de données"</string>
+	<string name="ToData">"Ajouter à skipp_apps.txt:"</string>
+	<string name="NothingToData">"\u0020\u0020 Pas applications seront pleinement résider dans, de données ou de données"</string>
+	
+	<!--   ExitDialog -->
+	<string name="btnNoExit">"Annuler"</string>
+	<string name="btnYesExit">"Sortie"</string>
+	<string name="ExitTitle">"SORTIE"</string>
+	<string name="RealyExit">"Etes-vous sûr de vouloir quitter l'application ?"</string>
+	
+	<!--   Preferences -->
+	<string name="WelcomeTitle">"Voir le message de bienvenue au prochain démarrage"</string>
+	<string name="WelcomeSummary">"vérifier pour voir"</string>
+	<string name="NotificationTitle">"Pas de notifications pour les applications nouvelles"</string>
+	<string name="NotificationSummary">"vérifier pour désactiver les notifications"</string>
+	<string name="LanguageTitle">"Langue"</string>
+	<string name="LanguageSummary">"la langue de cette application"</string>	
+	<string name="AboutAppTitle">"À propos de cette application"</string>
+	<string name="AboutAppSummary">"Tout à propos de l'objectif"</string>
+	<string name="AboutPhoneTitle">"À propos de votre téléphone"</string>
+	<string name="AboutPhoneSummary">"quelques informations sur votre système utilisé"</string>
+	<string name="DonateTitle">"Faire un don"</string>
+	<string name="DonateZattaSum">"Paypal Zatta"</string>
+	<string name="DonateWendigogoSum">"Paypal Wendigogo"</string>
+	<string name="XdaTitle">"Visitez XDA"</string>
+	<string name="XdaSummary">"[Script] Nouveau correctif faible notification de stockage"</string>
+	
+</resources>

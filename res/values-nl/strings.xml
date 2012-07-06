@@ -21,8 +21,8 @@
 	
 	<!--  ConfirmDialog -->
 	<string name="btnNoInstall">Anuleer</string>
-	<string name="btnYesNoReboot">Maak bestanden \n Niet herstarten \n</string>
-	<string name="btnYesAndReboot">Maak bestanden \n En herstart \n</string>
+	<string name="btnYesNoReboot">Maak files \n Geen herstart \n</string>
+	<string name="btnYesAndReboot">Maak files \n En herstart \n</string>
 	<string name="cbCopyScript">Kopieer script naar init.d</string>
 	<string name="ConfirmTitle">Creeer / update bestanden</string>
 	<string name="TiBuChecked">Je hebt Titanium geinstalleerd en je hebt backupFollowSymlinks geactiveerd.</string>
@@ -38,4 +38,21 @@
 	<string name="btnYesExit">Afsluiten</string>
 	<string name="ExitTitle">AFSLUITEN</string>
 	<string name="RealyExit">Weet u zeker dat u wilt afsluiten?</string>
+	
+	<!--   Preferences -->
+	<string name="WelcomeTitle">Laat welkom zien bij volgende start</string>
+	<string name="WelcomeSummary">vink aan om te laten zien</string>
+	<string name="NotificationTitle">Geen notificatie bij nieuwe app</string>
+	<string name="NotificationSummary">vink aan om uit te zetten</string>
+	<string name="LanguageTitle">Language</string>
+	<string name="LanguageSummary">the language for this app</string>	
+	<string name="AboutAppTitle">Over deze app</string>
+	<string name="AboutAppSummary">alles over het doel/werking van de app</string>
+	<string name="AboutPhoneTitle">Over jouw telefoon</string>
+	<string name="AboutPhoneSummary">Wat gebruikte info over jouw systeem</string>
+	<string name="DonateTitle">Doneer</string>
+	<string name="DonateZattaSum">paypal van Zatta</string>
+	<string name="DonateWendigogoSum">paypal van Wendigogo</string>
+	<string name="XdaTitle">Bezoek XDA</string>
+	<string name="XdaSummary">[Script]New Low Storage Notification fix</string>
 </resources>

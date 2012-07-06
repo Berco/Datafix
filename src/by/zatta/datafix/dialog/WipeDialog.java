@@ -33,7 +33,7 @@ public class WipeDialog extends DialogFragment implements View.OnClickListener{
         try {
             wipeListener = (OnWipedListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+            throw new ClassCastException(activity.toString() + " must implement OnWipeListener");
         }
     }
     

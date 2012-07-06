@@ -28,9 +28,9 @@
 	<string name="TiBuChecked">You have Titanium installed and you have backupFollowSymlinks checked.</string>
 	<string name="TiBuNotChecked">You have Titanium installed and need to check backupFollowSymLinks in it\'s settings.</string>
 	<string name="TiBuNotPresent">You don\'t have Titanium Backup installed. Once you do, check backupFollowSymLinks in it\'s settings.</string>
-	<string name="ToCache">Add to cache.txt:</string>
+	<string name="ToCache">Add to move_cache.txt:</string>
 	<string name="NothingToCache">\u0020\u0020 No caches will go to /data/data</string>
-	<string name="ToData">Add to data.txt:</string>
+	<string name="ToData">Add to skipp_apps.txt:</string>
 	<string name="NothingToData">\u0020\u0020 No apps will fully reside in /data/data</string>
 	
 	<!--   ExitDialog -->
@@ -39,6 +39,21 @@
 	<string name="ExitTitle">EXIT</string>
 	<string name="RealyExit">Are you sure you want to exit?</string>
 	
-	
+	<!--   Preferences -->
+	<string name="WelcomeTitle">Show welcome message on next start</string>
+	<string name="WelcomeSummary">check to show</string>
+	<string name="NotificationTitle">No notifications for new apps</string>
+	<string name="NotificationSummary">check to disable notifications</string>
+	<string name="LanguageTitle">Language</string>
+	<string name="LanguageSummary">the language for this app</string>	
+	<string name="AboutAppTitle">About this app</string>
+	<string name="AboutAppSummary">all about the purpose</string>
+	<string name="AboutPhoneTitle">About your phone</string>
+	<string name="AboutPhoneSummary">some used info about your system</string>
+	<string name="DonateTitle">Donate</string>
+	<string name="DonateZattaSum">paypal to Zatta</string>
+	<string name="DonateWendigogoSum">paypal to Wendigogo</string>
+	<string name="XdaTitle">Visit XDA</string>
+	<string name="XdaSummary">[Script]New Low Storage Notification fix</string>
 	
 </resources>
