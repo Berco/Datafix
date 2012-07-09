@@ -1,0 +1,37 @@
+<p><h1><i><u>BackGround</u></i></h1></p>
+
+<p>
+This app is a cooperation between Zatta and Wendigogo, both members of 
+XDA-developers. The init.d script that does the actual work (and has 
+been around for some time) is done by Wendigogo, the app to control the script 
+is done by Zatta.
+</p>
+<p>
+On Samsung Galaxy S, cyanogenmod 7 creates a ~175MB yaffs partition 
+which holds all app data. This partition is mounted at /datadata and 
+the usual location of this directory at /data/data is a symbolic link 
+that points to /datadata.
+</p>
+
+<p><i>
+$ ls -l /data/data <br />
+lrwxrwxrwx 1 system system 9 Oct 8 19:34 /data/data -&gt; /datadata</i></p>
+
+<p>
+The app apk itself does not reside here, but data created by the app 
+resides here, especially, the app's sqlite databases and user 
+preference xml files. The cyanogenmod developers did it this way to 
+address the lag experienced on the stock Galaxy S firmware. But, this produces a problem.
+</p>
+
+<p>
+The /datadata partition is quite small and may be filled up 
+quickly by an app that caches a lot of data (g+ for example). 
+Once /datadata fills up, apps will begin force closing since they will not 
+be able to create any new data on /datadata. The ext4 /data partition, 
+which is about 2GB, has plenty of space free. So, it is attractive to move /datadata 
+onto this large partition. But then we have the lag problem again. That's where this 
+script comes in. It moves certain subdirectories from each app on the ext4 partition. 
+Default select the "lib" &amp; "libs" subdirectories as here are static files : with 
+only read access, ext4 performances are not so bad compared to yaffs ones.
+</p>
