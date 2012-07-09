@@ -105,7 +105,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
     
     @Override
 	public void onLanguageListener(String language) {
-    	Toast.makeText(getBaseContext(), "activity received: "+language, Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(getBaseContext(), "activity received: "+language, Toast.LENGTH_SHORT).show();
     	makeLocale(language);
     	FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
@@ -113,9 +113,6 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 		ft.replace(android.R.id.content, new PrefFragment(), "prefs");
 		ft.addToBackStack(null);
 		ft.commit();
-		
-		// TODO Auto-generated method stub
-		
 	}
 
     @Override

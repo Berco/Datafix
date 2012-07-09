@@ -44,8 +44,8 @@
 	<string name="WelcomeSummary">vink aan om te laten zien</string>
 	<string name="NotificationTitle">Geen notificatie bij nieuwe app</string>
 	<string name="NotificationSummary">vink aan om uit te zetten</string>
-	<string name="LanguageTitle">Language</string>
-	<string name="LanguageSummary">the language for this app</string>	
+	<string name="LanguageTitle">Taal</string>
+	<string name="LanguageSummary">de taal voor deze app</string>	
 	<string name="AboutAppTitle">Over deze app</string>
 	<string name="AboutAppSummary">alles over het doel/werking van de app</string>
 	<string name="AboutPhoneTitle">Over jouw telefoon</string>

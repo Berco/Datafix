@@ -28,8 +28,8 @@
 
 	<Preference
 		android:title="@string/AboutAppTitle"
-		android:summary="@string/AboutAppSummary">
-		android:key="about_app_key"
+		android:summary="@string/AboutAppSummary"
+		android:key="about_app_key">
 	</Preference>
 	
 	<Preference

@@ -55,7 +55,7 @@ public class ShowInfoDialog extends DialogFragment {
 		
 		Boolean fixed = getPrefs.getBoolean("fixed", false);
 		String alreadyFixed="";
-		if (fixed) alreadyFixed = "true"; else alreadyFixed = "false";
+		if (fixed) alreadyFixed = "true, datafixed system"; else alreadyFixed = "false, no datafix installed";
 		
 		if (tibuState.contains("true"))
 			tibuState = "You have Titanium installed and you have backupFollowSymlinks checked.";
