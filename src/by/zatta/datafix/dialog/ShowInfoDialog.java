@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
@@ -76,7 +78,9 @@ public class ShowInfoDialog extends DialogFragment {
 				"  Total Space: " + total + '\n' +
 				"  Free Space:  " + free + " (" + percent + ")"  + '\n' + '\n' +
 				
-				"/data/data is a symlink: " + alreadyFixed 
+				"/data/data is a symlink: " + alreadyFixed + '\n' + '\n' +
+				
+				getDateAndTime()
 				
 				);
         tv.setText(about);
@@ -102,8 +106,6 @@ public class ShowInfoDialog extends DialogFragment {
             kernelVersion = "";
             ;
         }
-
-        // made it
         return kernelVersion;
     }
 	
@@ -129,7 +131,7 @@ public class ShowInfoDialog extends DialogFragment {
             is.close();
         } catch (IOException e) {
             Log.e("datafix", "Problem reading titanium prefs file");
-            titaniumState = "";
+            titaniumState = "null";
             ;
         }
 		
@@ -183,5 +185,12 @@ public class ShowInfoDialog extends DialogFragment {
 		if (fixed.contains("nofix")){
 			return false;
 		}else return true;
+	}
+	
+	public static String getDateAndTime(){
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss");
+		String dateAndTime = sdf.format(c.getTime())+"-datafix";
+		return dateAndTime;
 	}
 }

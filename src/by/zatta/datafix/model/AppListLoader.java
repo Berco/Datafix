@@ -1,5 +1,6 @@
 package by.zatta.datafix.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +49,9 @@ import by.zatta.datafix.assist.ShellProvider;
         		ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
         		dtxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/skip_apps.txt").split(" ");
         	        	
-        	if (ctxt[1].contains("No")){
+        	File cacheFile = new File("/data/local/datafix/move_cache.txt");
+        	if (!cacheFile.exists() || ctxt.length == 1){
+        		ctxt = new String[2];
         		ctxt[0] = "com.android.providers.downloads"; ctxt[1]= "com.google.android.gm";
         	}
         	

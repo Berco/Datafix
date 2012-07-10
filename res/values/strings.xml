@@ -24,6 +24,9 @@
 	<string name="btnYesNoReboot">Create files \n Don\'t reboot \n</string>
 	<string name="btnYesAndReboot">Create files \n And reboot \n</string>
 	<string name="cbCopyScript">Copy script to init.d</string>
+	<string name="cbMakeNandroid">Make nandroid backup: \u0020</string>
+	<string name="WarningNandroidChecked">Disabled. Uncheck nandroid or choose reboot.</string>
+	<string name="WarningNandroidNotChecked">Files created!</string>
 	<string name="ConfirmTitle">Create / update files</string>
 	<string name="TiBuChecked">You have Titanium installed and you have backupFollowSymlinks checked.</string>
 	<string name="TiBuNotChecked">You have Titanium installed and need to check backupFollowSymLinks in it\'s settings.</string>

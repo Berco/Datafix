@@ -1,0 +1,44 @@
+<p><h1><i><u>Welcome!</u></i></h1></p>
+
+<p>
+Please read this carefully!
+</p>
+<p>
+This app is made to install the init.d script that controls your datafix. It also creates 
+the move_cache.txt and the skip_apps.txt files already known. Besides that the app is able 
+to clear caches and data for every app, even when a datafix is applied, not nessessairy the 
+one done by this init.d script.
+</p>
+
+<p><i><b>move_cache.txt</i></b> <br />
+the move_cache.txt file is created by checking the checkboxes on the main screen. 
+apps in this file will store their caches on /data/data/*, potentially saving a lot of space 
+on the fast /datadata. Gmail and Downloads are checked by default.
+</p>
+
+<p><i><b>skip_apps.txt</i></b> <br />
+The apps in this file will have all their data on the huge but slow /data/data/*.
+</p>
+
+<p><i><b>Install button</i></b> <br />
+Once pressed install you will have a confirmation dialog, read carefully what will be 
+added to which file. You can choose between cancel (obvious), install without reboot and 
+with reboot. Both options will create the init.d script if the checkbox is checked and make 
+the .txt files.
+</p>
+
+<p><i><b>App details</i></b> <br />
+You can press on every entry in the list. This will show where this app currently has its data 
+and gives you the option to wipe its cache or all its data. Empty folders will show 4kB, symlinks 
+and non-existing folders will show 0kB
+</p>
+
+<p><i><b>Nandroid</i></b> <br />
+If you choose to make a nandroid backup from within this app, 
+you have to realize that this function is only available for 
+CWM based recoveries. TWRP is not supported by me at the moment. 
+If you want to help in this, feel free to PM me on XDA or email 
+zatta.xda@gmail.com.<br />
+The nandroid will be in:<br /> <i>/sdcard/clockworkmod/backup
+/2012-07-10.19.14.12-datafix</i>
+</p>

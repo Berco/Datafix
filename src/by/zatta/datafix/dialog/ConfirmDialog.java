@@ -23,10 +23,12 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.Toast;
 
 public class ConfirmDialog extends DialogFragment implements View.OnClickListener{
 	List<AppEntry> fls;
 	CheckBox mCbCopyScript;
+	CheckBox mCbNandroid;
 	
 	private LinearLayout mLinLayFlashView;
 	
@@ -52,13 +54,12 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
-    	// getString(R.string.FreeSpaceBar)
-    	
     	getDialog().setTitle(getString(R.string.ConfirmTitle));
         View v = inflater.inflate(R.layout.confirm_dialog, container, false);
         
         TextView tv = (TextView) v.findViewById(R.id.text);
         mCbCopyScript = (CheckBox) v.findViewById(R.id.cbCopyScript);
+        mCbNandroid = (CheckBox) v.findViewById(R.id.cbMakeNandroid);
         
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		String tibuState = getPrefs.getString("tibuState", "undefined");
@@ -152,18 +153,30 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 			break;
 		case R.id.btnYesAndReboot:
 			try {
+				String rebootMode = "";
+				if (mCbNandroid.isChecked()){
+					writeExtendedCommand();
+					rebootMode = " reboot_recovery";
+				}else{
+					rebootMode=" reboot";
+				}
 				writeFiles();
 				ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/by.zatta.datafix/files/totalscript.sh");
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + copyscript +" reboot");
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + copyscript + rebootMode);
 				} catch (Exception e) {	}
 				
 			break;
 		case R.id.btnYesNoReboot:
+			if (!mCbNandroid.isChecked()){
 			try {
 				writeFiles();
 				ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/by.zatta.datafix/files/totalscript.sh");
 				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + copyscript +" noreboot");
-				} catch (Exception e) {	}
+				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidNotChecked), Toast.LENGTH_LONG).show();
+			} catch (Exception e) {	}
+			}else{
+				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidChecked), Toast.LENGTH_LONG).show();
+			}
 			break;
 		}
 		dismiss();
@@ -172,8 +185,6 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 	public void writeFiles(){
 	    try
 	    {
-	    	
-	    	// /data/local with two files : "move_cache.txt" and "skip_apps.txt".
 	    	File cache = new File(getActivity().getBaseContext().getFilesDir()+"/move_cache.txt");
 	        cache.delete();
 	        FileWriter c = new FileWriter(cache, true);
@@ -202,9 +213,6 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 				}
 				
 			}
-	        	        
-	        
-	        	        
 	        c.flush();
 	        c.close();
 	        d.flush();
@@ -219,6 +227,32 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 	        System.out.println("Wrote file:" + data.getName() );
 	        }
 	     }catch(IOException e){}
+	   }  
+	
+	public void writeExtendedCommand(){
+	    try
+	    {
+	    	File exco = new File(getActivity().getBaseContext().getFilesDir()+"/extendedcommand");
+	        exco.delete();
+	        FileWriter w = new FileWriter(exco, true);
+	    	
+	    	w.append("ui_print(\" \");"+'\n');
+	        w.append("ui_print(\"  ---      DATAFIX      --- \");"+'\n');
+	        w.append("ui_print(\"  ---     HERE WE GO    --- \");"+'\n');
+	        w.append("ui_print(\"  --- ZATTA / WENDIGOGO --- \");"+'\n');
+	        w.append("ui_print(\" \");"+'\n');
+	        
+	        String backupName= ShowInfoDialog.getDateAndTime();
+	        String backup = "assert(backup_rom(\"/sdcard/clockworkmod/backup/"+backupName+"\"));";
+	        w.append(backup);
+	        
+	        w.append(" "+'\n');
+	        	        
+	        w.flush();
+	        w.close();
+	        if (BaseActivity.DEBUG)
+	        	System.out.println("Wrote file:" + exco.getName() );
+	    }catch(IOException e){}
 	   }    
 }
 

@@ -31,6 +31,11 @@ prepare_runtime()
 	if [ $3 = reboot ]; then
 		reboot
 	fi
+	
+	if [ $3 = reboot_recovery ]; then
+		cat extendedcommand > /cache/recovery/extendedcommand
+		reboot recovery
+	fi
 }
 
 wipe_cache()

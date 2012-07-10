@@ -1,11 +1,18 @@
 package by.zatta.datafix.dialog;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import by.zatta.datafix.R;
 import android.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,21 +45,30 @@ public class FirstUseDialog extends DialogFragment implements View.OnClickListen
         DISMISS.setOnClickListener(this);
         DONTSHOW.setOnClickListener(this);
         
-        String about = new String(
-				"  This app does nothing by itself" + '\n' +
-				"  it installs a script in init.d" + '\n' +
-				"  which does the actual work." + '\n' + '\n' +
-				"  This means you have to reboot to get" + '\n' +
-				"  the script to run and the datafix active." + '\n' + '\n' +
-				"  By default all libraries will stay on /data" + '\n' +
-				"  and the rest is moved back to /datadata" + '\n' +
-				"  By checking the checkboxes you can choose" + '\n' +
-				"  what else will stay in /data" + '\n'
-				);
-        tv.setText(about);
-                
-		return v;
+        Spanned inHtmlCC = Html.fromHtml(getAboutText());
+        
+        tv.setText(inHtmlCC);                
+		
+        return v;
     }
+	
+	public String getAboutText(){
+		InputStream is= null;
+		String about="";
+		
+		try {
+			is = getResources().getAssets().open("texts/first_start.html");
+			InputStreamReader ir = new InputStreamReader(is);
+	        BufferedReader br = new BufferedReader(ir);
+            String line;
+            while ((line = br.readLine())!= null ) {
+                about = about + line;
+            }
+			is.close();
+		} catch (IOException e) {}
+				
+		return about;
+	}
 
 	@Override
 	public void onClick(View v) {
