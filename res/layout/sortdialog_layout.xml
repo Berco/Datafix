@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/rgSortList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/rbAlpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Alpha" />
+
+        <RadioButton
+            android:id="@+id/rbSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Size" />
+
+        <RadioButton
+            android:id="@+id/rbType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type" />
+    </RadioGroup>
+    
+    <LinearLayout
+	    android:orientation="vertical" 		
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content"
+	    android:divider="?android:attr/dividerHorizontal"
+	    android:showDividers="middle" >
+
+		<View
+		    android:layout_width="wrap_content"
+		    android:layout_height="3dp" />
+        
+	    <LinearLayout
+		    style="?android:attr/buttonBarStyle"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" >
+
+		    <Button
+		        android:id="@+id/btnCancelSort"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/btnNoInstall" />
+		    
+		    
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

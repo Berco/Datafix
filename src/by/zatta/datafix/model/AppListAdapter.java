@@ -44,7 +44,8 @@ public class AppListAdapter extends ArrayAdapter<AppEntry> {
             view = convertView;
         }
         
-        Long biggest = getItem(0).getTotalSize();
+        //Long biggest = getItem(0).getTotalSize();
+        Long biggest = AppListLoader.biggestSize;
 
         AppEntry item = getItem(position);
         Boolean cache = false;

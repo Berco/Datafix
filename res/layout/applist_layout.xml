@@ -45,9 +45,8 @@
         android:max="100"
         android:progress="50"
         android:secondaryProgress="100"  />
-        
-		
-    <TextView
+
+    	<TextView
 		    android:id="@+id/tvSpaceOnDataData"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
@@ -75,6 +74,24 @@
 		    android:layout_below="@id/tvListDiscription"
 		    android:layout_toLeftOf="@id/tvAlltoData"
 		    android:text="@string/CacheBar" />
+		
+		<ImageView
+        	android:id="@+id/imageView1"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/pbFreeSpaceTotal"
+        	android:layout_alignBottom="@id/tvCachetoData"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginBottom="5dp"
+        	android:src="@drawable/sort_down" />
+
+		<View
+		    android:id="@+id/vTopListDiscription"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@id/tvCachetoData"
+		    />"
+		
 		</RelativeLayout>
 		
 		<!-- Old content    

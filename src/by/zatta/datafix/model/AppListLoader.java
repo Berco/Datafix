@@ -20,6 +20,7 @@ import by.zatta.datafix.assist.ShellProvider;
     public class AppListLoader extends AsyncTaskLoader<List<AppEntry>> {
         final InterestingConfigChanges mLastConfig = new InterestingConfigChanges();
         final PackageManager mPm;
+        public static long biggestSize;
 
         List<AppEntry> mApps;
         PackageIntentReceiver mPackageObserver;
@@ -67,6 +68,7 @@ import by.zatta.datafix.assist.ShellProvider;
 
             // Create corresponding array of entries and load their labels.
             List<AppEntry> entries = new ArrayList<AppEntry>(apps.size());
+            biggestSize=0;
             for (int i=0; i<apps.size(); i++) {
                 AppEntry entry = new AppEntry(this, apps.get(i), "false", "false");
                 entry.loadLabel(context);
@@ -74,6 +76,8 @@ import by.zatta.datafix.assist.ShellProvider;
     	    	    if (entry.getPackName().equals(total[a])){
                 	//System.out.println("total: "+total[a] + " " + total[a+1]);
                 	entry.setTotalSize((total[a+1]).trim());
+                	if (Long.valueOf(total[a+1].trim())*1024 > biggestSize)
+                		biggestSize=Long.valueOf(total[a+1].trim())*1024;
     	    	    }
                 }
     	    	for(int a = 0; a < caches.length ; a=a+2){

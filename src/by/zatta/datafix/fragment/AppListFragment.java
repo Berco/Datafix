@@ -1,6 +1,9 @@
 package by.zatta.datafix.fragment;
 
 import java.io.File;
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import by.zatta.datafix.BaseActivity;
@@ -10,6 +13,7 @@ import by.zatta.datafix.dialog.ConfirmDialog;
 import by.zatta.datafix.dialog.ExitDialog;
 import by.zatta.datafix.dialog.FirstUseDialog;
 import by.zatta.datafix.dialog.ShowInfoDialog;
+import by.zatta.datafix.dialog.SortDialog;
 import by.zatta.datafix.model.AppEntry;
 import by.zatta.datafix.model.AppListAdapter;
 import by.zatta.datafix.model.AppListLoader;
@@ -36,8 +40,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
-
 public class AppListFragment extends ListFragment 
 			implements LoaderManager.LoaderCallbacks<List<AppEntry>>, OnClickListener {
 	private ProgressBar mProgressView;
@@ -46,8 +48,10 @@ public class AppListFragment extends ListFragment
 	private TextView mTvFreeSpace;
 	private Button mBtnExit;
 	private Button mBtnFlash;
+	private View mTopView;
 	private TouchInterceptor mList;
 	public List<AppEntry> appList;
+	private Comparator<AppEntry> usedComparator = TYPE_COMPARATOR;
 	private TouchInterceptor.TickListener mTickListener =
 			    new TouchInterceptor.TickListener() {
 			        public void ticked(int item, int tick) {
@@ -97,8 +101,10 @@ public class AppListFragment extends ListFragment
 		mTvFreeSpace = (TextView) view.findViewById(R.id.tvSpaceOnDataData);
 		mBtnExit = (Button) view.findViewById(R.id.btnExit);
 		mBtnFlash = (Button) view.findViewById(R.id.btnFlash);
+		mTopView = (View) view.findViewById(R.id.vTopListDiscription);
 		mBtnExit.setOnClickListener(this);
 		mBtnFlash.setOnClickListener(this);
+		mTopView.setOnClickListener(this);
 		return view;
      }
 
@@ -129,6 +135,12 @@ public class AppListFragment extends ListFragment
 		getLoaderManager().restartLoader(0, null, this);
 	}
 	
+	public void resortList(Comparator<AppEntry> sort){
+		usedComparator = sort;
+		Collections.sort(appList, usedComparator);
+		mAdapter.setData(appList);
+	}
+	
 	public void freeSpaceAvailable(){
 			File datadata = new File ("/datadata/");
 			if (datadata.isDirectory()){
@@ -148,6 +160,45 @@ public class AppListFragment extends ListFragment
     	mBarHolder.setGravity(show ? Gravity.CENTER : Gravity.TOP);    	
     }
 	
+	public static final Comparator<AppEntry> ALPHA_COMPARATOR = new Comparator<AppEntry>() {
+        private final Collator sCollator = Collator.getInstance();
+        @Override
+        public int compare(AppEntry p, AppEntry o) {
+            return sCollator.compare(p.getLabel(), o.getLabel());
+        }
+    };
+    
+    public static final Comparator<AppEntry> SIZE_COMPARATOR = new Comparator<AppEntry>() {
+    	private final Collator sCollator = Collator.getInstance();
+    	@Override
+        public int compare(AppEntry p, AppEntry o) {
+				if ( o.getTotalSize() != p.getTotalSize() ){
+					int num = 0;
+					if (o.getTotalSize() > p.getTotalSize() ) num = 1; 
+					if (o.getTotalSize() < p.getTotalSize() ) num =  -1;
+					return num;	
+				}else{
+					return sCollator.compare(p.getLabel(), o.getLabel());
+				}  
+        }
+    };
+    
+    public static final Comparator<AppEntry> TYPE_COMPARATOR = new Comparator<AppEntry>() {
+    	private final Collator sCollator = Collator.getInstance();
+    	@Override
+        public int compare(AppEntry p, AppEntry o) {
+				if ( sCollator.compare(p.getType(), o.getType()) == 0   ){
+					int num = 0;
+					if (o.getTotalSize() > p.getTotalSize() ) num = 1; 
+					if (o.getTotalSize() == p.getTotalSize() ) num =  0;
+					if (o.getTotalSize() < p.getTotalSize() ) num =  -1;
+					return num;
+				}else{	
+					return sCollator.compare(o.getType(), p.getType());
+				}
+			}
+    };
+	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		if (BaseActivity.DEBUG)
@@ -158,8 +209,7 @@ public class AppListFragment extends ListFragment
 	
 	public interface OnAppSelectedListener{
 		public void onAppSelectedListener(AppEntry app);
-	}
-	
+	}	
 
 	@Override public Loader<List<AppEntry>> onCreateLoader(int id, Bundle args) {
 		return new AppListLoader(getActivity());
@@ -169,6 +219,7 @@ public class AppListFragment extends ListFragment
 		appList = data;
 		toggleLoading(false);
 		freeSpaceAvailable();
+		Collections.sort(appList, usedComparator);
 		mAdapter.setData(appList);
 	}
 	
@@ -202,9 +253,14 @@ public class AppListFragment extends ListFragment
 			ft.addToBackStack(null);
 			DialogFragment exitFragment = ExitDialog.newInstance();
 			exitFragment.show(ft, "dialog");			
+			break;	
+		case R.id.vTopListDiscription:
+			Fragment sort = getFragmentManager().findFragmentByTag("dialog");
+			if (sort != null) ft.remove(sort);
+			ft.addToBackStack(null);
+			DialogFragment sortFragment = SortDialog.newInstance(usedComparator);
+			sortFragment.show(ft, "dialog");			
 			break;
 		}
-		
 	}
-
 }

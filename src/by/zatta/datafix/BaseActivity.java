@@ -5,11 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Comparator;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 
 import by.zatta.datafix.dialog.ShowInfoDialog;
+import by.zatta.datafix.dialog.SortDialog.OnSortListener;
 import by.zatta.datafix.dialog.WipeDialog.OnWipedListener;
 import by.zatta.datafix.fragment.AppListFragment;
 import by.zatta.datafix.fragment.AppListFragment.OnAppSelectedListener;
@@ -37,9 +39,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener, OnLanguageListener{
+public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener, OnLanguageListener, OnSortListener{
 	public static final boolean DEBUG = true;
 	
     @Override
@@ -105,7 +106,6 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
     
     @Override
 	public void onLanguageListener(String language) {
-    	//Toast.makeText(getBaseContext(), "activity received: "+language, Toast.LENGTH_SHORT).show();
     	makeLocale(language);
     	FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
@@ -113,6 +113,12 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 		ft.replace(android.R.id.content, new PrefFragment(), "prefs");
 		ft.addToBackStack(null);
 		ft.commit();
+	}
+    
+    @Override
+	public void onSortListener(Comparator<AppEntry> sort) {
+		Fragment list = getFragmentManager().findFragmentByTag("list");
+    	((AppListFragment) list).resortList(sort);
 	}
 
     @Override
@@ -233,5 +239,5 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 	        editor.commit();
 	    }
 	}
-	
+
 }
