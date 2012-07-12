@@ -48,15 +48,20 @@ SAVEIFS=$IFS
 IFS=$'\n'
 		
 	cache="/data/data/$1/cache"
-	# clean cache simplification
-	# just remove all stuff in cache subdirectory
-	# no need to check where it is
-	if [ -e "$cache" ]; then
-		echo "Wiping $1 cache"
+	# clean cache simplification : just remove all stuff in cache subdirectory no need to check where it is
+	# ... but have to check if it's not a file
+	# IF THEY'RE MASKED FILES IN CACHE THEY'RE NOT REMOVED
+	if [ -e "$cache" -a ! -f "$cache" ]; then
 		# Check if it not empty (something to remove ?)
-		if [ -n $(ls $cache |head -1) ]; then
+		if [ "$(ls $cache)" ]; then
+			echo "Wiping $1 cache";
 			rm -rf -- "$cache"/*
+		else
+			echo "Nothing to clear"
 		fi
+	# if it's a file : emptying it
+	elif [ -f "$cache" ]; then
+		cat /dev/null > "$cache"
 	fi
 	
 IFS=$SAVEIFS
