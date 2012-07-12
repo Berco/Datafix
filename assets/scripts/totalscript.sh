@@ -13,7 +13,7 @@ prepare_runtime()
 		rm /data/data/.datafix_ng
 		cd /data/data/by.zatta.datafix/files
 		cat datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
-		chmod 777 /system/etc/init.d/$1datafix_ng_busybox
+		chmod 750 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
 	if [ ! -d "/data/local/datafix" ]; then
@@ -48,25 +48,15 @@ SAVEIFS=$IFS
 IFS=$'\n'
 		
 	cache="/data/data/$1/cache"
-	if [[ -L "$cache" || ! -d "$cache" || -L "/data/data" ]]; then
-		echo "wiping yaffs" &&
-		cache="/datadata/$1/cache"
-	else
-		echo "wiping data/data"			
-	fi
-	
-	# check if there really is a cache, else it will wipe unexpected stuff
-	if [[ -d "$cache" ]]; then
-		cd "$cache" &&
-		for item in *; do
-			if [[  -d "$item" ]]; then
-				echo "$item is directory"
-				rm -rf $item
-			else
-				echo "$item is file"
-				rm -f $item
-			fi
-		done
+	# clean cache simplification
+	# just remove all stuff in cache subdirectory
+	# no need to check where it is
+	if [ -e "$cache" ]; then
+		echo "Wiping $1 cache"
+		# Check if it not empty (something to remove ?)
+		if [ -n $(ls $cache |head -1) ]; then
+			rm -rf -- "$cache"/*
+		fi
 	fi
 	
 IFS=$SAVEIFS
