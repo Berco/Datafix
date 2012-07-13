@@ -38,7 +38,7 @@
 
 
 ####### Variables definition #######
-
+version='20120513'
 datadata='/data/data'
 yaffs='/datadata'
 
@@ -104,6 +104,8 @@ elif [ ! -e "$datadata/.datafix_ng" -a ! -L "$datadata" ]; then
 	busybox rm -r "$yaffs/"*
 	busybox touch "$datadata/.datafix_ng"
 fi
+
+busybox echo "$version" > "$datadata/.datafix_ng"
 
 # Changing input field separator (IFS) to prevent space separated directories name
 SAVEIFS=$IFS
