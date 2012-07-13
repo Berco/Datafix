@@ -78,50 +78,18 @@ IFS=$'\n'
 	
 	
 	basePath="/data/data/$1"
-	# there is no folder for this app. Must be no datafix yet.
-	if [ ! -d "$basePath" ]; then
-		basePath="/datadata/$1"
-	fi
-	
+
 	cd "$basePath" &&
-	for firstLevel in *; do
-		#if the entry is a symLink or not excists it must be on /datadata
-		tempBasePath="$basePath"
-		if [[ -L "$firstLevel" || !  -d "$firstLevel" ]]; then
-			
-			if [[ "$firstLevel" != "lib" && "$firstLevel" != "libs" && -L "$firstLevel" ]]; then
-				rm -f $firstLevel
+	for d in *; do
+		# if $dir is not a file (so a dir or a symlink)
+		if [[ "$d" != "lib" && "$d" != "libs" && ! -f "$d" ]]; then
+		# Check if it not empty (something to remove ?)
+			if [ "$(ls $d)" ]; then
+				rm -rf -- "$d"/*
 			fi
-			tempBasePath="/datadata/$1"
-			cd "$tempBasePath"
-		else
-			tempBasePath="$basePath"
-		fi		
-		
-		
-		echo "starting in $tempBasePath $firstLevel"
-		# We now are in the correct basePath. SymLink is destroyed.
-		# check if we deal with a directory (not being lib, skip those) or a file
-		if 	[[ "$firstLevel" != "lib" && "$firstLevel" != "libs"  && -d "$firstLevel" ]]; then
-			#Going in 
-			cd $firstLevel &&
-			for secondLevel in *; do
-				echo "second $secondLevel"
-				if [[  -d "$secondLevel" ]]; then
-					rm -rf $secondLevel
-				else
-					echo "$secondLevel is file"
-					rm -f $secondLevel
-				fi			
-				cd $tempBasePath
-			done
-			rm -rf $firstLevel
-			cd $basePath
-			
-		elif [[ "$firstLevel" != "lib" && "$firstLevel" != "libs" ]]; then
-			echo "$firstLevel is file"
-			rm -f $firstLevel
-			cd $basePath
+		# if it's a file : emptying it
+		elif [[ "$d" != "lib" && "$d" != "libs" &&  -f "$d" ]]; then
+			cat /dev/null > "$d"
 		fi
 	done
 	
