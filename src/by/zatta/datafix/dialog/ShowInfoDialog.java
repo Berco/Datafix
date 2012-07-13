@@ -112,6 +112,19 @@ public class ShowInfoDialog extends DialogFragment {
 	public static String getTitaniumState(){
 		String titaniumState = "";
 		ShellProvider.INSTANCE.getCommandOutput("chmod 777 " + TITANIUM_PATH);
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
+		
+		File f = new File(TITANIUM_PATH);
+		if (f.exists()) System.out.println("TB file exists");
+		else System.out.println("TB file does not");
+		if (f.canRead()) System.out.println("TB file can be read");
+		else System.out.println("TB file can not be read");
+		if (f.isFile()) System.out.println("TB file is a file");
+		else System.out.println("TB file is not a file");
+		if (f.isHidden()) System.out.println("TB file is hidden");
+		else System.out.println("TB file is not hidden");
+		
+		
 		
 		try {
             InputStream is = new FileInputStream(TITANIUM_PATH);
@@ -136,7 +149,15 @@ public class ShowInfoDialog extends DialogFragment {
         }
 		
 		ShellProvider.INSTANCE.getCommandOutput("chmod 660 " + TITANIUM_PATH);
-		
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
+		if (f.exists()) System.out.println("TB file exists");
+		else System.out.println("TB file does not");
+		if (f.canRead()) System.out.println("TB file can be read");
+		else System.out.println("TB file can not be read");
+		if (f.isFile()) System.out.println("TB file is a file");
+		else System.out.println("TB file is not a file");
+		if (f.isHidden()) System.out.println("TB file is hidden");
+		else System.out.println("TB file is not hidden");
 		return titaniumState;
 	}
 	

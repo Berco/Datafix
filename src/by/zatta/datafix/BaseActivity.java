@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 
+import by.zatta.datafix.assist.ShellProvider;
 import by.zatta.datafix.dialog.ShowInfoDialog;
 import by.zatta.datafix.dialog.SortDialog.OnSortListener;
 import by.zatta.datafix.dialog.WipeDialog.OnWipedListener;
@@ -46,7 +47,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        ShellProvider.INSTANCE.isSuAvailable();
         new PlantFiles().execute();        
        
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
