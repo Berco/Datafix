@@ -26,6 +26,7 @@ public class ShowInfoDialog extends DialogFragment {
 	private static final String KERNEL_VERSION_PATH = "/proc/version";
 	private static final String TITANIUM_PATH = "/data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml";
 	private static final String INITD_PATH = "/system/etc/init.d/";
+	private static final String OUR_VERSION = "/data/data/.datafix_ng";
 		
 	public static ShowInfoDialog newInstance() {
         ShowInfoDialog f = new ShowInfoDialog();
@@ -112,12 +113,12 @@ public class ShowInfoDialog extends DialogFragment {
 	public static String getTitaniumState(){
 		String titaniumState = "";
 		ShellProvider.INSTANCE.getCommandOutput("chmod 777 " + TITANIUM_PATH);
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs | awk '{print $1}'");
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup | awk '{print $1}'");
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata/com.keramidas.TitaniumBackup/shared_prefs | awk '{print $1}'");
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata/com.keramidas.TitaniumBackup | awk '{print $1}'");
+		
+		ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' > /sdcard/testfilezatta1.txt");
+		ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/testfilezatta1.txt");
+		
+		ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/com.keramidas.TitaniumBackup/shared_prefs");
+		ShellProvider.INSTANCE.getCommandOutput("chmod 755 /datadata/com.keramidas.TitaniumBackup/shared_prefs");
 		
 		File f = new File(TITANIUM_PATH);
 		if (f.exists()) System.out.println("TB file exists");
@@ -154,15 +155,10 @@ public class ShowInfoDialog extends DialogFragment {
         }
 		
 		ShellProvider.INSTANCE.getCommandOutput("chmod 660 " + TITANIUM_PATH);
-		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
-		if (f.exists()) System.out.println("TB file exists");
-		else System.out.println("TB file does not");
-		if (f.canRead()) System.out.println("TB file can be read");
-		else System.out.println("TB file can not be read");
-		if (f.isFile()) System.out.println("TB file is a file");
-		else System.out.println("TB file is not a file");
-		if (f.isHidden()) System.out.println("TB file is hidden");
-		else System.out.println("TB file is not hidden");
+		
+		ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' > /sdcard/testfilezatta2.txt");
+		ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/testfilezatta2.txt");
+		
 		return titaniumState;
 	}
 	
@@ -211,6 +207,27 @@ public class ShowInfoDialog extends DialogFragment {
 		if (fixed.contains("nofix")){
 			return false;
 		}else return true;
+	}
+	
+	public static String ourVersion(){
+		String version="";
+		try {
+            InputStream is = new FileInputStream(OUR_VERSION);
+            InputStreamReader ir = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(ir);
+
+            String line = null;
+            while ((line = br.readLine())!= null ) {
+            	version = line;
+            	}
+            
+            is.close();
+        } catch (IOException e) {
+            Log.e("datafix", "Problem reading titanium prefs file");
+            version = "null";
+            ;
+        }
+		return version;
 	}
 	
 	public static String getDateAndTime(){

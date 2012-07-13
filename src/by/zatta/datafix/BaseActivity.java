@@ -236,6 +236,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 	        editor.putString("tibuState", ShowInfoDialog.getTitaniumState());
 	        editor.putString("initDContent", ShowInfoDialog.getInitDContent());
 	        editor.putString("showSizes", ShowInfoDialog.showSizes());
+	        editor.putString("version", ShowInfoDialog.ourVersion());
 	        editor.putBoolean("fixed", ShowInfoDialog.isFixed());
 	        editor.commit();
 	    }
