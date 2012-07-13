@@ -113,6 +113,11 @@ public class ShowInfoDialog extends DialogFragment {
 		String titaniumState = "";
 		ShellProvider.INSTANCE.getCommandOutput("chmod 777 " + TITANIUM_PATH);
 		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup/shared_prefs | awk '{print $1}'");
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /data/data/com.keramidas.TitaniumBackup | awk '{print $1}'");
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml | awk '{print $1}'");
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata/com.keramidas.TitaniumBackup/shared_prefs | awk '{print $1}'");
+		ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata/com.keramidas.TitaniumBackup | awk '{print $1}'");
 		
 		File f = new File(TITANIUM_PATH);
 		if (f.exists()) System.out.println("TB file exists");
