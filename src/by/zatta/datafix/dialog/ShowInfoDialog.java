@@ -52,6 +52,7 @@ public class ShowInfoDialog extends DialogFragment {
 		String initDContent = getPrefs.getString("initDContent", "undefined");
 		String tibuState = getPrefs.getString("tibuState", "undefined");
 		String [] sizes = getPrefs.getString("showSizes", "1 2 3 4 5").split(" ");
+		String version = getPrefs.getString("version", "not defined");
 		String total = sizes[0] + " " + sizes[1];
 		String free = sizes[2] + " " + sizes[3];
 		String percent = sizes[4];
@@ -81,7 +82,9 @@ public class ShowInfoDialog extends DialogFragment {
 				
 				"/data/data is a symlink: " + alreadyFixed + '\n' + '\n' +
 				
-				getDateAndTime()
+				getDateAndTime() + '\n' + '\n' +
+				
+				version
 				
 				);
         tv.setText(about);
@@ -210,23 +213,15 @@ public class ShowInfoDialog extends DialogFragment {
 	}
 	
 	public static String ourVersion(){
-		String version="";
-		try {
-            InputStream is = new FileInputStream(OUR_VERSION);
-            InputStreamReader ir = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(ir);
-
-            String line = null;
-            while ((line = br.readLine())!= null ) {
-            	version = line;
-            	}
-            
-            is.close();
-        } catch (IOException e) {
-            Log.e("datafix", "Problem reading titanium prefs file");
-            version = "null";
-            ;
-        }
+		String version = "";
+		String initdVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /system/etc/init.d/*30datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'");
+		String appVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /data/data/by.zatta.datafix/files/datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'");
+		String fileVersion = ShellProvider.INSTANCE.getCommandOutput("cat /data/data/.datafix_ng");
+		initdVersion = "initdVersion: " + initdVersion;
+		appVersion = "appVersion: " + appVersion;
+		fileVersion = "fileVersion: " + fileVersion;
+		
+		version = initdVersion + '\n' + appVersion + '\n' + fileVersion + '\n' + version;
 		return version;
 	}
 	
