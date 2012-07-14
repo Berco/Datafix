@@ -12,6 +12,7 @@ import by.zatta.datafix.assist.ShellProvider;
 import by.zatta.datafix.model.AppEntry;
 import android.app.DialogFragment;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
@@ -27,8 +28,8 @@ import android.widget.Toast;
 
 public class ConfirmDialog extends DialogFragment implements View.OnClickListener{
 	List<AppEntry> fls;
-	CheckBox mCbCopyScript;
 	CheckBox mCbNandroid;
+	String update;
 	
 	private LinearLayout mLinLayFlashView;
 	
@@ -57,8 +58,8 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     	getDialog().setTitle(getString(R.string.ConfirmTitle));
         View v = inflater.inflate(R.layout.confirm_dialog, container, false);
         
-        TextView tv = (TextView) v.findViewById(R.id.text);
-        mCbCopyScript = (CheckBox) v.findViewById(R.id.cbCopyScript);
+        TextView tvTB = (TextView) v.findViewById(R.id.text);
+        TextView tvUP = (TextView) v.findViewById(R.id.text2);
         mCbNandroid = (CheckBox) v.findViewById(R.id.cbMakeNandroid);
         
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
@@ -76,8 +77,18 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 			tibuState = getString(R.string.TiBuNotPresent);
 			color = getResources().getColor(R.color.white);
 		}
-		tv.setTextColor(color);
-		tv.setText(tibuState);
+		tvTB.setTextColor(color);
+		tvTB.setText(tibuState);
+		
+		String version = getPrefs.getString("version", "0 1 2 3 4 5 6 7");
+		String[] versionArray = version.split(" ");
+		update = versionArray[7];
+		String updateMessage = "Script version schipped: " + '\n' + 
+								versionArray[3] + '\n' + 
+								"installation process: " + '\n' +
+								versionArray[7].replace("_", " ");
+		
+		tvUP.setText(updateMessage);
 		
         mLinLayFlashView = (LinearLayout) v.findViewById(R.id.llFilesForDialog);
         buildForm();
@@ -145,9 +156,7 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 	public void onClick(View v) {
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		String scripttype = getPrefs.getString("initDContent", "undefined");
-		String copyscript = "";
-		if (mCbCopyScript.isChecked()) copyscript = " copyscript";
-		else copyscript = " dontcopy";
+				
 		switch (v.getId()){
 		case R.id.btnNoInstall:
 			break;
@@ -162,7 +171,7 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 				}
 				writeFiles();
 				ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/by.zatta.datafix/files/totalscript.sh");
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + copyscript + rebootMode);
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update + rebootMode);
 				} catch (Exception e) {	}
 				
 			break;
@@ -171,8 +180,12 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 			try {
 				writeFiles();
 				ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/by.zatta.datafix/files/totalscript.sh");
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + copyscript +" noreboot");
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update +" noreboot");
 				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidNotChecked), Toast.LENGTH_LONG).show();
+				
+		    	Editor editor = getPrefs.edit();
+		    	editor.putString("version", ShowInfoDialog.ourVersion());
+		        editor.commit();
 			} catch (Exception e) {	}
 			}else{
 				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidChecked), Toast.LENGTH_LONG).show();
@@ -227,8 +240,9 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 	        System.out.println("Wrote file:" + data.getName() );
 	        }
 	     }catch(IOException e){}
-	   }  
+	   }
 	
+		
 	public void writeExtendedCommand(){
 	    try
 	    {

@@ -26,8 +26,7 @@ public class ShowInfoDialog extends DialogFragment {
 	private static final String KERNEL_VERSION_PATH = "/proc/version";
 	private static final String TITANIUM_PATH = "/data/data/com.keramidas.TitaniumBackup/shared_prefs/com.keramidas.TitaniumBackup_preferences.xml";
 	private static final String INITD_PATH = "/system/etc/init.d/";
-	private static final String OUR_VERSION = "/data/data/.datafix_ng";
-		
+			
 	public static ShowInfoDialog newInstance() {
         ShowInfoDialog f = new ShowInfoDialog();
         return f;
@@ -214,14 +213,23 @@ public class ShowInfoDialog extends DialogFragment {
 	
 	public static String ourVersion(){
 		String version = "";
-		String initdVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /system/etc/init.d/*30datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'");
-		String appVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /data/data/by.zatta.datafix/files/datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'");
-		String fileVersion = ShellProvider.INSTANCE.getCommandOutput("cat /data/data/.datafix_ng");
-		initdVersion = "initdVersion: " + initdVersion;
-		appVersion = "appVersion: " + appVersion;
-		fileVersion = "fileVersion: " + fileVersion;
+		String initdVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /system/etc/init.d/*30datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'").trim();
+		if (initdVersion.length() != 8) initdVersion = "";
+		String appVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /data/data/by.zatta.datafix/files/datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'").trim();
+		if (appVersion.length() != 8) appVersion = "";
+		String fileVersion = ShellProvider.INSTANCE.getCommandOutput("cat /data/data/.datafix_ng").trim();
+		if (fileVersion.length() != 8) fileVersion = "";
 		
-		version = initdVersion + '\n' + appVersion + '\n' + fileVersion + '\n' + version;
+		String process = "full_update";
+		if (initdVersion.equals("") && !fileVersion.equals("")) process = "files_and_script";
+		if (initdVersion.equals(appVersion)) process = "only_files";
+				
+		initdVersion = "initdVersion: " + initdVersion + " ";
+		appVersion = "appVersion: " + appVersion + " ";
+		fileVersion = "fileVersion: " + fileVersion + " ";
+		process = "installation: " + process;
+		
+		version = initdVersion + '\n' + appVersion + '\n' + fileVersion + '\n' + process;
 		return version;
 	}
 	

@@ -6,11 +6,20 @@ prepare_runtime()
 {
 	echo " prepare_runtime"
 	mount -o rw,remount -t yaffs2 /dev/block/mtdblock2 /system
-		
-	if [ $2 = copyscript ]; then
+	
+	echo "$2"
+	if [ $2 = full_update ]; then
 		rm /system/etc/init.d/30datafix*
 		rm /system/etc/init.d/S30datafix*
 		rm /data/data/.datafix_ng
+		cd /data/data/by.zatta.datafix/files
+		cat datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
+		chmod 750 /system/etc/init.d/$1datafix_ng_busybox
+	fi
+	
+	if [ $2 = files_and_script ]; then
+		rm /system/etc/init.d/30datafix*
+		rm /system/etc/init.d/S30datafix*
 		cd /data/data/by.zatta.datafix/files
 		cat datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
 		chmod 750 /system/etc/init.d/$1datafix_ng_busybox
