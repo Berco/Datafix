@@ -83,10 +83,14 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 		String version = getPrefs.getString("version", "0 1 2 3 4 5 6 7");
 		String[] versionArray = version.split(" ");
 		update = versionArray[7];
-		String updateMessage = "Script version schipped: " + '\n' + 
-								versionArray[3] + '\n' + 
-								"installation process: " + '\n' +
-								versionArray[7].replace("_", " ");
+		String updateMessage="";
+		if (update.equals("only_files"))
+			updateMessage = getString(R.string.FilesOnly);	
+		if (update.equals("full_update"))
+			updateMessage = getString(R.string.ShowVersion) + versionArray[3] + '\n' + getString(R.string.FullUpdate);
+		if (update.equals("files_and_script")){
+			updateMessage = getString(R.string.ShowVersion) + versionArray[3] + '\n' + getString(R.string.FilesAndScript);
+		}
 		
 		tvUP.setText(updateMessage);
 		
@@ -109,26 +113,22 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     		if (ff.getCacheBool().equals("true")) cachefile = true;
     		if (ff.getDataBool().equals("true")) datafile = true;
     	}
-    	addFormField(getString(R.string.ToCache));
+    	
     	if (cachefile){
+    	addFormField(getString(R.string.ToCache));
     		for (AppEntry ff: fls){
     			if (ff.getCacheBool().equals("true"))
     				addFormField("  "+ ff.getPackName());
     		}
-    	}else{
-    		addFormField(getString(R.string.NothingToCache));
+    		addFormField("");
     	}
     	
-    	addFormField("");
-    	
-    	addFormField(getString(R.string.ToData));
     	if (datafile){	
+    		addFormField(getString(R.string.ToData));
     		for (AppEntry ff: fls){
     			if (ff.getDataBool().equals("true"))
     				addFormField("  "+ ff.getPackName());
     		}	
-    	}else{
-    		addFormField(getString(R.string.NothingToData));
     	}
 	}
 

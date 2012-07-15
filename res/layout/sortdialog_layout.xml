@@ -14,19 +14,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Alpha" />
+            android:text="@string/rbAlpha" />
 
         <RadioButton
             android:id="@+id/rbSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Size" />
+            android:text="@string/rbSize" />
 
         <RadioButton
             android:id="@+id/rbType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type" />
+            android:text="@string/rbType" />
     </RadioGroup>
     
     <LinearLayout
@@ -52,7 +52,7 @@
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1"
-		        android:text="@string/btnNoInstall" />
+		        android:text="@string/btnCancelSort" />
 		    
 		    
 		</LinearLayout>

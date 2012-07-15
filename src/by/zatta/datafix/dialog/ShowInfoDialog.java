@@ -214,19 +214,28 @@ public class ShowInfoDialog extends DialogFragment {
 	public static String ourVersion(){
 		String version = "";
 		String initdVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /system/etc/init.d/*30datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'").trim();
-		if (initdVersion.length() != 8) initdVersion = "";
+		if (initdVersion.length() < 8) initdVersion = "0";  //exists but no version
+		if (initdVersion.length() > 8) initdVersion = "-1"; // doesn't exist
+		int initInt = Integer.valueOf(initdVersion);
+		
 		String appVersion = ShellProvider.INSTANCE.getCommandOutput("grep \"version\" /data/data/by.zatta.datafix/files/datafix_ng_busybox | tr -d '[:alpha:] [:punct:]'").trim();
-		if (appVersion.length() != 8) appVersion = "";
+		if (appVersion.length() != 8) appVersion = "0"; // just a precaution..
+		int appInt = Integer.valueOf(appVersion);
+		
 		String fileVersion = ShellProvider.INSTANCE.getCommandOutput("cat /data/data/.datafix_ng").trim();
-		if (fileVersion.length() != 8) fileVersion = "";
+		if (fileVersion.length() < 8) fileVersion = "0";   // exists but no version
+		if (fileVersion.length() > 8) fileVersion = "-1";  // doesn't exist
+		int fileInt = Integer.valueOf(fileVersion);
 		
 		String process = "full_update";
-		if (initdVersion.equals("") && !fileVersion.equals("")) process = "files_and_script";
-		if (initdVersion.equals(appVersion)) process = "only_files";
-				
-		initdVersion = "initdVersion: " + initdVersion + " ";
-		appVersion = "appVersion: " + appVersion + " ";
-		fileVersion = "fileVersion: " + fileVersion + " ";
+		if (initInt >= appInt) process = "only_files";
+		if (initInt >= fileInt) process = "only_files";
+		if (initInt < appInt ) process = "files_and_script";
+		if (initInt < 0 || fileInt < 0) process = "full_update";
+		
+		initdVersion = "initdVersion: " + Integer.toString(initInt) + " ";
+		appVersion = "appVersion: " + Integer.toString(appInt) + " ";
+		fileVersion = "fileVersion: " + Integer.toString(fileInt) + " ";
 		process = "installation: " + process;
 		
 		version = initdVersion + '\n' + appVersion + '\n' + fileVersion + '\n' + process;

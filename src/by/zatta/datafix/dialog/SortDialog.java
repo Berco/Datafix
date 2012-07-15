@@ -44,7 +44,7 @@ public class SortDialog extends DialogFragment implements RadioGroup.OnCheckedCh
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	getDialog().setTitle("Sort");
+    	getDialog().setTitle(getString(R.string.SortTitle));
         View v = inflater.inflate(R.layout.sortdialog_layout, container, false);
         RadioGroup RG = (RadioGroup) v.findViewById(R.id.rgSortList);
         RadioButton btnAlpha = (RadioButton) v.findViewById(R.id.rbAlpha);

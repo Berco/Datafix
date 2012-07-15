@@ -36,6 +36,11 @@
 	<string name="ToData">Add to skipp_apps.txt:</string>
 	<string name="NothingToData">\u0020\u0020 No apps will fully reside in /data/data</string>
 	
+	<string name="ShowVersion">Installing script version: \n</string>
+	<string name="FullUpdate">by full install: \n next boot takes longer</string>
+	<string name="FilesAndScript">replacing older version \n next boot can take longer</string>
+	<string name="FilesOnly">just installing .txt files \n next boot takes normal time</string>
+	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">Cancel</string>
 	<string name="btnYesExit">Exit</string>
@@ -58,5 +63,13 @@
 	<string name="DonateWendigogoSum">paypal to Wendigogo</string>
 	<string name="XdaTitle">Visit XDA</string>
 	<string name="XdaSummary">[Script]New Low Storage Notification fix</string>
+	
+	<!--  Sort Dialog -->
+	<string name = "rbAlpha">Sort alphabetically</string>
+	<string name = "rbSize">Sort by size</string>
+	<string name = "rbType">Sort by type and size</string>
+	<string name = "btnCancelSort">Cancel</string>
+	<string name = "SortTitle">Sort the list</string>
+	
 	
 </resources>

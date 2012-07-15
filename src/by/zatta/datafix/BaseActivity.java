@@ -192,8 +192,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
     	
 		@Override
 		protected Void doInBackground(Void... arg0) {
-			setPreferences();
-			
+					
 			String data_storage_root = getBaseContext().getFilesDir().toString();
 			
 			InputStream is= null;
@@ -209,7 +208,6 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 					os.flush();
 					os.close();
 					os = null;
-
 				} catch (IOException e) {}
 			}
 			
@@ -223,9 +221,9 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 					os.flush();
 					os.close();
 					os = null;
-
 				} catch (IOException e) {}
 			}
+			setPreferences();
 			return null;
 		}
 		
