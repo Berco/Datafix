@@ -1,7 +1,7 @@
 <p><h1><i><u>Welcome!</u></i></h1></p>
 
 <p>
-Please read this carefully!
+<b>Please read this carefully!</b>
 </p>
 <p>
 This app is made to install the init.d script that controls your datafix. It also creates 
@@ -23,14 +23,20 @@ The apps in this file will have all their data on the huge but slow /data/data/*
 <p><i><b>Install button</i></b> <br />
 Once pressed install you will have a confirmation dialog, read carefully what will be 
 added to which file. You can choose between cancel (obvious), install without reboot and 
-with reboot. Both options will create the init.d script if the checkbox is checked and make 
-the .txt files.
+with reboot. <br />
+The app itself will decide wheter or the datafix script will be installed or updated. Good 
+practice is to use the build in nandroid function. This is disabled if you choose to install 
+without a reboot.
 </p>
 
 <p><i><b>App details</i></b> <br />
 You can press on every entry in the list. This will show where this app currently has its data 
 and gives you the option to wipe its cache or all its data. Empty folders will show 4kB, symlinks 
-and non-existing folders will show 0kB
+and non-existing folders will show 0kB <br />
+Data clearing is a little different from the original Android method. We keep the directories 
+and symlinks but just clear their contents. Normally they would be erased as well, appart from the 
+libraries. This way restarting the app will keep the datafix in place. If we would remove the 
+symlinks everything would go to /data/data/*.
 </p>
 
 <p><i><b>Nandroid</i></b> <br />

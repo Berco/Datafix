@@ -1,13 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">"Bonjour tout le monde, DatafixActivity!"</string>
-    <string name="app_name">"Datafix"</string>
+    <string name="hello">Bonjour tout le monde, DatafixActivity!</string>
+    <string name="app_name">Datafix</string>
     
     <!-- AppDetailFragment -->
     <string name="YaffsSizeHere">"Taille totale \n /datadata"</string>
     <string name="DataSizeHere">"Taille totale \n /data/data"</string>
 	<string name="btnClearCaches">"Effacer le cache"</string>
-	<string name="btnClearAllData">"Effacer les données"</string>
+	<string name="btnClearAllData">"Effacer les données \n"</string>
 	
 	<!-- AppListFragment -->
 	<string name="LoadingDataOneMoment">"Chargement des données d'application \n \u0020 \u0020 \u0020 \u0020 Un instant s'il vous plaît"</string>
@@ -22,7 +23,9 @@
 	<string name="btnNoInstall">"Annuler"</string>
 	<string name="btnYesNoReboot">"Créer des fichiers \n Ne redémarre pas \n"</string>
 	<string name="btnYesAndReboot">"Créer des fichiers \n Et le redémarrage \n"</string>
-	<string name="cbCopyScript">"Copiez le script de init.d"</string>
+	<string name="cbMakeNandroid">"Faire de sauvegarde nandroid"</string>
+	<string name="WarningNandroidChecked">"Désactivé. Décochez la case redémarrage nandroid ou choisissez."</string>
+	<string name="WarningNandroidNotChecked">"Les fichiers créés!"</string>
 	<string name="ConfirmTitle">"Créer / mettre à jour les fichiers"</string>
 	<string name="TiBuChecked">"Vous avez de titane installé et que vous avez vérifié backupFollowSymlinks."</string>
 	<string name="TiBuNotChecked">"Vous avez installé et Titane besoin de vérifier backupFollowSymLinks dans ses paramètres."</string>
@@ -31,6 +34,11 @@
 	<string name="NothingToCache">"\u0020\u0020 caches Pas ira à, de données ou de données"</string>
 	<string name="ToData">"Ajouter à skipp_apps.txt:"</string>
 	<string name="NothingToData">"\u0020\u0020 Pas applications seront pleinement résider dans, de données ou de données"</string>
+	
+	<string name="ShowVersion">"Installation de la version de script: \n"</string>
+	<string name="FullUpdate">"par installation complète: \n prochain démarrage prend plus de temps"</string>
+	<string name="FilesAndScript">"remplacement ancienne version \n prochain démarrage peut prendre plus de temps"</string>
+	<string name="FilesOnly">"simplement l\'installation. txt files \n prochain démarrage prend du temps normale"</string>
 	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">"Annuler"</string>
@@ -54,5 +62,12 @@
 	<string name="DonateWendigogoSum">"Paypal Wendigogo"</string>
 	<string name="XdaTitle">"Visitez XDA"</string>
 	<string name="XdaSummary">"[Script] Nouveau correctif faible notification de stockage"</string>
+	
+	<!--  Sort Dialog -->
+	<string name="rbAlpha">"Classer par ordre alphabétique"</string>
+	<string name="rbSize">"Trier par taille"</string>
+	<string name="rbType">"Trier par type et la taille"</string>
+	<string name="btnCancelSort">"Annuler"</string>
+	<string name="SortTitle">"Trier la liste"</string>
 	
 </resources>
