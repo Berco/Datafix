@@ -12,61 +12,61 @@
 	
 	<!-- AppListFragment -->
 	<string name="LoadingDataOneMoment">"Chargement des données d'application \n \u0020 \u0020 \u0020 \u0020 Un instant s'il vous plaît"</string>
-	<string name="FreeSpaceBar">"Gratuit sur /datadata: \u0020"</string>
-	<string name="MoveBar">"\u0020 \u0020 Déplacer vers \n /data/data /"</string>
+	<string name="FreeSpaceBar">"Libre sur /datadata: \u0020"</string>
+	<string name="MoveBar">"\u0020 \u0020 Déplacer vers \n /data/data/"</string>
 	<string name="CacheBar">Cache"</string>
-	<string name="AllBar">"Tous"</string>
-	<string name="btnExit">"Sortie"</string>
+	<string name="AllBar">"Tout"</string>
+	<string name="btnExit">"Quitter"</string>
 	<string name="btnFlash">"Installer"</string>
 	
 	<!--  ConfirmDialog -->
 	<string name="btnNoInstall">"Annuler"</string>
-	<string name="btnYesNoReboot">"Créer des fichiers \n Ne redémarre pas \n"</string>
-	<string name="btnYesAndReboot">"Créer des fichiers \n Et le redémarrage \n"</string>
-	<string name="cbMakeNandroid">"Faire de sauvegarde nandroid"</string>
-	<string name="WarningNandroidChecked">"Désactivé. Décochez la case redémarrage nandroid ou choisissez."</string>
-	<string name="WarningNandroidNotChecked">"Les fichiers créés!"</string>
+	<string name="btnYesNoReboot">"Créer les fichiers Et \n Ne pas redémarrer \n"</string>
+	<string name="btnYesAndReboot">"Créer les fichiers \n Et redémarrer \n"</string>
+	<string name="cbMakeNandroid">"Faire une sauvegarde Nandroid"</string>
+	<string name="WarningNandroidChecked">"Désactivé. Décochez la sauvegarde Nandroid ou choisissez de redémarrer."</string>
+	<string name="WarningNandroidNotChecked">"Fichiers créés!"</string>
 	<string name="ConfirmTitle">"Créer / mettre à jour les fichiers"</string>
-	<string name="TiBuChecked">"Vous avez de titane installé et que vous avez vérifié backupFollowSymlinks."</string>
-	<string name="TiBuNotChecked">"Vous avez installé et Titane besoin de vérifier backupFollowSymLinks dans ses paramètres."</string>
-	<string name="TiBuNotPresent">"Vous n'avez pas de sauvegarde de titane installé. Une fois que vous faites, vérifiez backupFollowSymLinks dans ses paramètres."</string>
+	<string name="TiBuChecked">"Titanium Backup est installé et "Suivre tous les liens symboliques" est coché."</string>
+	<string name="TiBuNotChecked">"Titanium Backup est installé. Merci de cocher "Suivre tous les liens symboliques" dans ses Préférences."</string>
+	<string name="TiBuNotPresent">"Titanium Backup n'est pas installé. Si vous l'installez, cochez "Suivre tous les liens symboliques" dans ses Préférences."</string>
 	<string name="ToCache">"Ajouter à move_cache.txt:"</string>
-	<string name="NothingToCache">"\u0020\u0020 caches Pas ira à, de données ou de données"</string>
+	<string name="NothingToCache">"\u0020\u0020 Pas de cache à déplacer sur /data/data"</string>
 	<string name="ToData">"Ajouter à skipp_apps.txt:"</string>
-	<string name="NothingToData">"\u0020\u0020 Pas applications seront pleinement résider dans, de données ou de données"</string>
+	<string name="NothingToData">"\u0020\u0020 Pas d'applications à déplacer complètement sur /data/data"</string>
 	
 	<string name="ShowVersion">"Installation de la version de script: \n"</string>
-	<string name="FullUpdate">"par installation complète: \n prochain démarrage prend plus de temps"</string>
-	<string name="FilesAndScript">"remplacement ancienne version \n prochain démarrage peut prendre plus de temps"</string>
-	<string name="FilesOnly">"simplement l\'installation. txt files \n prochain démarrage prend du temps normale"</string>
+	<string name="FullUpdate">"Installation complète: \n le prochain démarrage prendra plus de temps"</string>
+	<string name="FilesAndScript">"Mise à jour \n le prochain démarrage peut prendre plus de temps"</string>
+	<string name="FilesOnly">"Installation des fichiers .txt seuls \n le prochain démarrage ne prendra pas plus de temps"</string>
 	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">"Annuler"</string>
 	<string name="btnYesExit">"Sortie"</string>
 	<string name="ExitTitle">"SORTIE"</string>
-	<string name="RealyExit">"Etes-vous sûr de vouloir quitter l'application ?"</string>
+	<string name="RealyExit">"Êtes-vous sûr de vouloir quitter l'application ?"</string>
 	
 	<!--   Preferences -->
-	<string name="WelcomeTitle">"Voir le message de bienvenue au prochain démarrage"</string>
-	<string name="WelcomeSummary">"vérifier pour voir"</string>
-	<string name="NotificationTitle">"Pas de notifications pour les applications nouvelles"</string>
-	<string name="NotificationSummary">"vérifier pour désactiver les notifications"</string>
+	<string name="WelcomeTitle">"Voir le message d'accueil au prochain démarrage"</string>
+	<string name="WelcomeSummary">"Cocher pour l'afficher"</string>
+	<string name="NotificationTitle">"Pas de notifications pour les nouvelles applications"</string>
+	<string name="NotificationSummary">"Cocher pour désactiver les notifications"</string>
 	<string name="LanguageTitle">"Langue"</string>
-	<string name="LanguageSummary">"la langue de cette application"</string>	
+	<string name="LanguageSummary">"La langue de cette application"</string>	
 	<string name="AboutAppTitle">"À propos de cette application"</string>
-	<string name="AboutAppSummary">"Tout à propos de l'objectif"</string>
+	<string name="AboutAppSummary">"Explications sur le pourquoi du comment"</string>
 	<string name="AboutPhoneTitle">"À propos de votre téléphone"</string>
-	<string name="AboutPhoneSummary">"quelques informations sur votre système utilisé"</string>
+	<string name="AboutPhoneSummary">"Quelques informations utiles sur votre système"</string>
 	<string name="DonateTitle">"Faire un don"</string>
 	<string name="DonateZattaSum">"Paypal Zatta"</string>
 	<string name="DonateWendigogoSum">"Paypal Wendigogo"</string>
 	<string name="XdaTitle">"Visitez XDA"</string>
-	<string name="XdaSummary">"[Script] Nouveau correctif faible notification de stockage"</string>
+	<string name="XdaSummary">"[Script]New "Low Storage" Notification fix "</string>
 	
 	<!--  Sort Dialog -->
 	<string name="rbAlpha">"Classer par ordre alphabétique"</string>
-	<string name="rbSize">"Trier par taille"</string>
-	<string name="rbType">"Trier par type et la taille"</string>
+	<string name="rbSize">"Classer par taille"</string>
+	<string name="rbType">"Classer par type et par taille"</string>
 	<string name="btnCancelSort">"Annuler"</string>
 	<string name="SortTitle">"Trier la liste"</string>
 	
