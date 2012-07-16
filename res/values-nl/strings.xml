@@ -24,7 +24,7 @@
 	<string name="btnYesNoReboot">Maak files \n Geen herstart \n</string>
 	<string name="btnYesAndReboot">Maak files \n En herstart \n</string>
 	<string name="cbMakeNandroid">Maak Nandroid backup</string>
-	<string name="WarningNandroidChecked">Uitgeschakeld. Vink nandroid uitzetten aub.</string>
+	<string name="WarningNandroidChecked">Uitgeschakeld. Vinkje nandroid uitzetten aub.</string>
 	<string name="WarningNandroidNotChecked">Files gecreeerd!</string>
 	<string name="ConfirmTitle">Creeer / update bestanden</string>
 	<string name="TiBuChecked">Je hebt Titanium geinstalleerd en je hebt backupFollowSymlinks geactiveerd.</string>
@@ -36,12 +36,12 @@
 	<string name="NothingToData">\u0020\u0020 Geen app zal zijn data volledig hebben in /data/data</string>
 	
 	<string name="ShowVersion">Script versie installeren: \n</string>
-	<string name="FullUpdate">door volledige instalatie \n volgende boot duurt langer</string>
+	<string name="FullUpdate">door volledige installatie \n volgende boot duurt langer</string>
 	<string name="FilesAndScript">oude versie wordt vervangen \n volgende boot kan langer duren</string>
 	<string name="FilesOnly">alleen .txt files installeren \n volgende boot duurt niet langer</string>
 	
 	<!--   ExitDialog -->
-	<string name="btnNoExit">Annuleer</string>
+	<string name="btnNoExit">Anuleer</string>
 	<string name="btnYesExit">Afsluiten</string>
 	<string name="ExitTitle">AFSLUITEN</string>
 	<string name="RealyExit">Weet u zeker dat u wilt afsluiten?</string>
@@ -51,7 +51,7 @@
 	<string name="WelcomeSummary">vink aan om te laten zien</string>
 	<string name="NotificationTitle">Geen notificatie bij nieuwe app</string>
 	<string name="NotificationSummary">vink aan om uit te zetten</string>
-	<string name="LanguageTitle">Taal</string>
+	<string name="LanguageTitle">Language</string>
 	<string name="LanguageSummary">de taal voor deze app</string>	
 	<string name="AboutAppTitle">Over deze app</string>
 	<string name="AboutAppSummary">alles over het doel/werking van de app</string>

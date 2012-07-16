@@ -199,7 +199,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 			OutputStream os = null;
 			
 			File f = new File(data_storage_root+"/totalscript.sh");
-			if (!f.exists() || (f.exists())){
+			if (!f.exists() ){
 				try {
 					is = getResources().getAssets().open("scripts/totalscript.sh");
 					os = new FileOutputStream(data_storage_root+"/totalscript.sh");
@@ -212,7 +212,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 			}
 			
 			File d = new File(data_storage_root+"/datafix_ng_busybox");
-			if (!d.exists() || (d.exists())){
+			if (!d.exists()  ){
 				try {
 					is = getResources().getAssets().open("scripts/30datafix_ng_busybox");
 					os = new FileOutputStream(data_storage_root+destFileName);

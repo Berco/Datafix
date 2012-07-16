@@ -17,10 +17,11 @@ public class InstalledReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if (BaseActivity.DEBUG) System.out.println("Datafix received Broadcast");
+		Boolean update = intent.getBooleanExtra(Intent.EXTRA_REPLACING, false);
 		mNotificationManager = (NotificationManager) context.getSystemService("notification");
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		Boolean disabledNotifications = getPrefs.getBoolean("disableNotifications", false);
-		if (!disabledNotifications) makeNotification(context);		
+		if (!disabledNotifications && !update) makeNotification(context);		
 	}
 	
 private void makeNotification(Context context) {
