@@ -122,18 +122,6 @@ public class ShowInfoDialog extends DialogFragment {
 		ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/com.keramidas.TitaniumBackup/shared_prefs");
 		ShellProvider.INSTANCE.getCommandOutput("chmod 755 /datadata/com.keramidas.TitaniumBackup/shared_prefs");
 		
-		File f = new File(TITANIUM_PATH);
-		if (f.exists()) System.out.println("TB file exists");
-		else System.out.println("TB file does not");
-		if (f.canRead()) System.out.println("TB file can be read");
-		else System.out.println("TB file can not be read");
-		if (f.isFile()) System.out.println("TB file is a file");
-		else System.out.println("TB file is not a file");
-		if (f.isHidden()) System.out.println("TB file is hidden");
-		else System.out.println("TB file is not hidden");
-		
-		
-		
 		try {
             InputStream is = new FileInputStream(TITANIUM_PATH);
             InputStreamReader ir = new InputStreamReader(is);
@@ -158,8 +146,8 @@ public class ShowInfoDialog extends DialogFragment {
 		
 		ShellProvider.INSTANCE.getCommandOutput("chmod 660 " + TITANIUM_PATH);
 		
-		ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' > /sdcard/testfilezatta2.txt");
-		ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/testfilezatta2.txt");
+		//ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' > /sdcard/testfilezatta2.txt");
+		//ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/testfilezatta2.txt");
 		
 		return titaniumState;
 	}

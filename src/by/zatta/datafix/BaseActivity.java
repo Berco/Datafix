@@ -42,7 +42,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener, OnLanguageListener, OnSortListener{
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
