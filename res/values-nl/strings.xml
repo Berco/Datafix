@@ -61,7 +61,7 @@
 	<string name="DonateZattaSum">paypal van Zatta</string>
 	<string name="DonateWendigogoSum">paypal van Wendigogo</string>
 	<string name="XdaTitle">Bezoek XDA</string>
-	<string name="XdaSummary">[Script]New Low Storage Notification fix</string>
+	<string name="XdaSummary">[APP/SCRIPT]Datafix-for "low storage notification" problems</string>
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">Sorteer alfabetisch</string>
