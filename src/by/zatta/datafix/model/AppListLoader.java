@@ -45,10 +45,22 @@ import by.zatta.datafix.assist.ShellProvider;
         	String[] caches=null;
         	String[] ctxt=null;
         	String[] dtxt=null;
-        		total= ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
-        		caches = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*/cache|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
         		ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
         		dtxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/skip_apps.txt").split(" ");
+        	
+        	String totalAmmount = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*|sort -n | awk -F \"/\" '{ print $3, $1 }'");
+        	total = totalAmmount.split(" ");
+        	if (total.length % 2 != 0){
+        		totalAmmount = "odd " + totalAmmount;
+        		total = totalAmmount.split(" ");
+        	}
+        	
+        	String cachesAmmount = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*/cache|sort -n | awk -F \"/\" '{ print $3, $1 }'");
+        	caches = cachesAmmount.split(" ");
+        	if (caches.length % 2 != 0){
+        		cachesAmmount = "odd " + cachesAmmount;
+        		caches = cachesAmmount.split(" ");
+        	}
         	
         	File cacheFile = new File("/data/local/datafix/move_cache.txt");
         	if (!cacheFile.exists() || ctxt.length == 1){
