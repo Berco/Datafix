@@ -1,0 +1,21 @@
+<p><h1><i><u>Historique</u></i></h1></p>
+<p>
+Cette application est une coop&#233ration entre Zatte et Wendigogo, tous deux membres de XDA-developers. 
+Le script init.d qui est actuellement utilis&#233 (et depuis un certain temps) a &#233t&#233 cr&#233&#233 par Wendigogo. Cette application qui configure le script a &#233t&#233 cr&#233&#233e par Zatta. 
+</p>
+<p>
+Sur les Samsung Galaxy S, cyanogenmod 7 cr&#233e une partition yaffs d&#39environ 175mb qui contient les donn&#233es d&#39applications. 
+Cette partition est mont&#233 &#224 /datadata alors que la location habituel dans /data/data est un lien symbolique vers /datadata.
+</p>
+<p><i>
+$ ls -l /data/data <br />
+lrwxrwxrwx 1 system system 9 Oct 8 19:34 /data/data -&gt; /datadata</i></p>
+<p>
+Le fichier apk de l&#39application elle-m&#234me n&#39est pas dans ce dossier, mes les donn&#233es cr&#233&#233 par l&#39application y sont, sp&#233cialement les bases de donn&#233es sqlite et les fichiers xml de pr&#233f&#233rence utilisateur pour les applications. Les d&#233veloppeurs Cyanogenmod ont utilis&#233 cette m&#233thode pour &#233liminer les lenteurs v&#233cues sur les syst&#232mes d&#39origine de Samsung. Mais cela ne s&#39est pas fait gratuitement. 
+</p>
+<p>
+La partition /datadata, quoique tr&#232s rapide, est plut&#244t petite et ce remplie tr&#232s rapidement par les applications qui stocke beaucoup de donn&#233es caches (par exemple G+).
+Une fois /datadata rempli &#224 capacit&#233 les applications commence &#224 plant&#233 (force close) car elles ne sont plus capable de cr&#233er aucune autre donn&#233e dans /datadata.
+La partition ext4 /data a quant &#224 elle une capacit&#233 de pr&#232s de 2GB, plus qu&#39il n&#39en faut donc, ci qui rend int&#233ressant l&#39id&#233e de d&#233placer /datadata dans cette grande partition. Mais cela ram&#232ne la lenteur propre au syst&#232me d&#39origine.
+C&#39est ici que rentre en jeux le DataFix script, il d&#233place certains sous-dossiers de chaque application sur la partition ext4. Par d&#233faut tous les sous-dossiers "lib" &amp; "libs" qui contiennent des fichiers statique en lecture seule qui ne seront que tr&#232s peu affect&#233 par la baisse de performance de la partition ext4 comparativement &#224 la partition yaffs.
+</p>

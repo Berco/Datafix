@@ -1,6 +1,8 @@
 package by.zatta.datafix.dialog;
 
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
+import by.zatta.datafix.assist.ShellProvider;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +38,10 @@ public class ExitDialog extends DialogFragment implements View.OnClickListener{
         Button NO = (Button)v.findViewById(R.id.btnNoExit);
         Button YESREBOOT = (Button) v.findViewById(R.id.btnYesExit);
         
+        if (BaseActivity.DEBUG){	
+			YESREBOOT.setText(getString(R.string.btnYesExit) + '\n' + "dump logcat");
+		}
+        
         
         NO.setOnClickListener(this); 
         YESREBOOT.setOnClickListener(this); 
@@ -51,6 +57,9 @@ public class ExitDialog extends DialogFragment implements View.OnClickListener{
 			break;
 		
 		case R.id.btnYesExit:
+			if (BaseActivity.DEBUG){	
+				ShellProvider.INSTANCE.getCommandOutput("logcat -d > /sdcard/testfilezatta_logcat.txt");
+			}
 			//Toast.makeText(getActivity(), "Leave", Toast.LENGTH_LONG).show();
 			getActivity().finish();
 			break;

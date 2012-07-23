@@ -49,7 +49,7 @@ import by.zatta.datafix.assist.ShellProvider;
         		caches = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*/cache|sort -n | awk -F \"/\" '{ print $3, $1 }'").split(" ");
         		ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
         		dtxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/skip_apps.txt").split(" ");
-        	        	
+        	
         	File cacheFile = new File("/data/local/datafix/move_cache.txt");
         	if (!cacheFile.exists() || ctxt.length == 1){
         		ctxt = new String[2];

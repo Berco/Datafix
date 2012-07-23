@@ -4,16 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 import by.zatta.datafix.R;
 import android.app.DialogFragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AboutDialog extends DialogFragment {
 	
@@ -45,10 +49,19 @@ public class AboutDialog extends DialogFragment {
     }
 	public String getAboutText(){
 		InputStream is= null;
-		String about="";
 		
+		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+		String language = getPrefs.getString("languagePref", "undefined");
+        Locale locale = Locale.getDefault();
+        String myLocale = locale.getLanguage();
+        Toast.makeText(getActivity().getBaseContext(), myLocale, Toast.LENGTH_SHORT).show();
+		String filename = "texts/background_en.html";
+        if (myLocale.contains("fr") || language.contains("fr"))
+			filename = "texts/background_fr.html";
+        
+        String about="";
 		try {
-			is = getResources().getAssets().open("texts/background.html");
+			is = getResources().getAssets().open(filename);
 			InputStreamReader ir = new InputStreamReader(is);
 	        BufferedReader br = new BufferedReader(ir);
             String line;

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 import by.zatta.datafix.R;
 import android.app.DialogFragment;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FirstUseDialog extends DialogFragment implements View.OnClickListener{
 	
@@ -54,10 +56,19 @@ public class FirstUseDialog extends DialogFragment implements View.OnClickListen
 	
 	public String getAboutText(){
 		InputStream is= null;
-		String about="";
 		
-		try {
-			is = getResources().getAssets().open("texts/first_start.html");
+		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+		String language = getPrefs.getString("languagePref", "undefined");
+        Locale locale = Locale.getDefault();
+        String myLocale = locale.getLanguage();
+        Toast.makeText(getActivity().getBaseContext(), myLocale, Toast.LENGTH_SHORT).show();
+		String filename = "texts/first_start_en.html";
+        if (myLocale.contains("fr") || language.contains("fr"))
+			filename = "texts/first_start_fr.html";
+        
+        String about="";
+        try {
+			is = getResources().getAssets().open(filename);
 			InputStreamReader ir = new InputStreamReader(is);
 	        BufferedReader br = new BufferedReader(ir);
             String line;

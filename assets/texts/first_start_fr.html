@@ -1,0 +1,31 @@
+<p><h1><i><u>Bonjour!</u></i></h1></p>
+
+<p>
+<b>SVP. Lisez attentivement!</b>
+</p>
+<p>
+Cette application a &#233t&#233 cr&#233&#233e pour configurer le script init.d (Datafix).  Elle cr&#233e aussi les fichiers move_cache.txt et skip_apps.txt que vous connaissez d&#233j&#224.  En addition, l&#39application est aussi capable de nettoyer le cache ou effacer les donn&#233es de n&#39importe quelle application m&#234me lors de la pr&#233sence de liens symboliques. Liens qui peuvent avoir &#233t&#233 cr&#233&#233e par ce script ou n&#39importe quel autre script. 
+</p>
+
+<p><i><b>move_cache.txt</i></b> <br />
+Le fichier move_cache.txt est cr&#233&#233 en cochant les cases sur l&#39&#233cran principal.  Les applications &#233crites dans ce fichier entreposeront les donn&#233es des caches dans /data/data, permettant &#233ventuellement de sauver beaucoup d&#39espace sur la rapide partition /datadata/*.  Les applications Gmail et Download sont s&#233lectionn&#233 par d&#233faut. 
+</p>
+
+<p><i><b>skip_apps.txt</i></b> <br />
+Les applications &#233crites dans ce fichiers verront TOUTE leur donn&#233es entrepos&#233s dans la tr&#232s grande mes aussi tr&#232s lente partition /data sous /data/data/*.
+</p>
+
+<p><i><b>Bouton Installer</i></b> <br />
+Une fois ce bouton appuy&#233 vous aurez une boite de confirmation,  lisez attentivement ce qui sera ajout&#233 &#224 chaque fichier.  Vous pouvez sois annuler, installer sans red&#233marrer ou installer et red&#233marr&#233.<br />
+L&#39application d&#233cidera si le script doit &#234tre install&#233 ou mis &#224 jour.  Une bonne pratique serait d&#39utilis&#233 la fonction red&#233marrer avec backup nandroid.  Le backup nandroid est ignor&#233 si vous choisissez l&#39option d&#39installer sans red&#233marrer.
+</p>
+
+<p><i><b>D&#233tails d&#39application</i></b> <br />
+Vous pouvez appuyer sur n&#39importe quelle application dans la liste.  Ceci affichera l&#39emplacement actuel des donn&#233es pour l&#39application et vous donne la possibilit&#233 d&#39effacer sont cache ou ses donn&#233es.  Les dossiers vide seront affich&#233 &#224 4KB alors que les liens symbolique et les dossier inexistant seront affich&#233 &#224 0KB.<br />
+La m&#233thode d&#39effacement du cache est quelque peu diff&#233rente de la m&#233thode Android.  Les dossiers et les liens symboliques sont pr&#233serv&#233s et seulement leur contenu est effac&#233.  De cette fa&#231ons lorsque vous repartez une application le lien symbolique est toujours en place et les donn&#233es continueront d&#39aller l&#224 o&#249 n&#233cessaire plut&#244t qu&#39enti&#232rement dans /data/data/*.</p>
+
+<p><i><b>Nandroid</i></b> <br />
+Si vous choissez de faire un backup nandroid &#224 partir de l&#39application vous devez savoir que cette fonction ne fonctionnera qu&#39avec les recovery bas&#233 sur CWM (ClockWorkMod).  TWRP (Touch) n&#39est pas support&#233 pour le moment, si vous voulez aider sentez-vous libre de m&#39envoyer un message priv&#233 sur XDA ou par email zatta.xda@gmail.com  (en anglais svp). <br />
+Le backup nandroid sera dans <br /> <i>/sdcard/clockworkmod/backup/2012-07-10.19.14.12-datafix</i>
+</p>
+
