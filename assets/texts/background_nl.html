@@ -1,0 +1,36 @@
+<p><h1><i><u>Achtergrond</u></i></h1></p>
+
+<p>
+Deze app is een samenwerking tussen Zatta en Wendigogo, beiden leden van 
+XDA-developers. Het init.d script dat het feitelijke werk verricht (en al 
+een poosje bestaat) is gemaakt door Wendigogo, de app om deze te bedienen 
+is gemaakt door Zatta. 
+</p>
+<p>
+Op de Samsung Galaxys wordt vanaf CyanogenMod 7 een partitie van ~175 MB 
+op yaffs gebruikt waar alle app data op wordt opgeslagen. Deze partitie is 
+op /datadata gemount en de gebruikelijke locatie van de directory /data/data 
+is een symlink hiernaartoe. 
+</p>
+
+<p><i>
+$ ls -l /data/data <br />
+lrwxrwxrwx 1 system system 9 Oct 8 19:34 /data/data -&gt; /datadata</i></p>
+
+<p>
+De apps apk zelf staat hier niet, enkel de data die door de apps wordt aangemaakt 
+wordt hier opgeslagen. In het bijzonder de sqlite databases en de voorkeuren xml bestanden. 
+De CyanogenMod ontwikkelaars hebben dit gedaan op de lag zoals wordt ervaren op stock ROMs 
+op te heffen. Maar.. dit zorgt wel voor een nieuw probleem. 
+</p>
+
+<p>
+De /datadata partitie is dermate klein dat deze snel wordt gevuld met allerhande data, met name 
+door apps die veel cache willen gebruiken zoals Google Plus. Wanneer /datadata vol begint te raken 
+zullen diverse apps geforceerd gaan sluiten omdat ze geen data meer kunnen wegschrijven. De ext4 /data 
+partitie heeft ruim voldoende vrije ruimte, ongeveer 2GB. Het ligt dus voor de hand om dan deze te 
+gebruiken voor de data. Helaas ontstaat hierdoor weer de lag. Hier komt het script om de hoek kijken. 
+Het script verplaatst standaard slechts de library directories omdat hier RO statische bestanden 
+staan. Voor deze bestanden is de ext4 performance nog niet zo slecht. De overige bestanden kunnen dan 
+op de snelle yaffs /datadata partitie blijven.
+</p>

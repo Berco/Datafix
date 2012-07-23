@@ -1,0 +1,49 @@
+<p><h1><i><u>Welkom!</u></i></h1></p>
+
+<p>
+<b>Lees dit AUB aandachtig!</b>
+</p>
+<p>
+Deze app is gemaakt om het init.d script dat je datafix controleert te installeren. Het maakt bovendien 
+de move_cache.txt en de skipp_apps.txt bestanden. Daarnaast is de app in staat de apps caches te legen en 
+de data te wissen voor iedere app. Ook wanneer er een datafix aanwezig is, niet noodzakelijk die bij deze app 
+wordt meegeleverd.
+</p>
+
+<p><i><b>move_cache.txt</i></b> <br />
+De move_cache.txt file wordt aangemaakt door de betreffende checkboxes aan te vinken op 
+het hoofdscherm. Apps die aangevinkt worden zullen hun cache op /data/data/* opslaan, potentieel 
+bespaart dit een hoop op de snelle /datadata partitie. Gmail en Downloads zijn standaard geselecteerd. 
+</p>
+
+<p><i><b>skip_apps.txt</i></b> <br />
+De apps in dit bestand zullen al hun data op de enorme maar langzame /data/data/* opslaan. 
+</p>
+
+<p><i><b>Knop Installeren</i></b> <br />
+Wanneer je de knop indrukt zal je een bevestigings dialoog krijgen. Lees aandachtig wat er in 
+welk bestand komt te staan. Je kan kiezen voor anuleren, installeren zonder herstart of installeren 
+met een herstart. <br />
+De app zal zelf bepalen of het datafix script geinstalleerd of geupdated moet worden. Een goed 
+gebruik is het laten maken van een nandroid backup door de ingebouwde backup functie. Deze mogelijkheid 
+is uitgeschakeld wanneer je kiest voor een installatie zonder herstart. 
+</p>
+
+<p><i><b>App details</i></b> <br />
+Je kan op ieder item in de lijst klikken. Dit zal een gedetailleert overzicht geven van de locatie 
+van de data van de app. Ook zit hier de mogelijkheid de cache te legen of de data te wissen. Lege mappen 
+staan te boek als 4kB, symlinks en niet bestaande mappen als 0kB. <br />
+Data wissen gaat een beetje anders dan op de standaard Android manier. Wij houden de directories en 
+symlinks in stand en we wissen slechts de inhoud. Normaal zouden de mappen zelf ook worden gewist maar dat 
+zorgt ervoor dat de datafix in stand blijft. Anders zou na het starten van de app alle data op de langzame 
+/data/data/* locatie komen te staan.
+</p>
+
+<p><i><b>Nandroid</i></b> <br />
+Als je kiest voor een nandroid backup moet je je beseffen dat deze 
+functie alleen beschikbaar is voor op CWM gebaseerde recoveries. TWRP 
+wordt momenteel niet ondersteund. Mocht je me hiermee willen helpen, voel 
+je niet bezwaard me een pm te sturen op XDA of te mailen op zatta.xda@gmail.com. <br />
+De nandroid zal zich bevinden op:<br /> <i>/sdcard/clockworkmod/backup
+/2012-07-10.19.14.12-datafix</i>
+</p>

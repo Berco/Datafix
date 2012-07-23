@@ -58,6 +58,8 @@ public class AboutDialog extends DialogFragment {
 		String filename = "texts/background_en.html";
         if (myLocale.contains("fr") || language.contains("fr"))
 			filename = "texts/background_fr.html";
+        if (myLocale.contains("nl") || language.contains("nl"))
+			filename = "texts/background_nl.html";
         
         String about="";
 		try {

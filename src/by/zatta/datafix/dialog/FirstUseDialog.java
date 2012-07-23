@@ -61,10 +61,11 @@ public class FirstUseDialog extends DialogFragment implements View.OnClickListen
 		String language = getPrefs.getString("languagePref", "undefined");
         Locale locale = Locale.getDefault();
         String myLocale = locale.getLanguage();
-        Toast.makeText(getActivity().getBaseContext(), myLocale, Toast.LENGTH_SHORT).show();
-		String filename = "texts/first_start_en.html";
+        String filename = "texts/first_start_en.html";
         if (myLocale.contains("fr") || language.contains("fr"))
 			filename = "texts/first_start_fr.html";
+        if (myLocale.contains("nl") || language.contains("nl"))
+			filename = "texts/first_start_nl.html";
         
         String about="";
         try {
