@@ -69,5 +69,13 @@
 	<string name = "rbType">Sorteer op type en grote</string>
 	<string name = "btnCancelSort">Anuleer</string>
 	<string name = "SortTitle">De lijst sorteren</string>
+	
+	<!--  FirstUse Dialog --> 
+	<string name = "btnDismiss">Klaar</string>
+	<string name = "btnDontShowAgain">Laat niet \n meer zien \n</string>
+	<string name = "FirstUseTitle">Welkom!</string>
+	
+	<!--   About Dialog -->
+	<string name = "AboutTitle">Over</string>
 		
 </resources>

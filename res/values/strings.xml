@@ -70,4 +70,12 @@
 	<string name = "btnCancelSort">Cancel</string>
 	<string name = "SortTitle">Sort the list</string>
 	
+	<!--  FirstUse Dialog --> 
+	<string name = "btnDismiss">Dismiss</string>
+	<string name = "btnDontShowAgain">Dont show \n again \n</string>
+	<string name = "FirstUseTitle">Welcome!</string>
+	
+	<!--   About Dialog -->
+	<string name = "AboutTitle">About</string>
+	
 </resources>

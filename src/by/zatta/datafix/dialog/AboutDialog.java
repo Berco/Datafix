@@ -36,7 +36,7 @@ public class AboutDialog extends DialogFragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	getDialog().setTitle("About");
+    	getDialog().setTitle(getString(R.string.AboutTitle));
         View v = inflater.inflate(R.layout.aboutdialog_layout, container, false);
         
         TextView tv = (TextView) v.findViewById(R.id.tvAbout);
@@ -54,8 +54,7 @@ public class AboutDialog extends DialogFragment {
 		String language = getPrefs.getString("languagePref", "undefined");
         Locale locale = Locale.getDefault();
         String myLocale = locale.getLanguage();
-        Toast.makeText(getActivity().getBaseContext(), myLocale, Toast.LENGTH_SHORT).show();
-		String filename = "texts/background_en.html";
+        String filename = "texts/background_en.html";
         if (myLocale.contains("fr") || language.contains("fr"))
 			filename = "texts/background_fr.html";
         if (myLocale.contains("nl") || language.contains("nl"))
