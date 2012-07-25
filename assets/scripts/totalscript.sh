@@ -15,6 +15,10 @@ prepare_runtime()
 		chmod 750 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
+	if [ -f "/data/local/datafix" ]; then
+		rm /data/local/datafix
+	fi
+	
 	if [ ! -d "/data/local/datafix" ]; then
 		mkdir -p "/data/local/datafix"
 	fi
