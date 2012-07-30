@@ -13,6 +13,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.widget.Toast;
 
 public class PrefFragment extends PreferenceFragment {
 	
@@ -30,7 +31,7 @@ public class PrefFragment extends PreferenceFragment {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.prefs); 
+        addPreferencesFromResource(R.xml.prefs);
     }
 	
 	@Override
@@ -52,6 +53,10 @@ public class PrefFragment extends PreferenceFragment {
 			DialogFragment aboutFragment = ShowInfoDialog.newInstance();
 			aboutFragment.show(ft, "dialog");
 		}
+		if (pref.getKey().contentEquals("enableDebugging")){
+			Toast.makeText(getActivity().getBaseContext(), getString(R.string.DebuggingWarning), Toast.LENGTH_LONG).show();
+		}
+		
 		if (pref.getKey().contentEquals("languagePref")){
 			pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
 				@Override

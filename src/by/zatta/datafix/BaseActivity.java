@@ -42,17 +42,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class BaseActivity extends Activity implements OnAppSelectedListener, OnWipedListener, OnLanguageListener, OnSortListener{
-	public static final boolean DEBUG = false;
+	public static boolean DEBUG = false;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ShellProvider.INSTANCE.isSuAvailable();
-        new PlantFiles().execute();        
-       
+        new PlantFiles().execute();
+               
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		String language = getPrefs.getString("languagePref", "undefined");
+		
+        String language = getPrefs.getString("languagePref", "undefined");
         if (!language.equals("undefined")) makeLocale(language);
+        
+        DEBUG = getPrefs.getBoolean("enableDebugging", false);
         
         FragmentManager fm = getFragmentManager();
 
@@ -199,7 +202,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 			OutputStream os = null;
 			
 			File f = new File(data_storage_root+"/totalscript.sh");
-			if (!f.exists() ){
+			if (!f.exists() || f.exists()){
 				try {
 					is = getResources().getAssets().open("scripts/totalscript.sh");
 					os = new FileOutputStream(data_storage_root+"/totalscript.sh");
@@ -212,7 +215,7 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 			}
 			
 			File d = new File(data_storage_root+"/datafix_ng_busybox");
-			if (!d.exists()  ){
+			if (!d.exists() || f.exists() ){
 				try {
 					is = getResources().getAssets().open("scripts/30datafix_ng_busybox");
 					os = new FileOutputStream(data_storage_root+destFileName);

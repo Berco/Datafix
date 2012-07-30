@@ -22,9 +22,15 @@
         android:summary="@string/LanguageSummary"
         android:key="languagePref"
         android:entries="@array/languages"
-        android:entryValues="@array/languages_short">
-        
+        android:entryValues="@array/languages_short">        
     </ListPreference>
+    
+	<CheckBoxPreference
+		android:title="@string/DebuggingTitle"
+		android:defaultValue="false"
+		android:key="enableDebugging"
+		android:summary="@string/DebuggingSummary">
+	</CheckBoxPreference>
 
 	<Preference
 		android:title="@string/AboutAppTitle"

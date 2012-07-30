@@ -62,6 +62,9 @@
 	<string name="DonateWendigogoSum">"Paypal Wendigogo"</string>
 	<string name="XdaTitle">"Visitez XDA"</string>
 	<string name="XdaSummary">"[APP/SCRIPT]Datafix-for "low storage notification" problems"</string>
+	<string name="DebuggingTitle">"Débogage"</string>
+	<string name="DebuggingSummary">"Cochez la case pour activer débogage"</string>
+	<string name="DebuggingWarning">"Repartir l'application s'il vous plaît"</string>
 	
 	<!--  Sort Dialog -->
 	<string name="rbAlpha">"Classer par ordre alphabétique"</string>

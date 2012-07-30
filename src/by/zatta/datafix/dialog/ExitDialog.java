@@ -53,14 +53,14 @@ public class ExitDialog extends DialogFragment implements View.OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()){
 		case R.id.btnNoExit:
-			//Toast.makeText(getActivity(), "Stay", Toast.LENGTH_LONG).show();
 			break;
 		
 		case R.id.btnYesExit:
-			if (BaseActivity.DEBUG){	
-				ShellProvider.INSTANCE.getCommandOutput("logcat -d > /sdcard/testfilezatta_logcat.txt");
+			if (BaseActivity.DEBUG){
+				ShellProvider.INSTANCE.getCommandOutput("echo \" \" >> /sdcard/debugfileZatta.txt");
+				ShellProvider.INSTANCE.getCommandOutput("echo \"***** LOGCAT ***\" >> /sdcard/debugfileZatta.txt");
+				ShellProvider.INSTANCE.getCommandOutput("logcat -d >> /sdcard/debugfileZatta.txt");
 			}
-			//Toast.makeText(getActivity(), "Leave", Toast.LENGTH_LONG).show();
 			getActivity().finish();
 			break;
 		}

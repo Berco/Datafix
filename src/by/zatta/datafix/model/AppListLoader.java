@@ -9,10 +9,10 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.BaseActivity.InterestingConfigChanges;
 import by.zatta.datafix.BaseActivity.PackageIntentReceiver;
 import by.zatta.datafix.assist.ShellProvider;
-
 
 	/**
      * A custom Loader that loads all of the installed applications.
@@ -45,9 +45,7 @@ import by.zatta.datafix.assist.ShellProvider;
         	String[] caches=null;
         	String[] ctxt=null;
         	String[] dtxt=null;
-        		ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
-        		dtxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/skip_apps.txt").split(" ");
-        	
+    	
         	String totalAmmount = ShellProvider.INSTANCE.getCommandOutput("du -sL /datadata/*|sort -n | awk -F \"/\" '{ print $3, $1 }'");
         	total = totalAmmount.split(" ");
         	if (total.length % 2 != 0){
@@ -61,12 +59,39 @@ import by.zatta.datafix.assist.ShellProvider;
         		cachesAmmount = "odd " + cachesAmmount;
         		caches = cachesAmmount.split(" ");
         	}
-        	
+
+        	ShellProvider.INSTANCE.getCommandOutput("chmod -R 777 /data/local/datafix");
+        	ctxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/move_cache.txt").split(" ");
         	File cacheFile = new File("/data/local/datafix/move_cache.txt");
+        	
+        	if (BaseActivity.DEBUG){
+        		if (cacheFile.exists())
+        			System.out.println("cacheFile does exist");
+        		else System.out.println("cacheFile does not exist");
+        	
+        		System.out.println("cacheFile.lenght = " + cacheFile.length());
+
+        		if (BaseActivity.DEBUG){
+        			ShellProvider.INSTANCE.getCommandOutput("echo \" \" > /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("echo \"***** LOCAL ***\" >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("ls -l /data | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/local | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("echo \" \" >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("echo \"***** TITANIUM ***\" >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("echo \" \" >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("echo \"***** INIT.D ***\" >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("ls -l /system/etc/init.d | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
+        		}
+        	}
+        	
         	if (cacheFile.length() == 0){
         		ctxt = new String[2];
         		ctxt[0] = "com.android.providers.downloads"; ctxt[1]= "com.google.android.gm";
         	}
+
+        	dtxt = ShellProvider.INSTANCE.getCommandOutput("cat /data/local/datafix/skip_apps.txt").split(" ");
         	
         	List<ApplicationInfo> apps = mPm.getInstalledApplications(
                     PackageManager.GET_UNINSTALLED_PACKAGES |

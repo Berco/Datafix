@@ -12,7 +12,7 @@ prepare_runtime()
 		rm /system/etc/init.d/S30datafix*
 		cd /data/data/by.zatta.datafix/files
 		cat datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
-		chmod 750 /system/etc/init.d/$1datafix_ng_busybox
+		chmod 777 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
 	if [ -f "/data/local/datafix" ]; then

@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import android.app.DialogFragment;
@@ -143,13 +142,6 @@ public class ShowInfoDialog extends DialogFragment {
         }
 		
 		ShellProvider.INSTANCE.getCommandOutput("chmod 660 " + TITANIUM_PATH);
-		
-		if (BaseActivity.DEBUG){	
-			ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' > /sdcard/testfilezatta1.txt");
-			ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/testfilezatta1.txt");
-			ShellProvider.INSTANCE.getCommandOutput("ls -l /datadata | awk '{print $1, $6, $7}' > /sdcard/testfilezatta2.txt");
-			ShellProvider.INSTANCE.getCommandOutput("ls -l / | awk '{print $1, $6, $7}' > /sdcard/testfilezatta3.txt");
-		}
 		
 		return titaniumState;
 	}
