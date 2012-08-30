@@ -2,6 +2,7 @@
 # 30datafix
 #
 #  INSTALLED BY ZATTA. DEVELOPPED BY WENDIGOGO. 7 june 2012
+#  MODIFIED BY ZATTA 28 august 2012
 #
 # Move apps data to the ext4 /data partition then move back and create symbolic links
 # ALL apps data subdirs (on yaffs /datadata partiton) BUT :
@@ -38,7 +39,7 @@
 
 
 ####### Variables definition #######
-version='20120713'
+version='20120829'
 datadata='/data/data'
 yaffs='/datadata'
 
@@ -69,22 +70,43 @@ if [ ! -r "$datafix_files_dir/$skip_apps_file" ]; then
 	busybox touch "$datafix_files_dir/$skip_apps_file"
 fi
 
-
 # Check that there's enough space on /datadata to store all but libs files
-size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
-size_lib=$(busybox du -sLc /data/data/*/lib|busybox tail -1|busybox cut -f1)
+	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
+	size_lib=$(busybox du -sLc /data/data/*/lib|busybox tail -1|busybox cut -f1)
+	size_avail=$(busybox df /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
 
-if [ $(($size_total - $size_lib)) -gt 175000 ]; then
-	echo "Not enough space on $yaffs ;" &&
-	echo "Uninstall some apps before retrying." &&
-	echo "Aborting datafix ..." &&
-	exit 1
-fi
-
-# Everything goes fine, go to next step !
+	size_cache=0
+	for app in $(busybox cat /data/local/datafix/move_cache.txt) ; do
+		app_cache=$(busybox du -sLc /data/data/$app/cache|busybox tail -1|busybox cut -f1)
+		size_cache=$(($size_cache + $app_cache))
+		echo "calculating cache sizes: $app $app_cache $size_cache" 
+	done
+	
+	size_skip=0
+	for app in $(busybox cat /data/local/datafix/skip_apps.txt) ; do
+		app_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
+		size_skip=$(($size_skip + $app_skip))
+		echo "calculating data sizes: $app $app_skip $size_skip" 
+	done
+	
+	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
+	minimum=$(($size_avail - 5000))
+	
+	if [ $dif -gt $minimum ]; then
+		shortage=$(($dif - $minimum))
+		echo "Not enough space on $yaffs to" &&
+		echo "run datafix like this...." &&
+		echo "Uninstall some apps or add some" &&
+		echo "apps to move_cache or skip_apps." &&
+		echo "Aborting datafix ..." &&
+		echo "We need to loose $shortage somewhere" &&
+		exit 1
+	else
+		echo "datafix checks okay, result will be" &&
+		echo "roughly  $dif kB used on /datadata"
+	fi
 
 ####### Script Initialisation #######
-
 
 # Move everything on /data/data (only once the first use of this script)
 if [ -L "$datadata" ]; then

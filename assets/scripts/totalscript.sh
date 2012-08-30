@@ -12,7 +12,8 @@ prepare_runtime()
 		rm /system/etc/init.d/S30datafix*
 		cd /data/data/by.zatta.datafix/files
 		cat datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
-		chmod 777 /system/etc/init.d/$1datafix_ng_busybox
+		chown 0:2000 /system/etc/init.d/$1datafix_ng_busybox
+		chmod 755 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
 	if [ -f "/data/local/datafix" ]; then
@@ -43,7 +44,6 @@ prepare_runtime()
 
 wipe_cache()
 {
-
 	# DRAWBACK FOR-DO USING  * IS TAKING EVERY WORD AS ENTRY. SO A NAME WITH
 	# A WHITE SPACE IN ITS NAME IS NOT GETTING HANDLED PROPERLY
 
@@ -72,7 +72,6 @@ IFS=$SAVEIFS
 
 wipe_data()
 {
-
 SAVEIFS=$IFS
 IFS=$'\n'
 
@@ -105,7 +104,6 @@ do
 		
 	prepare_runtime) prepare_runtime $2 $3 $4;;
 	wipe_cache) wipe_cache $2;;
-	wipe_data) wipe_data $2;;
-	
+	wipe_data) wipe_data $2;;	
   esac
 done
