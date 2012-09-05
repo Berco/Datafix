@@ -1,10 +1,8 @@
 #!/system/bin/sh
 # script for DATAFIX
-echo " **  SCRIPT FOR DATAFIX ** "
 
 prepare_runtime()
 {
-	echo " prepare_runtime"
 	mount -o rw,remount -t yaffs2 /dev/block/mtdblock2 /system
 	
 	if [[ $2 = files_and_script || $2 = full_update ]]; then
@@ -98,12 +96,47 @@ IFS=$'\n'
 IFS=$SAVEIFS
 }
 
+check_sizes()
+{
+	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
+	size_lib=$(busybox du -sLc /data/data/*/lib|busybox tail -1|busybox cut -f1)
+	size_avail=$(busybox df /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
+
+	size_cache=0
+	for app in $(busybox cat /data/data/by.zatta.datafix/files/move_cache.txt) ; do
+		if [[ ! `busybox grep "$app" "/data/data/by.zatta.datafix/files/skip_apps.txt"` ]]; then
+			app_cache=$(busybox du -sLc /data/data/$app/cache|busybox tail -1|busybox cut -f1)
+			size_cache=$(($size_cache + $app_cache))
+		fi
+	done
+	
+	size_skip=0
+	for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
+		size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
+		if [[ -d "/data/data/$app/lib" ]]; then
+			app_lib=$(busybox du -sLc /data/data/$app/lib|busybox tail -1|busybox cut -f1)
+			size_skip=$(($size_skip - $app_lib))
+		fi
+	done
+	
+	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
+	minimum=$(($size_avail - 5000))
+	
+	if [ $dif -gt $minimum ]; then
+		shortage=$(($dif - $minimum))
+		echo "$shortage"
+	else
+		echo "okay"
+	fi
+}
+
 for i
 do
   case "$i" in
 		
 	prepare_runtime) prepare_runtime $2 $3 $4;;
 	wipe_cache) wipe_cache $2;;
-	wipe_data) wipe_data $2;;	
+	wipe_data) wipe_data $2;;
+	check_sizes) check_sizes;;	
   esac
 done

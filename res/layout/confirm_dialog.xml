@@ -42,9 +42,29 @@
             android:layout_marginTop="10dip"
             android:layout_marginBottom="10dip"
             android:gravity="top|center_horizontal"
-            android:visibility="visible"   
+            android:visibility="gone"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
             
+    	<LinearLayout
+			android:id="@+id/llLoadingPreCheck"
+			android:orientation="horizontal"
+			android:gravity="center"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:visibility="gone">
+			<ProgressBar
+				android:id="@+id/pbPreCheck"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:visibility="gone" />
+			<TextView
+		    android:id="@+id/tvPreCheck"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:text="@string/CalculateScenario" />
+    	</LinearLayout>
+    	
     	<LinearLayout
         	android:id="@+id/llFilesForDialog"
         	android:layout_width="match_parent"
@@ -68,6 +88,7 @@
             android:layout_height="0dp"
             android:checked="true"
             android:layout_weight="1"
+            android:visibility="gone"
             android:text="@string/cbMakeNandroid" />
     </LinearLayout>
 
@@ -102,7 +123,8 @@
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1"
-		        android:text="@string/btnYesNoReboot" />
+		        android:text="@string/btnYesNoReboot"
+		        android:visibility="gone" />
 
 		    <Button
 		        android:id="@+id/btnYesAndReboot"
@@ -110,7 +132,8 @@
 		        android:layout_width="0dp"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1"
-		        android:text="@string/btnYesAndReboot" />
+		        android:text="@string/btnYesAndReboot"
+		        android:visibility="gone" />
 		</LinearLayout>
 
 	</LinearLayout>

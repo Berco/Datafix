@@ -222,7 +222,11 @@ public class AppListFragment extends ListFragment
 		Collections.sort(appList, usedComparator);
 		mAdapter.setData(appList);
 	}
-	
+
+	@Override public void onLoaderReset(Loader<List<AppEntry>> loader) {
+		mAdapter.setData(null);
+	}
+
 	public void showFirstUse(){	
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
@@ -231,13 +235,10 @@ public class AppListFragment extends ListFragment
 		DialogFragment newFragment = FirstUseDialog.newInstance();
 		newFragment.show(ft, "dialog");
 	}
-
-	@Override public void onLoaderReset(Loader<List<AppEntry>> loader) {
-		mAdapter.setData(null);
-	}
-
+	
 	@Override
 	public void onClick(View v) {
+		
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		switch(v.getId()){
 		case R.id.btnFlash:			

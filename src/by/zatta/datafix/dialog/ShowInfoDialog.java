@@ -36,7 +36,7 @@ public class ShowInfoDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, 0);
-        setRetainInstance(false);
+        setRetainInstance(true);
     }
 	
 	@Override
@@ -180,10 +180,17 @@ public class ShowInfoDialog extends DialogFragment {
 	
 	public static String readable(Long bytes, boolean si) {
     	int unit = si ? 1000 : 1024;
+    	boolean negative = false;
+    	if (bytes < 0){
+    		negative = true;
+    		bytes = Math.abs(bytes);
+    	}
         if (bytes < unit) return bytes + " B";
         int exp = (int) (Math.log(bytes) / Math.log(unit));
         String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
-        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+        String output = String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+        if (negative) output = "-"+output;
+        return output;
     }
 	
 	public static boolean isFixed(){

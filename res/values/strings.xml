@@ -34,6 +34,12 @@
 	<string name="NothingToCache">\u0020\u0020 No caches will go to /data/data</string>
 	<string name="ToData">Add to skipp_apps.txt:</string>
 	<string name="NothingToData">\u0020\u0020 No apps will fully reside in /data/data</string>
+	<!-- ConfirmDialog New Lines -->
+	<string name = "NotEnoughSpace">
+	    Not enough space on /datadata to run datafix script succesfully.\n 
+	    Uninstall some apps or add some apps to move_cache or skip_apps.\n
+	    You need to loose</string>
+	<string name = "CalculateScenario">"Calculating scenario's"</string>
 	
 	<string name="ShowVersion">Installing script version: \n</string>
 	<string name="FullUpdate">by full install: \n next boot takes longer</string>

@@ -10,7 +10,10 @@ import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import by.zatta.datafix.model.AppEntry;
+import by.zatta.datafix.model.PreCheckLoader;
 import android.app.DialogFragment;
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -22,15 +25,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
-public class ConfirmDialog extends DialogFragment implements View.OnClickListener{
-	List<AppEntry> fls;
-	CheckBox mCbNandroid;
-	String update;
-	
+public class ConfirmDialog extends DialogFragment 
+	implements View.OnClickListener, LoaderManager.LoaderCallbacks<String>{
+	private List<AppEntry> fls;
+	private CheckBox mCbNandroid;
+	private String update;
+	private TextView tvTB;
+	private TextView tvUP;
+	private Button NO;
+	private Button YESANDREBOOT;
+	private Button YESNOREBOOT;
+	private String updateMessage;
+	private ProgressBar mPbPreCheck;
+	private LinearLayout mLinLayPreCheck;
 	private LinearLayout mLinLayFlashView;
 	
     public static ConfirmDialog newInstance(List<AppEntry> apps) {
@@ -55,12 +67,25 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
+    	writeFiles();
+    	getLoaderManager().initLoader(0, null, this);
     	getDialog().setTitle(getString(R.string.ConfirmTitle));
         View v = inflater.inflate(R.layout.confirm_dialog, container, false);
         
-        TextView tvTB = (TextView) v.findViewById(R.id.text);
-        TextView tvUP = (TextView) v.findViewById(R.id.text2);
+        tvTB = (TextView) v.findViewById(R.id.text);
+        tvUP = (TextView) v.findViewById(R.id.text2);
+        mPbPreCheck = (ProgressBar) v.findViewById(R.id.pbPreCheck);
+    	mLinLayPreCheck = (LinearLayout) v.findViewById(R.id.llLoadingPreCheck);
+        mLinLayFlashView = (LinearLayout) v.findViewById(R.id.llFilesForDialog);
         mCbNandroid = (CheckBox) v.findViewById(R.id.cbMakeNandroid);
+        NO = (Button)v.findViewById(R.id.btnNoInstall);
+        YESANDREBOOT = (Button) v.findViewById(R.id.btnYesAndReboot);
+        YESNOREBOOT = (Button) v.findViewById(R.id.btnYesNoReboot);
+        
+        YESANDREBOOT.setOnClickListener(this); 
+        YESNOREBOOT.setOnClickListener(this);
+        NO.setOnClickListener(this); 
+        toggleLoading(true);
         
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		String tibuState = getPrefs.getString("tibuState", "undefined");
@@ -83,7 +108,7 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 		String version = getPrefs.getString("version", "0 1 2 3 4 5 6 7");
 		String[] versionArray = version.split(" ");
 		update = versionArray[7];
-		String updateMessage="";
+		updateMessage="";
 		if (update.equals("only_files"))
 			updateMessage = getString(R.string.FilesOnly);	
 		if (update.equals("full_update"))
@@ -91,19 +116,38 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 		if (update.equals("files_and_script")){
 			updateMessage = getString(R.string.ShowVersion) + versionArray[3] + '\n' + getString(R.string.FilesAndScript);
 		}
-		
-		tvUP.setText(updateMessage);
-		
-        mLinLayFlashView = (LinearLayout) v.findViewById(R.id.llFilesForDialog);
-        buildForm();
-        Button NO = (Button)v.findViewById(R.id.btnNoInstall);
-        Button YESANDREBOOT = (Button) v.findViewById(R.id.btnYesAndReboot);
-        Button YESNOREBOOT = (Button) v.findViewById(R.id.btnYesNoReboot);
-        
-        NO.setOnClickListener(this); 
-        YESANDREBOOT.setOnClickListener(this); 
-        YESNOREBOOT.setOnClickListener(this);
 		return v;
+    }
+    
+    @Override 
+	public Loader<String> onCreateLoader(int id, Bundle args) {
+		return new PreCheckLoader(getActivity());
+	}
+
+	@Override 
+	public void onLoadFinished(Loader<String> loader, String data) {
+		String testString = data;
+    	if (testString.contains("okay")){
+    		tvUP.setText(updateMessage);
+    		mCbNandroid.setVisibility(View.VISIBLE);
+    		YESANDREBOOT.setVisibility(View.VISIBLE);
+        	YESNOREBOOT.setVisibility(View.VISIBLE);
+    	}else{
+    		testString = ShowInfoDialog.readable(Long.valueOf(testString.trim())*1024, false);
+    		testString = getString(R.string.NotEnoughSpace) + " " + testString;
+    		tvUP.setText(testString);
+    		tvUP.setTextColor(getResources().getColor(R.color.red));
+    	}
+    	tvUP.setVisibility(View.VISIBLE);
+    	buildForm();
+    	toggleLoading(false);
+	}
+
+	@Override public void onLoaderReset(Loader<String> loader) {}
+	
+	private void toggleLoading(boolean show) {
+    	mLinLayPreCheck.setVisibility(show ? View.VISIBLE : View.GONE);
+    	mPbPreCheck.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private void buildForm() {
@@ -128,17 +172,16 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
     		for (AppEntry ff: fls){
     			if (ff.getDataBool().equals("true"))
     				addFormField("  "+ ff.getPackName());
-    		}	
+    		}
+    		addFormField("");
     	}
-	}
+    }
 
 	private void addFormField(String label) {
 		TextView tvLabel = new TextView(getActivity());
 		tvLabel.setLayoutParams(getDefaultParams(false));
 		tvLabel.setText(label);
-
-		mLinLayFlashView.addView(tvLabel);
-		
+		mLinLayFlashView.addView(tvLabel);	
 	}
 
 	private LayoutParams getDefaultParams(boolean isLabel) {
@@ -150,7 +193,6 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 		}
 		return params;
 	}
-
 	
 	@Override
 	public void onClick(View v) {
@@ -169,8 +211,6 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 				}else{
 					rebootMode=" reboot";
 				}
-				writeFiles();
-				ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/by.zatta.datafix/files/totalscript.sh");
 				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update + rebootMode);
 				} catch (Exception e) {	}
 				
@@ -178,8 +218,6 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 		case R.id.btnYesNoReboot:
 			if (!mCbNandroid.isChecked()){
 			try {
-				writeFiles();
-				ShellProvider.INSTANCE.getCommandOutput("chmod 777 /data/data/by.zatta.datafix/files/totalscript.sh");
 				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update +" noreboot");
 				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidNotChecked), Toast.LENGTH_LONG).show();
 				
@@ -267,6 +305,7 @@ public class ConfirmDialog extends DialogFragment implements View.OnClickListene
 	        if (BaseActivity.DEBUG)
 	        	System.out.println("Wrote file:" + exco.getName() );
 	    }catch(IOException e){}
-	   }    
+	   }
+	
 }
 
