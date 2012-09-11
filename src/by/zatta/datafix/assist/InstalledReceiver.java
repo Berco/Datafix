@@ -25,9 +25,9 @@ public class InstalledReceiver extends BroadcastReceiver {
 	}
 	
 private void makeNotification(Context context) {
-        CharSequence label = "First run the app";
-        CharSequence text = "Don't forget your datafix for performance";
-        CharSequence full = "then fix its data";
+        CharSequence label = context.getString(R.string.labelNotify);
+        CharSequence text = context.getString(R.string.textNotify);
+        CharSequence full = context.getString(R.string.fullNotify);
         final Notification notification = new Notification(R.drawable.ic_launcher,text,System.currentTimeMillis());
         notification.setLatestEventInfo(context,label,full,null);
         notification.defaults = Notification.DEFAULT_ALL;

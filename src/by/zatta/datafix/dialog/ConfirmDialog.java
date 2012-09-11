@@ -127,12 +127,19 @@ public class ConfirmDialog extends DialogFragment
 	@Override 
 	public void onLoadFinished(Loader<String> loader, String data) {
 		String testString = data;
+		if (BaseActivity.DEBUG){
+			ShellProvider.INSTANCE.getCommandOutput("echo \"***** Check Sizes ***\" >> /sdcard/debugfileZatta.txt");
+			ShellProvider.INSTANCE.getCommandOutput("echo \""+ testString +"\" >> /sdcard/debugfileZatta.txt");
+			ShellProvider.INSTANCE.getCommandOutput("echo \"***** Check Sizes ***\" >> /sdcard/debugfileZatta.txt");
+		}
     	if (testString.contains("okay")){
     		tvUP.setText(updateMessage);
     		mCbNandroid.setVisibility(View.VISIBLE);
     		YESANDREBOOT.setVisibility(View.VISIBLE);
         	YESNOREBOOT.setVisibility(View.VISIBLE);
     	}else{
+    		String[]myArray = testString.split(" ");
+    		testString = myArray[myArray.length-1];
     		testString = ShowInfoDialog.readable(Long.valueOf(testString.trim())*1024, false);
     		testString = getString(R.string.NotEnoughSpace) + " " + testString;
     		tvUP.setText(testString);

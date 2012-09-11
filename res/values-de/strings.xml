@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hallo Welt, DatafixActivity!</string>
+    <string name="app_name">Datafix</string>
+    
+    <!-- AppDetailFragment -->
+    <string name="YaffsSizeHere">Größe total\n/datadata</string>
+    <string name="DataSizeHere">Größe total\n/data/data</string>
+	<string name="btnClearCaches">Caches leeren</string>
+	<string name="btnClearAllData">Data leeren</string>
+	
+	<!-- AppListFragment -->
+	<string name="LoadingDataOneMoment">\u0020\u0020\u0020 Lade App-Daten \u0020\u0020 \n Einen Moment bitte</string>
+	<string name="FreeSpaceBar">Frei auf /datadata:\u0020</string>
+	<string name="MoveBar">\u0020\u0020 Verschieben nach \n \u0020\u0020\u0020\u0020\u0020\u0020 /data/data/</string>
+	<string name="CacheBar">Cache</string>
+	<string name="AllBar">Alles</string>
+	<string name="btnExit">Verlassen</string>
+	<string name="btnFlash">Installieren</string>
+	
+	<!--  ConfirmDialog -->
+	<string name="btnNoInstall">Abbrechen</string>
+	<string name="btnYesNoReboot">Dateien erstellen \n nicht neustarten \n</string>
+	<string name="btnYesAndReboot">Dateien erstellen \n und neustarten \n</string>
+	<string name="cbMakeNandroid">Nandroid-Backup erstellen</string>
+	<string name="WarningNandroidChecked">Deaktiviert. Wähle Nandroid ab oder wähle \"Neustart\".</string>
+	<string name="WarningNandroidNotChecked">Dateien erstellt!</string>
+	<string name="ConfirmTitle">Dateien erstellen / updaten</string>
+	<string name="TiBuChecked">Titanium ist installiert und backupFollowSymlinks ausgewählt.</string>
+	<string name="TiBuNotChecked">Titanium ist installiert, du mußt aber backupFollowSymLinks in den Einstellungen von Titanium aktivieren.</string>
+	<string name="TiBuNotPresent">Titanium Backup ist nicht installiert. Sobald es installiert ist, mußt du backupFollowSymLinks in Titaniums Einstellungen aktivieren.</string>
+	<string name="ToCache">Hinzufügen zu move_cache.txt:</string>
+	<string name="NothingToCache">\u0020\u0020 Keine Caches werden nach /data/data verlagert</string>
+	<string name="ToData">Hinzufügen zu skipp_apps.txt:</string>
+	<string name="NothingToData">\u0020\u0020 Keine Apps werden ausschließlich in /data/data lagern</string>
+	
+	<string name="ShowVersion">Installiere Skript-Version: \n</string>
+	<string name="FullUpdate">bei voller Installation: \n Der nächste Start dauert etwas länger</string>
+	<string name="FilesAndScript">ersetze alte Version \n Der nächste Start kann länger dauern</string>
+	<string name="FilesOnly">installiere nur .txt-Dateien \n Der nächste Start wird nicht beeinflußt</string>
+	
+	<!-- ConfirmDialog New Lines -->
+	<string name = "NotEnoughSpace">
+	    Nicht genug Platz in /datadata, um das Datafix erfolgreich auszuführen.\n 
+	    Deinstalliere einige Apps oder füge weiter Apps zu move_cache oder skip_apps hinzu.\n
+	    Loswerden mußt du</string>
+	<string name = "CalculateScenario">"Berechne Szenarien"</string>
+	
+	<!--   ExitDialog -->
+	<string name="btnNoExit">Abbrechen</string>
+	<string name="btnYesExit">Beenden</string>
+	<string name="ExitTitle">BEENDEN</string>
+	<string name="RealyExit">Willst du sicher die App beenden?</string>
+	
+	<!--   Preferences -->
+	<string name="WelcomeTitle">Zeige Willkommens-Nachricht beim nächsten Start</string>
+	<string name="WelcomeSummary">auswählen zum Anzeigen</string>
+	<string name="NotificationTitle">Keine Benachrichtigung über neue Apps</string>
+	<string name="NotificationSummary">auswählen um Benachrichtigungen zu deaktivieren</string>
+	<string name="LanguageTitle">Sprache</string>
+	<string name="LanguageSummary">die Sprache für diese App</string>	
+	<string name="AboutAppTitle">Über diese App</string>
+	<string name="AboutAppSummary">alles über Sinn und Funktion</string>
+	<string name="AboutPhoneTitle">Über dein Telefon</string>
+	<string name="AboutPhoneSummary">Informationen über dein System</string>
+	<string name="DonateTitle">Spenden</string>
+	<string name="DonateZattaSum">Paypal an Zatta</string>
+	<string name="DonateWendigogoSum">Paypal an Wendigogo</string>
+	<string name="XdaTitle">XDA besuchen</string>
+	<string name="XdaSummary">[APP/SCRIPT]Datafix-for "low storage notification" problems</string>
+	<string name="DebuggingTitle">Debugging</string>
+	<string name="DebuggingSummary">anwählen um Debugging zu aktivieren</string>
+	<string name="DebuggingWarning">Bitte die App neustarten!</string>
+	
+	<!--  Sort Dialog -->
+	<string name = "rbAlpha">alphabetisch sortieren</string>
+	<string name = "rbSize">nach Größe sortieren</string>
+	<string name = "rbType">nach Typ und Größe sortieren</string>
+	<string name = "btnCancelSort">Abbrechen</string>
+	<string name = "SortTitle">Liste sortieren</string>
+	
+	<!--  FirstUse Dialog --> 
+	<string name = "btnDismiss">Überspringen</string>
+	<string name = "btnDontShowAgain">Nicht erneut \n zeigen \n</string>
+	<string name = "FirstUseTitle">Willkommen!</string>
+	
+	<!--   About Dialog -->
+	<string name = "AboutTitle">Über</string>
+	
+	<!--   Notification -->
+	<string name = "labelNotify">"Erst die App starten"</string>
+    <string name = "textNotify">"Vergiss für die Performance dein Datafix nicht"</string>
+    <string name = "fullNotify">"dann Datafix anwenden"</string>
+	
+</resources>

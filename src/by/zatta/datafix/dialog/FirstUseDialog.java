@@ -57,7 +57,7 @@ public class FirstUseDialog extends DialogFragment implements View.OnClickListen
 		InputStream is= null;
 		
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-		String language = getPrefs.getString("languagePref", "undefined");
+		String language = getPrefs.getString("languagePref", "unknown");
         Locale locale = Locale.getDefault();
         String myLocale = locale.getLanguage();
         String filename = "texts/first_start_en.html";
@@ -65,6 +65,8 @@ public class FirstUseDialog extends DialogFragment implements View.OnClickListen
 			filename = "texts/first_start_fr.html";
         if (myLocale.contains("nl") || language.contains("nl"))
 			filename = "texts/first_start_nl.html";
+        if (myLocale.contains("de") || language.contains("de"))
+			filename = "texts/first_start_de.html";
         
         String about="";
         try {

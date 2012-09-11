@@ -4,12 +4,14 @@
 	<string-array name="languages">
 	    <item>English</item>
 		<item>Nederlands</item>
+		<item>Deutsch</item>
 		<item>Francais</item>
 	</string-array>
 	
 	<string-array name="languages_short">
 		<item>en</item>
 		<item>nl</item>
+		<item>de</item>
 		<item>fr</item>
 	</string-array>
     

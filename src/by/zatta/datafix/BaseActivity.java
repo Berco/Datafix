@@ -52,8 +52,8 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
                
         SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		
-        String language = getPrefs.getString("languagePref", "undefined");
-        if (!language.equals("undefined")) makeLocale(language);
+        String language = getPrefs.getString("languagePref", "unknown");
+        if (!language.equals("unknown")) makeLocale(language);
         
         DEBUG = getPrefs.getBoolean("enableDebugging", false);
         

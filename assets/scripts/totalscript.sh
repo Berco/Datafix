@@ -100,7 +100,7 @@ check_sizes()
 {
 	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
 	size_lib=$(busybox du -sLc /data/data/*/lib|busybox tail -1|busybox cut -f1)
-	size_avail=$(busybox df /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
+	size_avail=$(busybox df -k /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
 
 	size_cache=0
 	for app in $(busybox cat /data/data/by.zatta.datafix/files/move_cache.txt) ; do

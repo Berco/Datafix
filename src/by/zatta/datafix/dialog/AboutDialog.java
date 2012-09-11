@@ -50,7 +50,7 @@ public class AboutDialog extends DialogFragment {
 		InputStream is= null;
 		
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-		String language = getPrefs.getString("languagePref", "undefined");
+		String language = getPrefs.getString("languagePref", "unknown");
         Locale locale = Locale.getDefault();
         String myLocale = locale.getLanguage();
         String filename = "texts/background_en.html";
@@ -58,6 +58,8 @@ public class AboutDialog extends DialogFragment {
 			filename = "texts/background_fr.html";
         if (myLocale.contains("nl") || language.contains("nl"))
 			filename = "texts/background_nl.html";
+        if (myLocale.contains("de") || language.contains("de"))
+			filename = "texts/background_de.html";
         
         String about="";
 		try {

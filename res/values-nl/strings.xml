@@ -40,6 +40,13 @@
 	<string name="FilesAndScript">oude versie wordt vervangen \n volgende boot kan langer duren</string>
 	<string name="FilesOnly">alleen .txt files installeren \n volgende boot duurt niet langer</string>
 	
+	<!-- ConfirmDialog New Lines -->
+	<string name = "NotEnoughSpace">
+	    Niet genoeg ruimte op /datadata om het script succesvol te draaien. \n
+	    Deinstalleer enkele apps of voeg apps toe aan move_cache of skipp_apps. \n
+	    Het tekort is</string>
+	<string name = "CalculateScenario">"Scenario's berekenen"</string>
+	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">Anuleer</string>
 	<string name="btnYesExit">Afsluiten</string>
@@ -80,5 +87,10 @@
 	
 	<!--   About Dialog -->
 	<string name = "AboutTitle">Over</string>
+	
+	<!--   Notification -->
+	<string name = "labelNotify">"Start eerst de app"</string>
+    <string name = "textNotify">"Denk aan de datafix voor prestaties"</string>
+    <string name = "fullNotify">"En fix daarna zijn data"</string>
 		
 </resources>

@@ -40,6 +40,13 @@
 	<string name="FilesAndScript">"Mise à jour \n le prochain démarrage peut prendre plus de temps"</string>
 	<string name="FilesOnly">"Installation des fichiers .txt seuls \n le prochain démarrage ne prendra pas plus de temps"</string>
 	
+	<!-- ConfirmDialog New Lines -->
+	<string name = "NotEnoughSpace">
+	    "L'espace disque sur /datadata est insuffisant pour exécuter le script datafix correctement.\n 
+	    Supprimez quelques applications ou ajouter quelques applications aux fichiers move_cache ou skip_apps.\n
+	    Vous devez libérer"</string>
+	<string name = "CalculateScenario">"Scénarios en cours de calcul"</string>
+	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">"Annuler"</string>
 	<string name="btnYesExit">"Sortie"</string>
@@ -80,5 +87,10 @@
 	
 	<!--   About Dialog -->
 	<string name = "AboutTitle">"À propos"</string>
+	
+	<!-- Notification -->
+	<string name = "labelNotify">"D'abord, démarrer l'application"</string>
+	<string name = "textNotify">"N'oubliez pas votre datafix pour les performances"</string>
+	<string name = "fullNotify">"ensuite, \"fixez\" ses données"</string>
 	
 </resources>
