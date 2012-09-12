@@ -99,7 +99,7 @@ IFS=$SAVEIFS
 check_sizes()
 {
 	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
-	size_lib=$(busybox du -sLc /data/data/*/lib|busybox tail -1|busybox cut -f1)
+	size_lib=$(busybox du -sLc /data/data/*/li*|busybox tail -1|busybox cut -f1)
 	size_avail=$(busybox df -k /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
 
 	size_cache=0
@@ -113,8 +113,8 @@ check_sizes()
 	size_skip=0
 	for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
 		size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
-		if [[ -d "/data/data/$app/lib" ]]; then
-			app_lib=$(busybox du -sLc /data/data/$app/lib|busybox tail -1|busybox cut -f1)
+		if [[ -d "/data/data/$app/li*" ]]; then
+			app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
 			size_skip=$(($size_skip - $app_lib))
 		fi
 	done
@@ -122,11 +122,15 @@ check_sizes()
 	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
 	minimum=$(($size_avail - 5000))
 	
+	echo "avail:$size_avail dif:$dif total:$size_total lib:$size_lib cache:$size_cache skip:$size_skip"
+	
 	if [ $dif -gt $minimum ]; then
 		shortage=$(($dif - $minimum))
 		echo "$shortage"
 	else
 		echo "okay"
+		#shortage=$(($dif - $minimum))
+		#echo "$shortage"
 	fi
 }
 
