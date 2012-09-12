@@ -4,12 +4,12 @@
 Diese App ist eine Zusammenarbeit zwischen Zatta und Wendigogo, beides Mitglieder 
 von XDA-Developers. Das init.d-Skript, das die eigentliche Arbeit macht (und das 
 es schon l&#228nger gibt), wurde von Wendigogo erstellt, die App, die das Skript 
-kontrolliert von Zatta.
+steuert von Zatta.
 </p>
 <p>
 Auf dem Samsung Galaxy S erstellt CyanogenMod 7 eine yaffs-Partition von ungef&#228hr 
 175MB, die alle App-Daten enth&#228lt. Diese Partition wird unter /datadata gemountet 
-und der &#252bliche Platz des Ordners /data/data ist ein Symlink nach /datadata. 
+und die &#252bliche Position des Ordners /data/data ist ein Symlink nach /datadata. 
 </p>
 
 <p><i>
@@ -21,17 +21,17 @@ Die eigentliche .apk einer App ist hier nicht gespeichert, wohl aber Daten, die 
 App erstellt, insbesondere SQL-Datenbanken der App und XML-Dateien mit Benutzer-
 Einstellungen. Die CyanogenMod-Entwickler taten dies, um dem Lag entgegenzuwirken, 
 den man mit einer Stock-Galaxy-S-Firmware erleben kann. Aber dadurch entsteht 
-ein Problem.
+ein neues Problem.
 </p>
 
 <p>
-Die /datadata-Partition ist recht klein und kann angef&#252llt werden durch Apps, die 
-viele Daten cachen (G+ zum Beispiel). 
+Die /datadata-Partition ist recht klein und kann schnell angef&#252llt werden durch Apps, 
+die viele Daten cachen (G+ zum Beispiel). 
 Sobald /datadata voll ist, fangen Apps an abzust&#252rzen, weil sie keine neuen Daten 
 mehr auf /datadata erstellen k&#246nnen. Die ext4-Partition /data, die circa 2GB gro&#223 ist, 
 hat Unmengen an Platz. Es ist also sehr attraktiv, /datadata auf diese gro&#223e Partition 
 zu veschieben. Aber dann h&#228tten wir wieder das Problem mit dem Lag. Und an dieser Stelle 
-kommt diese Skript ins Spiel. Es verschiebt bestimmte Unterordner von jeder App auf die 
+kommt dieses Skript ins Spiel. Es verschiebt bestimmte Unterordner einer App auf die 
 ext4-Partition. In der Grundeinstellung werden nur "lib"-Ordner verschoben, da "lib"-
 Unterordner lediglich statische Daten enthalten, die sich nicht &#228ndern, also nur 
 gelesen werden m&#252ssen. Und beim Lese-Zugriff sind die ext4-Werte im Vergleich zu denen 

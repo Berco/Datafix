@@ -11,7 +11,7 @@
 	<string name="btnClearAllData">Data leeren</string>
 	
 	<!-- AppListFragment -->
-	<string name="LoadingDataOneMoment">\u0020\u0020\u0020 Lade App-Daten \u0020\u0020 \n Einen Moment bitte</string>
+	<string name="LoadingDataOneMoment">\u0020\u0020\u0020 Lade App-Daten \u0020\u0020 \n einen Moment bitte</string>
 	<string name="FreeSpaceBar">Frei auf /datadata:\u0020</string>
 	<string name="MoveBar">\u0020\u0020 Verschieben nach \n \u0020\u0020\u0020\u0020\u0020\u0020 /data/data/</string>
 	<string name="CacheBar">Cache</string>
@@ -26,13 +26,13 @@
 	<string name="cbMakeNandroid">Nandroid-Backup erstellen</string>
 	<string name="WarningNandroidChecked">Deaktiviert. Wähle Nandroid ab oder wähle \"Neustart\".</string>
 	<string name="WarningNandroidNotChecked">Dateien erstellt!</string>
-	<string name="ConfirmTitle">Dateien erstellen / updaten</string>
+	<string name="ConfirmTitle">Dateien erstellen/updaten</string>
 	<string name="TiBuChecked">Titanium ist installiert und backupFollowSymlinks ausgewählt.</string>
 	<string name="TiBuNotChecked">Titanium ist installiert, du mußt aber backupFollowSymLinks in den Einstellungen von Titanium aktivieren.</string>
 	<string name="TiBuNotPresent">Titanium Backup ist nicht installiert. Sobald es installiert ist, mußt du backupFollowSymLinks in Titaniums Einstellungen aktivieren.</string>
 	<string name="ToCache">Hinzufügen zu move_cache.txt:</string>
 	<string name="NothingToCache">\u0020\u0020 Keine Caches werden nach /data/data verlagert</string>
-	<string name="ToData">Hinzufügen zu skipp_apps.txt:</string>
+	<string name="ToData">Hinzufügen zu skip_apps.txt:</string>
 	<string name="NothingToData">\u0020\u0020 Keine Apps werden ausschließlich in /data/data lagern</string>
 	
 	<string name="ShowVersion">Installiere Skript-Version: \n</string>
@@ -61,7 +61,7 @@
 	<string name="LanguageTitle">Sprache</string>
 	<string name="LanguageSummary">die Sprache für diese App</string>	
 	<string name="AboutAppTitle">Über diese App</string>
-	<string name="AboutAppSummary">alles über Sinn und Funktion</string>
+	<string name="AboutAppSummary">über Sinn und Funktion</string>
 	<string name="AboutPhoneTitle">Über dein Telefon</string>
 	<string name="AboutPhoneSummary">Informationen über dein System</string>
 	<string name="DonateTitle">Spenden</string>
@@ -89,7 +89,7 @@
 	<string name = "AboutTitle">Über</string>
 	
 	<!--   Notification -->
-	<string name = "labelNotify">"Erst die App starten"</string>
+	<string name = "labelNotify">"Erst neue App starten"</string>
     <string name = "textNotify">"Vergiss für die Performance dein Datafix nicht"</string>
     <string name = "fullNotify">"dann Datafix anwenden"</string>
 	

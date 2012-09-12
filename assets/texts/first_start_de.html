@@ -4,26 +4,27 @@
 <b>Bitte sorgf&#228ltig lesen!</b>
 </p>
 <p>
-Diese App wurde gemacht, um das init.d-Skript zu installieren, dass dein Datafix kontrolliert. 
+Diese App gibt es, um das init.d-Skript zu installieren, dass dein Datafix kontrolliert. 
 Sie erstellt auch die bereits bekannten Dateien move_cache.txt und skip_apps.txt. Zus&#228tzlich 
-kann die App die Caches und Daten jeder App s&#228ubern, auch wenn ein Datafix in Gebrauch ist, auch 
-wenn es nich das Datafix von diesem init.d-Skript ist.
+kann die App die Caches und Daten jeder App s&#228ubern, auch wenn ein anderes Datafix in Gebrauch 
+ist, als das von diesem init.d-Skript installierte.
 </p>
 
 <p><i><b>move_cache.txt</i></b> <br />
 Die Datei move_cache.txt wird durch das Markieren der K&#228stchen im Haupt-Bildschirm erstellt. 
-Apps in der Datei speichern ihren Cache in /data/data/*, was einiges an Platz spart im schnellen 
-/datadata. GMail und Downloads sind standardm&#228&#223ig angew&#228hlt.
+In der Datei gelistete Apps speichern ihren Cache in /data/data/*, was einiges an Platz spart im 
+schnelleren Speicher von /datadata. GMail und Downloads sind standardm&#228&#223ig angew&#228hlt.
 </p>
 
 <p><i><b>skip_apps.txt</i></b> <br />
-Die Apps in dieser Datei legen alle ihre Daten auf dem gro&#223en, aber langsameren /data/data/* ab.
+Die in dieser Datei gelisteten Apps legen alle ihre Daten im gr&#246&#223eren, aber langsameren 
+Speicher in /data/data/* ab.
 </p>
 
 <p><i><b>Installations-Knopf</i></b> <br />
 Wenn "Installation" einmal gedr&#252ckt wurde, erscheint ein Best&#228tigungs-Dialog, in dem du sorgf&#228ltig 
-lesen solltest, was zu welcher Datei hinzugef&#252gt wird. Du kannst nun entweder abbrechen, ohne 
-Neustart installieren oder mit Neustart installieren. <br />
+lesen solltest, was zu welcher Datei hinzugef&#252gt wird. Du kannst nun entweder abbrechen oder 
+die Installation mit oder ohne Neustart durchf&#252hren. <br />
 Die App selbst wird entscheiden, ob das Datafix-Skript installiert oder geupdatet wird. Gut ist es, 
 die eingebaute Nandroid-Option zu nutzen. Diese ist deaktiviert, wenn du die Installtion ohne 
 Neustart w&#228hlst.
@@ -31,17 +32,17 @@ Neustart w&#228hlst.
 
 <p><i><b>App-Details</i></b> <br />
 Du kannst jeden Eintrag in der Liste dr&#252cken. Dadurch wird dir angezeigt, wo die App aktuell ihre 
-Daten ablegt und gibt dir die Option, den Cache oder die Daten der jeweiligen App zu l&#246schen. 
+Daten ablegt und gibt dir die Optionen, den Cache oder die Daten der jeweiligen App zu l&#246schen. 
 Leere Ordner werden mit 4kb angezeigt, Symlinks oder nicht-existierende Ordner mit 0kb. <br />
 Das L&#246schen der Daten einer App erfolgt etwas anders als Androids Standard-Methode. Wir behalten 
 die Ordner und Symlinks und l&#246schen lediglich deren Inhalte. Normalerweise w&#252rden die auch gel&#246scht 
 werden, bis auf die Libraries. Auf diesem Wege bleibt das Datafix auch nach einem Neustart der 
-App an seinem Platz. Wenn wir die Symlinks entfernen w&#252rden, w&#252rde wieder alles nach 
+App an seinem Platz. Wenn wir die Symlinks entfernen w&#252rden, dann w&#252rde wieder alles nach 
 /data/data/* gehen.
 </p>
 
 <p><i><b>Nandroid</i></b> <br />
-Wenn du entscheidest, ein Nandroid-Backup von dieser App auszumachen, musst du wissen, dass 
+Wenn du entscheidest, ein Nandroid-Backup von dieser App machen zu lassen, musst du wissen, dass 
 diese Funktion lediglich f&#252r CWM-basierte Recoveries verf&#252gbar ist. TWRP wird derzeit nicht 
 unterst&#252tzt. Wenn du dabei helfen m&#246chtest, schreib mir einfach eine PM auf XDA oder eine Email 
 an zatta.xda@gmail.com.<br />
