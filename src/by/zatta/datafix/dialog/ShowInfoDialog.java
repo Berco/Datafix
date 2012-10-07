@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.apache.commons.io.FileUtils;
+
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import android.app.DialogFragment;
@@ -172,8 +174,11 @@ public class ShowInfoDialog extends DialogFragment {
 			
 			showSizes = readable(total, false);
 			showSizes = showSizes + " " + readable(free, false);
-			showSizes = showSizes + " " + Integer.toString(percent) + "%";
-			
+			showSizes = showSizes + " " + Integer.toString(percent) + "%";			
+		}
+		else {
+			long size = FileUtils.sizeOfDirectory(new File("/data"));
+			showSizes = readable(size, false) + " 0 MB 3%";	
 		}
 		return showSizes;
 	}
@@ -235,6 +240,7 @@ public class ShowInfoDialog extends DialogFragment {
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss");
 		String dateAndTime = sdf.format(c.getTime())+"-datafix";
+		
 		return dateAndTime;
 	}
 }

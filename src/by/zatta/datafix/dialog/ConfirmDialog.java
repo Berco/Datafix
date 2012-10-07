@@ -132,19 +132,36 @@ public class ConfirmDialog extends DialogFragment
 			ShellProvider.INSTANCE.getCommandOutput("echo \""+ testString +"\" >> /sdcard/debugfileZatta.txt");
 			ShellProvider.INSTANCE.getCommandOutput("echo \"***** Check Sizes ***\" >> /sdcard/debugfileZatta.txt");
 		}
-    	if (testString.contains("okay")){
-    		tvUP.setText(updateMessage);
-    		mCbNandroid.setVisibility(View.VISIBLE);
-    		YESANDREBOOT.setVisibility(View.VISIBLE);
-        	YESNOREBOOT.setVisibility(View.VISIBLE);
-    	}else{
-    		String[]myArray = testString.split(" ");
-    		testString = myArray[myArray.length-1];
-    		testString = ShowInfoDialog.readable(Long.valueOf(testString.trim())*1024, false);
-    		testString = getString(R.string.NotEnoughSpace) + " " + testString;
-    		tvUP.setText(testString);
-    		tvUP.setTextColor(getResources().getColor(R.color.red));
-    	}
+    	try {
+			if (testString.contains("okay")){
+				tvUP.setText(updateMessage);
+				mCbNandroid.setVisibility(View.VISIBLE);
+				YESANDREBOOT.setVisibility(View.VISIBLE);
+				YESNOREBOOT.setVisibility(View.VISIBLE);
+			}else if (testString.contains("UNCHECKED")){
+				tvUP.setText(getString(R.string.WarningNoSpaceCheck));
+				mCbNandroid.setVisibility(View.VISIBLE);
+				YESANDREBOOT.setVisibility(View.VISIBLE);
+				YESNOREBOOT.setVisibility(View.VISIBLE);
+			}else {	
+				String[]myArray = testString.split(" ");
+				String showString = myArray[myArray.length-1];
+				showString = ShowInfoDialog.readable(Long.valueOf(showString.trim())*1024, false);
+				SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+				String checkMode = getPrefs.getString("scriptcheck", "simple_check");
+				if (checkMode.equals("simple_check"))
+					showString = getString(R.string.NotEnoughSpaceSimple) + " " + showString;
+				else
+					showString = getString(R.string.NotEnoughSpaceAdvanced) + " " + showString;
+				tvUP.setText(showString);
+				tvUP.setTextColor(getResources().getColor(R.color.red));
+			}
+		} catch (Exception e) {
+				tvUP.setText("SCRIPT ERROR" + '\n' + testString);
+				mCbNandroid.setVisibility(View.VISIBLE);
+				YESANDREBOOT.setVisibility(View.VISIBLE);
+				YESNOREBOOT.setVisibility(View.VISIBLE);
+		} 
     	tvUP.setVisibility(View.VISIBLE);
     	buildForm();
     	toggleLoading(false);
@@ -192,8 +209,8 @@ public class ConfirmDialog extends DialogFragment
 	}
 
 	private LayoutParams getDefaultParams(boolean isLabel) {
-		LayoutParams params = new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 		if (isLabel) {
 			params.bottomMargin = 5;
 			params.topMargin = 10;
@@ -205,11 +222,17 @@ public class ConfirmDialog extends DialogFragment
 	public void onClick(View v) {
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		String scripttype = getPrefs.getString("initDContent", "undefined");
+		String checkMode = getPrefs.getString("scriptcheck", "simple_check");
+		Editor editor = getPrefs.edit();
 				
 		switch (v.getId()){
 		case R.id.btnNoInstall:
 			break;
 		case R.id.btnYesAndReboot:
+			if (checkMode.equals("no_check")){
+				editor.putString("scriptcheck", "simple_check");
+				editor.commit();
+			}
 			try {
 				String rebootMode = "";
 				if (mCbNandroid.isChecked()){
@@ -218,17 +241,19 @@ public class ConfirmDialog extends DialogFragment
 				}else{
 					rebootMode=" reboot";
 				}
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update + rebootMode);
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update + rebootMode + " " + checkMode);
 				} catch (Exception e) {	}
 				
 			break;
 		case R.id.btnYesNoReboot:
+			if (checkMode.equals("no_check")){
+				editor.putString("scriptcheck", "simple_check");
+				editor.commit();
+			}
 			if (!mCbNandroid.isChecked()){
 			try {
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update +" noreboot");
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update +" noreboot" + " " + checkMode);
 				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidNotChecked), Toast.LENGTH_LONG).show();
-				
-		    	Editor editor = getPrefs.edit();
 		    	editor.putString("version", ShowInfoDialog.ourVersion());
 		        editor.commit();
 			} catch (Exception e) {	}

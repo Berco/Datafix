@@ -54,7 +54,8 @@ public class AppListFragment extends ListFragment
 	private Comparator<AppEntry> usedComparator = TYPE_COMPARATOR;
 	private TouchInterceptor.TickListener mTickListener =
 			    new TouchInterceptor.TickListener() {
-			        public void ticked(int item, int tick) {
+			        @Override
+					public void ticked(int item, int tick) {
 			        	if (BaseActivity.DEBUG)
 			        	System.out.println("Ticklisten item: "+item + " box: " + tick);
 			            AppEntry app = appList.get(item);
@@ -101,7 +102,7 @@ public class AppListFragment extends ListFragment
 		mTvFreeSpace = (TextView) view.findViewById(R.id.tvSpaceOnDataData);
 		mBtnExit = (Button) view.findViewById(R.id.btnExit);
 		mBtnFlash = (Button) view.findViewById(R.id.btnFlash);
-		mTopView = (View) view.findViewById(R.id.vTopListDiscription);
+		mTopView = view.findViewById(R.id.vTopListDiscription);
 		mBtnExit.setOnClickListener(this);
 		mBtnFlash.setOnClickListener(this);
 		mTopView.setOnClickListener(this);

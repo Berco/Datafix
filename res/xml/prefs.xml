@@ -2,7 +2,7 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:key="datafix_preferences">
- 
+  
    	<CheckBoxPreference
 		android:title="@string/WelcomeTitle"
 		android:defaultValue="true"
@@ -25,12 +25,26 @@
         android:entryValues="@array/languages_short">        
     </ListPreference>
     
-	<CheckBoxPreference
-		android:title="@string/DebuggingTitle"
-		android:defaultValue="false"
-		android:key="enableDebugging"
-		android:summary="@string/DebuggingSummary">
-	</CheckBoxPreference>
+    <PreferenceScreen
+    	android:key="screen_preference"
+        android:title="@string/AdvancedTitle"
+        android:summary="@string/AdvancedSummary">
+        
+        <CheckBoxPreference
+			android:title="@string/DebuggingTitle"
+			android:defaultValue="false"
+			android:key="enableDebugging"
+			android:summary="@string/DebuggingSummary"/>
+        
+        <ListPreference
+        	android:title="@string/ScriptTitle"
+        	android:summary="@string/ScriptSummary"
+        	android:key="scriptcheck"
+        	android:entries="@array/checks"
+        	android:entryValues="@array/check_keys">        
+    	</ListPreference>
+    	
+  	</PreferenceScreen>
 
 	<Preference
 		android:title="@string/AboutAppTitle"

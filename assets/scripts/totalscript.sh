@@ -30,6 +30,8 @@ prepare_runtime()
 	cat skip_apps.txt > /data/local/datafix/skip_apps.txt
 	chmod 740 /data/local/datafix/skip_apps.txt
 	
+	busybox echo "$4" > "/data/local/datafix/type"
+	
 	if [ $3 = reboot ]; then
 		reboot
 	fi
@@ -98,26 +100,34 @@ IFS=$SAVEIFS
 
 check_sizes()
 {
+if [[ "$1" != "no_check" ]]; then
+	
 	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
 	size_lib=$(busybox du -sLc /data/data/*/li*|busybox tail -1|busybox cut -f1)
-	size_avail=$(busybox df -k /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
-
+	size_avail=$(df -k | grep "/datadata" | busybox awk -F " " '{ print $1  }')
+	#making it possible for Zatta to debug on an device not containing /datadata
+	if [ -z $size_avail ]; then
+		size_avail=400000
+	fi 
 	size_cache=0
-	for app in $(busybox cat /data/data/by.zatta.datafix/files/move_cache.txt) ; do
-		if [[ ! `busybox grep "$app" "/data/data/by.zatta.datafix/files/skip_apps.txt"` ]]; then
-			app_cache=$(busybox du -sLc /data/data/$app/cache|busybox tail -1|busybox cut -f1)
-			size_cache=$(($size_cache + $app_cache))
-		fi
-	done
-	
 	size_skip=0
-	for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
-		size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
-		if [[ -d "/data/data/$app/li*" ]]; then
-			app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
-			size_skip=$(($size_skip - $app_lib))
-		fi
-	done
+	
+	if [[ "$1" = "advanced_check" ]]; then
+		for app in $(busybox cat /data/data/by.zatta.datafix/files/move_cache.txt) ; do
+			if [[ ! `busybox grep "$app" "/data/data/by.zatta.datafix/files/skip_apps.txt"` ]]; then
+				app_cache=$(busybox du -sLc /data/data/$app/cache|busybox tail -1|busybox cut -f1)
+				size_cache=$(($size_cache + $app_cache))
+			fi
+		done
+	
+		for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
+			size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
+			if [[ -d "/data/data/$app/li*" ]]; then
+				app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
+				size_skip=$(($size_skip - $app_lib))
+			fi
+		done
+	fi
 	
 	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
 	minimum=$(($size_avail - 5000))
@@ -132,15 +142,17 @@ check_sizes()
 		#shortage=$(($dif - $minimum))
 		#echo "$shortage"
 	fi
+else
+	echo "UNCHECKED"
+fi
 }
 
 for i
 do
   case "$i" in
-		
-	prepare_runtime) prepare_runtime $2 $3 $4;;
+	prepare_runtime) prepare_runtime $2 $3 $4 $5;;
 	wipe_cache) wipe_cache $2;;
 	wipe_data) wipe_data $2;;
-	check_sizes) check_sizes;;	
+	check_sizes) check_sizes $2;;	
   esac
 done

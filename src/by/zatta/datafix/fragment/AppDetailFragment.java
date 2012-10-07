@@ -45,7 +45,8 @@ public class AppDetailFragment extends ListFragment implements OnClickListener{
 	private DataListAdapter mAdapter;		
 	private TouchInterceptor.TickListener mTickListener =
 			    new TouchInterceptor.TickListener() {
-			        public void ticked(int item, int tick) {
+			        @Override
+					public void ticked(int item, int tick) {
 			        	
 			        	DataEntry dataItem = dataList.get(item);
 			        	if (BaseActivity.DEBUG)

@@ -41,11 +41,20 @@
 	<string name="FilesOnly">alleen .txt files installeren \n volgende boot duurt niet langer</string>
 	
 	<!-- ConfirmDialog New Lines -->
-	<string name = "NotEnoughSpace">
-	    Niet genoeg ruimte op /datadata om het script succesvol te draaien. \n
-	    Deinstalleer enkele apps of voeg apps toe aan move_cache of skipp_apps. \n
-	    Het tekort is</string>
 	<string name = "CalculateScenario">"Scenario's berekenen"</string>
+	<string name = "NotEnoughSpaceSimple">
+	    Niet genoeg ruimte op /datadata om het script succesvol te draaien. \n
+	    Deinstalleer enkele apps of kijk bij geavanceerde instellingen - script checks. \n
+	    Het tekort is</string>
+	<string name = "NotEnoughSpaceAdvanced">
+	    Niet genoeg ruimte op /datadata om het script succesvol te draaien. \n
+	    Deinstalleer enkele apps of vink enkele apps aan op het hoofdscherm.\n
+	    Mocht het nog steeds niet lukken vraag dan om hulp op XDA. \n
+	    Het tekort is</string>
+	<string name = "WarningNoSpaceCheck">NIET GECONTROLEERD OP BESCHIKBARE RUIMTE. \n \n
+	    									HET INIT.D SCRIPT KAN ZO PROBLEMEN VEROORZAKEN. \n \n
+	    									DEZE ZAL SLECHTS 1 MAAL ZO DRAAIEN,
+	    									TIJDENS DE EERSTVOLGENDE REBOOT</string>
 	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">Anuleer</string>
@@ -72,6 +81,10 @@
 	<string name="DebuggingTitle">Foutopsporing</string>
 	<string name="DebuggingSummary">Vink aan om foutopsporing te activeren</string>
 	<string name="DebuggingWarning">Herstart de app aub!</string>
+	<string name="AdvancedTitle">Geavanceerde Instellingen</string>
+	<string name="AdvancedSummary">voor onverwacht gedrag</string>
+	<string name="ScriptTitle">Script checks</string>
+	<string name="ScriptSummary">methode om beschikbare ruimte vast te stellen</string>
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">Sorteer alfabetisch</string>

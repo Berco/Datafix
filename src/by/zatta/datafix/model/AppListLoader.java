@@ -82,7 +82,7 @@ import by.zatta.datafix.assist.ShellProvider;
         			ShellProvider.INSTANCE.getCommandOutput("ls -lR /datadata/com.keramidas.TitaniumBackup | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("echo \" \" >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("echo \"***** INIT.D ***\" >> /sdcard/debugfileZatta.txt");
-        			ShellProvider.INSTANCE.getCommandOutput("ls -l /system/etc/init.d | awk '{print $1, $6, $7}' >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("ls -l /system/etc/init.d  >> /sdcard/debugfileZatta.txt");
         		}
         	}
         	

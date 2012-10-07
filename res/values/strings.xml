@@ -41,11 +41,19 @@
 	<string name="FilesOnly">just installing .txt files \n next boot takes normal time</string>
 	
 	<!-- ConfirmDialog New Lines -->
-	<string name = "NotEnoughSpace">
+	<string name = "CalculateScenario">"Calculating scenarios"</string>
+	<string name = "NotEnoughSpaceSimple">
+	    Not enough space on /datadata to run datafix script succesfully.\n 
+	    Uninstall some apps or look under advanced settings - script checks.\n
+	    You need to loose</string>
+	<string name = "NotEnoughSpaceAdvanced">
 	    Not enough space on /datadata to run datafix script succesfully.\n 
 	    Uninstall some apps or add some apps to move_cache or skip_apps.\n
+	    If it still fails find help on xda. \n
 	    You need to loose</string>
-	<string name = "CalculateScenario">"Calculating scenarios"</string>
+	<string name = "WarningNoSpaceCheck">NOT CHECKED FOR AVAILABLE SPACE \n  \n
+	    									THE INIT.D SCRIPT CAN CAUSE HUGE PROBLEMS \n \n 
+	    									SCRIPT WILL RUN ONLY ONCE THIS WAY, NEXT REBOOT ONLY</string>
 	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">Cancel</string>
@@ -72,6 +80,10 @@
 	<string name="DebuggingTitle">Debugging</string>
 	<string name="DebuggingSummary">Check to enable debugging</string>
 	<string name="DebuggingWarning">Restart the app please!</string>
+	<string name="AdvancedTitle">Advanced Settings</string>
+	<string name="AdvancedSummary">for unexpected behaviour</string>
+	<string name="ScriptTitle">Script checks</string>
+	<string name="ScriptSummary">method used for checking available space</string>
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">Sort alphabetically</string>

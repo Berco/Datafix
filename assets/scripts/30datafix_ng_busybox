@@ -39,7 +39,7 @@
 
 
 ####### Variables definition #######
-version='20120912'
+version='20121002'
 datadata='/data/data'
 yaffs='/datadata'
 
@@ -70,28 +70,45 @@ if [ ! -r "$datafix_files_dir/$skip_apps_file" ]; then
 	busybox touch "$datafix_files_dir/$skip_apps_file"
 fi
 
-# Check that there's enough space on /datadata to store all but libs files
+### Check that there's enough space on /datadata to store all but libs files ##
+# See if there is a file containing the way we want to check the available sizes
+if [ -e "/data/local/datafix/type" ]; then
+	mode=$(cat /data/local/datafix/type)
+else
+	# if there is no such file, do the old fashioned method.
+	mode="simple_check"
+fi
+# skip the whole thing is the user wants it that way. Not preferred.
+if [[ "$mode" != "no_check" ]]; then
+	
+	#get the basis variables.
 	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
 	size_lib=$(busybox du -sLc /data/data/*/li*|busybox tail -1|busybox cut -f1)
 	size_avail=$(busybox df -k /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
-
 	size_cache=0
-	for app in $(busybox cat /data/local/datafix/move_cache.txt) ; do
-		if [[ ! `busybox grep "$app" "/data/local/datafix/skip_apps.txt"` ]]; then
-			app_cache=$(busybox du -sLc /data/data/$app/cache|busybox tail -1|busybox cut -f1)
-			size_cache=$(($size_cache + $app_cache))
-		fi
-	done
-	
 	size_skip=0
-	for app in $(busybox cat /data/local/datafix/skip_apps.txt) ; do
-		size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
-		if [[ -d "/data/data/$app/li*" ]]; then
-			app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
-			size_skip=$(($size_skip - $app_lib))
-		fi
-	done
 	
+	#if the user wants, he can take the move_cache and skip_apps into account. Advanced mode.
+	if [[ "$mode" = "advanced_check" ]]; then
+		for app in $(busybox cat /data/data/by.zatta.datafix/files/move_cache.txt) ; do
+			#Take the cache in account only when the app is not listed in skip_apps, else it counts double
+			if [[ ! `busybox grep "$app" "/data/data/by.zatta.datafix/files/skip_apps.txt"` ]]; then
+				app_cache=$(busybox du -sLc /data/data/$app/cache|busybox tail -1|busybox cut -f1)
+				size_cache=$(($size_cache + $app_cache))
+			fi
+		done
+	
+		for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
+			size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
+			#Don't count the libraries again.
+			if [[ -d "/data/data/$app/li*" ]]; then
+				app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
+				size_skip=$(($size_skip - $app_lib))
+			fi
+		done
+	fi
+	
+	#make the calculations, keep a 5MB extra for safety.
 	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
 	minimum=$(($size_avail - 5000))
 	
@@ -108,6 +125,12 @@ fi
 		echo "datafix checks okay, result will be" &&
 		echo "roughly $dif kB used on /datadata"
 	fi
+fi
+#if the user has used no_check, change this option back to simple
+if [[ -e "/data/local/datafix/type" && $mode = "no_check" ]]; then
+	busybox rm -r "/data/local/datafix/type"
+	busybox echo "simple_check" > "/data/local/datafix/type"
+fi
 
 ####### Script Initialisation #######
 

@@ -14,5 +14,17 @@
 		<item>de</item>
 		<item>fr</item>
 	</string-array>
+	
+	<string-array name="checks">
+	    <item>None</item>
+		<item>Simple</item>
+		<item>Advanced</item>
+	</string-array>
+	
+	<string-array name="check_keys">
+		<item>no_check</item>
+		<item>simple_check</item>
+		<item>advanced_check</item>
+	</string-array>
     
 </resources>
