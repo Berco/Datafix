@@ -1,34 +1,32 @@
-#!/system/bin/sh
+#!/system/xbin/sh
 # script for DATAFIX
 
 prepare_runtime()
 {
-	mount -o rw,remount -t yaffs2 /dev/block/mtdblock2 /system
+
+	busybox mount -o rw,remount -t yaffs2 /dev/block/mtdblock2 /system
 	
 	if [[ $2 = files_and_script || $2 = full_update ]]; then
-		rm /system/etc/init.d/30datafix*
-		rm /system/etc/init.d/S30datafix*
-		cd /data/data/by.zatta.datafix/files
-		cat datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
-		chown 0:2000 /system/etc/init.d/$1datafix_ng_busybox
-		chmod 755 /system/etc/init.d/$1datafix_ng_busybox
+		busybox rm /system/etc/init.d/30datafix*
+		busybox rm /system/etc/init.d/S30datafix*
+		busybox cat /data/data/by.zatta.datafix/files/datafix_ng_busybox > /system/etc/init.d/$1datafix_ng_busybox
+		busybox chown 0:2000 /system/etc/init.d/$1datafix_ng_busybox
+		busybox chmod 755 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
 	if [ -f "/data/local/datafix" ]; then
-		rm /data/local/datafix
+		busybox rm /data/local/datafix
 	fi
 	
 	if [ ! -d "/data/local/datafix" ]; then
-		mkdir -p "/data/local/datafix"
+		busybox mkdir -p "/data/local/datafix"
 	fi
+		
+	busybox cat /data/data/by.zatta.datafix/files/move_cache.txt > /data/local/datafix/move_cache.txt
+	busybox chmod 740 /data/local/datafix/move_cache.txt
 	
-	cd /data/data/by.zatta.datafix/files
-	
-	cat move_cache.txt > /data/local/datafix/move_cache.txt
-	chmod 740 /data/local/datafix/move_cache.txt
-	
-	cat skip_apps.txt > /data/local/datafix/skip_apps.txt
-	chmod 740 /data/local/datafix/skip_apps.txt
+	busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt > /data/local/datafix/skip_apps.txt
+	busybox chmod 740 /data/local/datafix/skip_apps.txt
 	
 	busybox echo "$4" > "/data/local/datafix/type"
 	
@@ -101,10 +99,10 @@ IFS=$SAVEIFS
 check_sizes()
 {
 if [[ "$1" != "no_check" ]]; then
-	
+
 	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
 	size_lib=$(busybox du -sLc /data/data/*/li*|busybox tail -1|busybox cut -f1)
-	size_avail=$(df -k | grep "/datadata" | busybox awk -F " " '{ print $1  }')
+	size_avail=$(busybox df -k | grep "/datadata" | busybox awk -F " " '{ print $2  }')
 	#making it possible for Zatta to debug on an device not containing /datadata
 	if [ -z $size_avail ]; then
 		size_avail=400000
