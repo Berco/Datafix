@@ -39,7 +39,7 @@
 
 
 ####### Variables definition #######
-version='20121002'
+version='20121011'
 datadata='/data/data'
 yaffs='/datadata'
 
