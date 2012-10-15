@@ -15,6 +15,8 @@ import by.zatta.datafix.R;
 import by.zatta.datafix.assist.ShellProvider;
 import android.app.DialogFragment;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -69,6 +71,7 @@ public class ShowInfoDialog extends DialogFragment {
 		if (tibuState.contains("null"))
 			tibuState = "You don't have Titanium Backup installed. Once you do, check backupFollowSymLinks in it's settings.";
         String about = new String(
+        		"Appversion: " + myAppVersion() + '\n' + '\n' +
 				"Just to show some info:" + '\n' + '\n'+
 				"Your Kernel:"+ '\n' +
 				kernel+ '\n'+'\n'+
@@ -242,5 +245,16 @@ public class ShowInfoDialog extends DialogFragment {
 		String dateAndTime = sdf.format(c.getTime())+"-datafix";
 		
 		return dateAndTime;
+	}
+	
+	public String myAppVersion(){
+		PackageInfo pinfo;
+		try {
+			pinfo = getActivity().getBaseContext().getPackageManager().getPackageInfo((getActivity().getBaseContext().getPackageName()), 0);
+			return pinfo.versionName;
+		} catch (NameNotFoundException e) {
+			return "version unknow";
+		}
+		
 	}
 }
