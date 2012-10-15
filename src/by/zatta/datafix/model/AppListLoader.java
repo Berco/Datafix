@@ -85,11 +85,9 @@ import by.zatta.datafix.assist.ShellProvider;
         			ShellProvider.INSTANCE.getCommandOutput("ls -l /system/etc/init.d  >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("echo \"***** DATAFIX ***\" >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/by.zatta.datafix  >> /sdcard/debugfileZatta.txt");
-<<<<<<< HEAD
         			ShellProvider.INSTANCE.getCommandOutput("echo \"***** SYSTEM INFO ***\" >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("busybox df  >> /sdcard/debugfileZatta.txt");
-=======
->>>>>>> 1d7d37cbfa69a08e96cea826eac8688db76aaedc
+
         		}
         	}
         	
