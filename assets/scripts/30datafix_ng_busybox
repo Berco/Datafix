@@ -101,7 +101,7 @@ if [[ "$mode" != "no_check" ]]; then
 		for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
 			app_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
 			#Dont count the libraries again.
-			if [ -d "/data/data/$app/li*" ]; then
+			if [ -d /data/data/$app/li* ]; then
 				app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
 				app_skip=$(($app_skip - $app_lib))
 			fi
