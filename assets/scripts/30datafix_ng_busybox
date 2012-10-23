@@ -39,7 +39,7 @@
 
 
 ####### Variables definition #######
-version='20121011'
+version='20121023'
 datadata='/data/data'
 yaffs='/datadata'
 
@@ -99,12 +99,13 @@ if [[ "$mode" != "no_check" ]]; then
 		done
 	
 		for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
-			size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
-			#Don't count the libraries again.
-			if [[ -d "/data/data/$app/li*" ]]; then
+			app_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
+			#Dont count the libraries again.
+			if [ -d "/data/data/$app/li*" ]; then
 				app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
-				size_skip=$(($size_skip - $app_lib))
+				app_skip=$(($app_skip - $app_lib))
 			fi
+			size_skip=$(($size_skip + $app_skip))
 		done
 	fi
 	

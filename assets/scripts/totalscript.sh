@@ -106,7 +106,7 @@ if [[ "$1" != "no_check" ]]; then
 	#making it possible for Zatta to debug on an device not containing /datadata
 	if [ -z $size_avail ]; then
 		size_avail=400000
-	fi 
+	fi
 	size_cache=0
 	size_skip=0
 	
@@ -117,28 +117,29 @@ if [[ "$1" != "no_check" ]]; then
 				size_cache=$(($size_cache + $app_cache))
 			fi
 		done
-	
+		
 		for app in $(busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt) ; do
-			size_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
-			if [[ -d "/data/data/$app/li*" ]]; then
+			app_skip=$(busybox du -sLc /data/data/$app/*|busybox tail -1|busybox cut -f1)
+			if [ -d /data/data/$app/li* ]; then
 				app_lib=$(busybox du -sLc /data/data/$app/li*|busybox tail -1|busybox cut -f1)
-				size_skip=$(($size_skip - $app_lib))
+				app_skip=$(($app_skip - $app_lib))
 			fi
+			size_skip=$(($size_skip + $app_skip))
 		done
 	fi
 	
 	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
 	minimum=$(($size_avail - 5000))
 	
-	echo "avail:$size_avail dif:$dif total:$size_total lib:$size_lib cache:$size_cache skip:$size_skip"
+	echo "ZEOL TOTALS ZEOL avail:$size_avail ZEOL ZEOL total:$size_total ZEOL lib:$size_lib ZEOL cache:$size_cache ZEOL skip:$size_skip ZEOL dif:$dif ZEOL"
 	
 	if [ $dif -gt $minimum ]; then
 		shortage=$(($dif - $minimum))
 		echo "$shortage"
 	else
+		result=$(($dif - $minimum))
+		echo "result will be $result ZEOL"
 		echo "okay"
-		#shortage=$(($dif - $minimum))
-		#echo "$shortage"
 	fi
 else
 	echo "UNCHECKED"

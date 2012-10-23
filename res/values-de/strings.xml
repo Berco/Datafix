@@ -41,11 +41,19 @@
 	<string name="FilesOnly">installiere nur .txt-Dateien \n Der nächste Start wird nicht beeinflußt</string>
 	
 	<!-- ConfirmDialog New Lines -->
-	<string name = "NotEnoughSpace">
-	    Nicht genug Platz in /datadata, um das Datafix erfolgreich auszuführen.\n 
-	    Deinstalliere einige Apps oder füge weiter Apps zu move_cache oder skip_apps hinzu.\n
-	    Loswerden mußt du</string>
-	<string name = "CalculateScenario">"Berechne Szenarien"</string>
+	<string name = "CalculateScenario">"Calculating scenarios"</string>
+	<string name = "NotEnoughSpaceSimple">
+	    Nicht genug Platz auf /datadata, um das Datafix vernünftig ausführen zu können.\n
+    	Entferne entweder einige Apps oder schau bei den erweiterten Einstellungen - Script Checks.\n
+    	Es fehlen noch</string>
+	<string name = "NotEnoughSpaceAdvanced">
+	    Nicht genug Platz auf /datadata, um das Datafix vernünftig ausführen zu können.\n
+    	Entferne einige Apps oder erweitere die Liste move_cache oder skip_apps.\n
+    	Es fehlen noch</string>
+	<string name = "WarningNoSpaceCheck">VERFÜGBARER PLATZ NOCH NICHT ÜBERPRÜFT \n  \n
+    									DAS INIT.D-SCRIPT KANN GROSSE PROBLEME VERURSACHEN \n  \n
+    									DAS SCRIPT WIRD SO NUR EINMALIG LAUFEN, UND ZWAR BEIM NÄCHSTEN NEUSTART</string>
+	
 	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">Abbrechen</string>
@@ -72,6 +80,10 @@
 	<string name="DebuggingTitle">Debugging</string>
 	<string name="DebuggingSummary">anwählen um Debugging zu aktivieren</string>
 	<string name="DebuggingWarning">Bitte die App neustarten!</string>
+	<string name="AdvancedTitle">Erweiterte Einstellungen</string>
+	<string name="AdvancedSummary">bei unerwartetem Verhalten</string>
+	<string name="ScriptTitle">Script Checks</string>
+	<string name="ScriptSummary">wie der verfügbare Platz geprüft wird</string>
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">alphabetisch sortieren</string>

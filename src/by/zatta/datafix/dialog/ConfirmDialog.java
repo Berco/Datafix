@@ -156,6 +156,12 @@ public class ConfirmDialog extends DialogFragment
 				tvUP.setText(showString);
 				tvUP.setTextColor(getResources().getColor(R.color.red));
 			}
+//			//UNCOMMENT THIS FOR TESTING THE SCRIPT
+//			testString = testString.replace("ZEOL", "\n");
+//			tvUP.setText(testString);
+//			mCbNandroid.setVisibility(View.VISIBLE);
+//			YESANDREBOOT.setVisibility(View.VISIBLE);
+//			YESNOREBOOT.setVisibility(View.VISIBLE);
 		} catch (Exception e) {
 				tvUP.setText("SCRIPT ERROR" + '\n' + testString);
 				mCbNandroid.setVisibility(View.VISIBLE);

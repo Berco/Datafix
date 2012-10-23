@@ -41,11 +41,19 @@
 	<string name="FilesOnly">"Installation des fichiers .txt seuls \n le prochain démarrage ne prendra pas plus de temps"</string>
 	
 	<!-- ConfirmDialog New Lines -->
-	<string name = "NotEnoughSpace">
-	    "L'espace disque sur /datadata est insuffisant pour exécuter le script datafix correctement.\n 
-	    Supprimez quelques applications ou ajouter quelques applications aux fichiers move_cache ou skip_apps.\n
-	    Vous devez libérer"</string>
 	<string name = "CalculateScenario">"Scénarios en cours de calcul"</string>
+	<string name = "NotEnoughSpaceSimple">
+	    "Espace disponible insuffisant sur /datadata pour exécuter le script datafix correctement.\n
+		Désinstallez quelques applications où vérifiez la méthode de calcul dans les paramètres avancés.\n
+		Vous devez gagner"</string>
+	<string name = "NotEnoughSpaceAdvanced">
+	    "Espace disponible insuffisant sur /datadata pour exécuter le script datafix correctement.\n
+		Désinstallez quelques applications ou ajoutez des applications aux fichiers move_cache ou skip_apps.\n
+		Si cela échoue toujours venez chercher de l'aide sur xda.\n
+		Vous devez gagner"</string>
+	<string name = "WarningNoSpaceCheck">AUCUNE VERIFICATION DE L\'ESPACE DISPONIBLE \n \n
+										LE SCRIPT INIT.D PEUT CAUSER DE GROS PROBLEMES \n \n
+										LE SCRIPT NE DEMARRERA QU\'UNE SEULE FOIS, LORS DU PROCHAIN REDEMARRAGE</string>
 	
 	<!--   ExitDialog -->
 	<string name="btnNoExit">"Annuler"</string>
@@ -72,6 +80,10 @@
 	<string name="DebuggingTitle">"Débogage"</string>
 	<string name="DebuggingSummary">"Cochez la case pour activer débogage"</string>
 	<string name="DebuggingWarning">"Redémarrez l'application s'il vous plaît"</string>
+	<string name="AdvancedTitle">"Paramètres Avancés"</string>
+	<string name="AdvancedSummary">"pour les comportements inattendus"</string>
+	<string name="ScriptTitle">"Script de vérification"</string>
+	<string name="ScriptSummary">"méthode utilisée pour vérifier l'espace disponible"</string>
 	
 	<!--  Sort Dialog -->
 	<string name="rbAlpha">"Classer par ordre alphabétique"</string>
