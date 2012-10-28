@@ -100,6 +100,11 @@ check_sizes()
 {
 if [[ "$1" != "no_check" ]]; then
 
+	#lines for testing purposes
+	#if [ ! -e "/data/data/by.zatta.datafix/thislink" ]; then
+	#	busybox ln -s "/sdcard/Cyandelta" "/data/data/by.zatta.datafix/thislink"
+	#fi
+	
 	size_total=$(busybox du -sLc /data/data|busybox tail -1|busybox cut -f1)
 	size_lib=$(busybox du -sLc /data/data/*/li*|busybox tail -1|busybox cut -f1)
 	size_avail=$(busybox df -k | grep "/datadata" | busybox awk -F " " '{ print $2  }')
@@ -109,7 +114,8 @@ if [[ "$1" != "no_check" ]]; then
 	fi
 	size_cache=0
 	size_skip=0
-	
+	exclude=0
+		
 	if [[ "$1" = "advanced_check" ]]; then
 		for app in $(busybox cat /data/data/by.zatta.datafix/files/move_cache.txt) ; do
 			if [[ ! `busybox grep "$app" "/data/data/by.zatta.datafix/files/skip_apps.txt"` ]]; then
@@ -126,12 +132,22 @@ if [[ "$1" != "no_check" ]]; then
 			fi
 			size_skip=$(($size_skip + $app_skip))
 		done
+		
+		for base in data/data datadata ; do
+		for mylink in $(busybox find /$base -type l) ; do
+			link=$(busybox ls -l $mylink | busybox awk -F " " '{ print $11  }' | busybox awk -F "/" '{ print $2 }' )
+			if [[ ! "$link" = "datadata" ]]; then
+				exclude_this=$(busybox du -sLc $mylink | busybox tail -1 | busybox cut -f1)
+				exclude=$(( $exclude + $exclude_this ))
+			fi
+		done	
+	done
 	fi
 	
-	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
+	dif=$(($size_total - $size_lib - $size_cache - $size_skip - $exclude))
 	minimum=$(($size_avail - 5000))
 	
-	echo "ZEOL TOTALS ZEOL avail:$size_avail ZEOL ZEOL total:$size_total ZEOL lib:$size_lib ZEOL cache:$size_cache ZEOL skip:$size_skip ZEOL dif:$dif ZEOL"
+	echo "ZEOL TOTALS ZEOL avail:$size_avail ZEOL ZEOL total:$size_total ZEOL lib:$size_lib ZEOL cache:$size_cache ZEOL skip:$size_skip ZEOL dif:$dif ZEOL exclude:$exclude ZEOL"
 	
 	if [ $dif -gt $minimum ]; then
 		shortage=$(($dif - $minimum))

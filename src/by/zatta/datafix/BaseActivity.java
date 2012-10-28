@@ -33,6 +33,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -47,6 +49,9 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String version = myAppVersion();
+        this.setTitle(getString(R.string.app_name) + " " + version);
+        
         ShellProvider.INSTANCE.isSuAvailable();
         new PlantFiles().execute();
                
@@ -81,6 +86,17 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
         getBaseContext().getResources().updateConfiguration(config, 
         getBaseContext().getResources().getDisplayMetrics());
     }
+    
+    public String myAppVersion(){
+		PackageInfo pinfo;
+		try {
+			pinfo = this.getPackageManager().getPackageInfo((this.getPackageName()), 0);
+			return pinfo.versionName;
+		} catch (NameNotFoundException e) {
+			return " ";
+		}
+		
+	}
     
     @Override
 	public void onAppSelectedListener(AppEntry app) {

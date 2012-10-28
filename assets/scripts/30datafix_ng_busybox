@@ -39,7 +39,7 @@
 
 
 ####### Variables definition #######
-version='20121023'
+version='20121028'
 datadata='/data/data'
 yaffs='/datadata'
 
@@ -72,12 +72,16 @@ fi
 
 ### Check that there's enough space on /datadata to store all but libs files ##
 # See if there is a file containing the way we want to check the available sizes
+
 if [ -e "/data/local/datafix/type" ]; then
 	mode=$(cat /data/local/datafix/type)
+	echo "mode from file: $mode"
 else
 	# if there is no such file, do the old fashioned method.
 	mode="simple_check"
+	echo "no mode file: $mode"
 fi
+
 # skip the whole thing is the user wants it that way. Not preferred.
 if [[ "$mode" != "no_check" ]]; then
 	
@@ -87,6 +91,7 @@ if [[ "$mode" != "no_check" ]]; then
 	size_avail=$(busybox df -k /datadata | busybox tail -1 | busybox awk -F " " '{ print $2  }')
 	size_cache=0
 	size_skip=0
+	exclude=0
 	
 	#if the user wants, he can take the move_cache and skip_apps into account. Advanced mode.
 	if [[ "$mode" = "advanced_check" ]]; then
@@ -107,11 +112,25 @@ if [[ "$mode" != "no_check" ]]; then
 			fi
 			size_skip=$(($size_skip + $app_skip))
 		done
+		
+		#check for strange symlinks
+		for base in data/data datadata ; do
+			for mylink in $(busybox find /$base -type l) ; do
+				link=$(busybox ls -l $mylink | busybox awk -F " " '{ print $11  }' | busybox awk -F "/" '{ print $2 }' )
+				#exclude all symlinks in not pointing to /datadata
+				if [[ ! "$link" = "datadata" ]]; then
+					exclude_this=$(busybox du -sLc $mylink | busybox tail -1 | busybox cut -f1)
+					exclude=$(( $exclude + $exclude_this ))
+				fi
+			done
+		done
 	fi
 	
 	#make the calculations, keep a 5MB extra for safety.
-	dif=$(($size_total - $size_lib - $size_cache - $size_skip))
+	dif=$(($size_total - $size_lib - $size_cache - $size_skip - $exclude))
 	minimum=$(($size_avail - 5000))
+	
+	echo "avail:$size_avail total:$size_total lib:$size_lib cache:$size_cache skip:$size_skip dif:$dif exclude:$exclude"
 	
 	if [ $dif -gt $minimum ]; then
 		shortage=$(($dif - $minimum))
@@ -127,6 +146,7 @@ if [[ "$mode" != "no_check" ]]; then
 		echo "roughly $dif kB used on /datadata"
 	fi
 fi
+
 #if the user has used no_check, change this option back to simple
 if [[ -e "/data/local/datafix/type" && $mode = "no_check" ]]; then
 	busybox rm -r "/data/local/datafix/type"
