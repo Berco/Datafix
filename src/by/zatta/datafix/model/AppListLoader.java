@@ -87,8 +87,9 @@ import by.zatta.datafix.assist.ShellProvider;
         			ShellProvider.INSTANCE.getCommandOutput("ls -lR /data/data/by.zatta.datafix  >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("echo \"***** SYSTEM INFO ***\" >> /sdcard/debugfileZatta.txt");
         			ShellProvider.INSTANCE.getCommandOutput("busybox df  >> /sdcard/debugfileZatta.txt");
-
-        		}
+        			ShellProvider.INSTANCE.getCommandOutput("echo \"***** KERNEL AND ROM ***\" >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("busybox cat /proc/version  >> /sdcard/debugfileZatta.txt");
+        			ShellProvider.INSTANCE.getCommandOutput("busybox busybox grep ro.modversion /system/build.prop  >> /sdcard/debugfileZatta.txt");        		}
         	}
         	
         	if (cacheFile.length() == 0){

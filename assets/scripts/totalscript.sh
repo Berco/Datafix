@@ -14,6 +14,11 @@ prepare_runtime()
 		busybox chmod 755 /system/etc/init.d/$1datafix_ng_busybox
 	fi
 	
+	busybox rm /system/addon.d/60-datafix.sh
+	busybox cat /data/data/by.zatta.datafix/files/60-datafix.sh > /system/addon.d/60-datafix.sh
+	busybox chown 0:2000 /system/addon.d/60-datafix.sh
+	busybox chmod 755 /system/addon.d/60-datafix.sh
+	
 	if [ -f "/data/local/datafix" ]; then
 		busybox rm /data/local/datafix
 	fi

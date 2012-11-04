@@ -230,6 +230,19 @@ public class BaseActivity extends Activity implements OnAppSelectedListener, OnW
 				} catch (IOException e) {}
 			}
 			
+			File g = new File(data_storage_root+"/60-datafix.sh");
+			if (!f.exists() || f.exists()){
+				try {
+					is = getResources().getAssets().open("scripts/60-datafix.sh");
+					os = new FileOutputStream(data_storage_root+"/60-datafix.sh");
+					IOUtils.copy(is, os);
+					is.close();
+					os.flush();
+					os.close();
+					os = null;
+				} catch (IOException e) {}
+			}
+			
 			File d = new File(data_storage_root+"/datafix_ng_busybox");
 			if (!d.exists() || f.exists() ){
 				try {

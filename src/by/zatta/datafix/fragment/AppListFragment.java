@@ -9,6 +9,7 @@ import java.util.List;
 import by.zatta.datafix.BaseActivity;
 import by.zatta.datafix.R;
 import by.zatta.datafix.assist.TouchInterceptor;
+import by.zatta.datafix.dialog.ChangelogDialog;
 import by.zatta.datafix.dialog.ConfirmDialog;
 import by.zatta.datafix.dialog.ExitDialog;
 import by.zatta.datafix.dialog.FirstUseDialog;
@@ -26,6 +27,8 @@ import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -127,6 +130,11 @@ public class AppListFragment extends ListFragment
 					SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 					Boolean firstUse = getPrefs.getBoolean("showFirstUse", true);
 					if (firstUse) showFirstUse();
+					
+					String currentVersion = myAppVersion();
+					String previousVersion = getPrefs.getString("oldVersion", "1.1.5");
+					if (! currentVersion.equals(previousVersion)) showChangelog();
+					showChangelog();
 				}
 				freeSpaceAvailable();
 	}
@@ -235,6 +243,26 @@ public class AppListFragment extends ListFragment
 		ft.addToBackStack(null);
 		DialogFragment newFragment = FirstUseDialog.newInstance();
 		newFragment.show(ft, "dialog");
+	}
+	
+	public void showChangelog(){	
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+		if (prev != null) ft.remove(prev);
+		ft.addToBackStack(null);
+		DialogFragment newFragment = ChangelogDialog.newInstance();
+		newFragment.show(ft, "dialog");
+	}
+	
+	public String myAppVersion(){
+		PackageInfo pinfo;
+		try {
+			pinfo = getActivity().getBaseContext().getPackageManager().getPackageInfo((getActivity().getBaseContext().getPackageName()), 0);
+			return pinfo.versionName;
+		} catch (NameNotFoundException e) {
+			return " ";
+		}
+		
 	}
 	
 	@Override

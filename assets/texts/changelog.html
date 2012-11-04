@@ -1,0 +1,52 @@
+<p><h1><i><u>Changelog</u></i></h1></p>
+
+<p><b><u>Version 1.1.7:</u></b></b><br/>
+&#8226;Added a changelog to the app, market changelog is just too short<br/>
+&#8226;Created addon.d option in the settings. Enable it to keep the init.d script there when upgrading your rom.<br/>
+
+<p><b><u>Version 1.1.6:</u></b></b><br/>
+&#8226;Disabled nandroid check-box, need to figure out why it has stopped working. <br/>
+&#8226;Shows version in the actionbar.<br/>
+&#8226;Scripts change: checks for symlinks pointing to somewhere outside /datadata locations when calculating the available size.<br/>
+
+</p><p><b><u>Version 1.1.5:</u></b><br/>
+&#8226;Improvements made in the way the script and app check for available and requiered space on /datadata.<br/>
+&#8226;Made it optional to do these checks. It can now be done simple (not taking the checkboxes in account) or advanced (calculating the extra space on /datadata freed up by checking some boxes). It can also be disabled but be aware this is a risk for your device.<br/>
+&#8226;Updated French, Dutch and German translations.<br/>
+
+</p><p><b><u>Version 1.1.2:</u></b><br/>
+&#8226;Added German translations.<br/>
+&#8226;Changed the way the script checks for enough space. Should take the apps added to move_cache and skipp_apps in account now.<br/>
+&#8226;Implemented this change in the app itself, if there is not enough space available for all your data (independant from the free percentage, it can be that on /data a huge collection of data has piled up).<br/>
+&#8226;Notifications now also translated in Dutch, French and German.<br/>
+
+</p><p><b><u>Version 1.0.1:</u></b><br/>
+&#8226;REMOVE THE PREVIOUS SCRIPT FROM INIT.D PLEASE!!<br/>
+&#8226;Another French update<br/>
+&#8226;permission for init.d script: 755, owner: shell (thanks Rollus for pointing out the effect of previous change).<br/>
+&#8226;changed script version number to force the app to replace the init.d script.<br/>
+
+</p><p><b><u>Version 1.0.0:</u></b><br/>
+&#8226;Fix for lost permissions of the move_cache.txt, causing it not to bea read by the app.<br/>
+&#8226;Made debugging a user preference. It spits out a textfile with some permissions info plus a logcat when exiting the app (if enabled).<br/>
+&#8226;changed permission for the init.d script to 777 again.<br/>
+
+</p><p><b><u>Version 0.9.5:</u></b><br/>
+&#8226;Again French translation update.<br/>
+&#8226;Fix for overriding the move_cache initialisation. Now your personal settings for move_cache should always stick exept for a fully empty move_cache.txt. Gmail and Downloads will be ticked in that case.<br/>
+&#8226;Fix for having a file instead of a directory on /data/local/datafix.<br/>
+
+</p><p><b><u>Version 0.9.4:</u></b><br/>
+&#8226;Updated French and Dutch translations (thanks to SilentBoB and Rebel2K).<br/>
+&#8226;Fix for not showing datasizes and misfunctioning sorting.<br/>
+&#8226;New permission: Play Store in app billing: not used for now, in the future to replace paypal donations.<br/>
+
+</p><p><b><u>Version 0.9.2:</u></b><br/>
+&#8226;Updated French translations.<br/>
+&#8226;Fixed typo in Dutch translations.<br/>
+&#8226;Fixed a minor bug in the notifications: no more notification when updating an app, only notify on new installs.<br/>
+&#8226;Improved performance (only create apps data on first start).<br/>
+&#8226;Changed the link in preferences to this thread (notice that the new tapatalk can handle this link as wel!!)<br/>
+
+</p><p><b><u>Version 0.9(.1):</u></b><br/>
+&#8226;Initial release.<br/></p>
