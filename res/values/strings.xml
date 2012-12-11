@@ -84,6 +84,8 @@
 	<string name="AdvancedSummary">for unexpected behaviour</string>
 	<string name="ScriptTitle">Script checks</string>
 	<string name="ScriptSummary">method used for checking available space</string>
+	<string name="AddonTitle">Survive ROM flashing</string>
+	<string name="AddonSummary">use addon.d to keep init.d script installed. Press install to activate.</string>
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">Sort alphabetically</string>

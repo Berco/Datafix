@@ -229,6 +229,9 @@ public class ConfirmDialog extends DialogFragment
 		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
 		String scripttype = getPrefs.getString("initDContent", "undefined");
 		String checkMode = getPrefs.getString("scriptcheck", "simple_check");
+		Boolean addonMode = getPrefs.getBoolean("useAddonD", true);
+		String addon;
+		if (addonMode) addon = "addon"; else addon = "no_addon";
 		Editor editor = getPrefs.edit();
 				
 		switch (v.getId()){
@@ -247,7 +250,7 @@ public class ConfirmDialog extends DialogFragment
 				}else{
 					rebootMode=" reboot";
 				}
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update + rebootMode + " " + checkMode);
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update + " " + addon + " " + rebootMode + " " + checkMode);
 				} catch (Exception e) {	}
 				
 			break;
@@ -258,7 +261,7 @@ public class ConfirmDialog extends DialogFragment
 			}
 			if (!mCbNandroid.isChecked()){
 			try {
-				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update +" noreboot" + " " + checkMode);
+				ShellProvider.INSTANCE.getCommandOutput("/data/data/by.zatta.datafix/files/totalscript.sh prepare_runtime " + scripttype + " " + update +  " " + addon + " " + "noreboot" + " " + checkMode);
 				Toast.makeText(getActivity().getBaseContext(), getString(R.string.WarningNandroidNotChecked), Toast.LENGTH_LONG).show();
 		    	editor.putString("version", ShowInfoDialog.ourVersion());
 		        editor.commit();

@@ -5,7 +5,7 @@ prepare_runtime()
 {
 
 	busybox mount -o rw,remount -t yaffs2 /dev/block/mtdblock2 /system
-	
+	echo "$1 $2 $3 $4 $5 $6"
 	if [[ $2 = files_and_script || $2 = full_update ]]; then
 		busybox rm /system/etc/init.d/30datafix*
 		busybox rm /system/etc/init.d/S30datafix*
@@ -15,9 +15,12 @@ prepare_runtime()
 	fi
 	
 	busybox rm /system/addon.d/60-datafix.sh
-	busybox cat /data/data/by.zatta.datafix/files/60-datafix.sh > /system/addon.d/60-datafix.sh
-	busybox chown 0:2000 /system/addon.d/60-datafix.sh
-	busybox chmod 755 /system/addon.d/60-datafix.sh
+	
+	if [ $3 = addon ]; then
+		busybox cat /data/data/by.zatta.datafix/files/60-datafix.sh > /system/addon.d/60-datafix.sh
+		busybox chown 0:2000 /system/addon.d/60-datafix.sh
+		busybox chmod 755 /system/addon.d/60-datafix.sh
+	fi
 	
 	if [ -f "/data/local/datafix" ]; then
 		busybox rm /data/local/datafix
@@ -33,13 +36,13 @@ prepare_runtime()
 	busybox cat /data/data/by.zatta.datafix/files/skip_apps.txt > /data/local/datafix/skip_apps.txt
 	busybox chmod 740 /data/local/datafix/skip_apps.txt
 	
-	busybox echo "$4" > "/data/local/datafix/type"
+	busybox echo "$5" > "/data/local/datafix/type"
 	
-	if [ $3 = reboot ]; then
+	if [ $4 = reboot ]; then
 		reboot
 	fi
 	
-	if [ $3 = reboot_recovery ]; then
+	if [ $4 = reboot_recovery ]; then
 		cat extendedcommand > /cache/recovery/extendedcommand
 		reboot recovery
 	fi
@@ -170,7 +173,7 @@ fi
 for i
 do
   case "$i" in
-	prepare_runtime) prepare_runtime $2 $3 $4 $5;;
+	prepare_runtime) prepare_runtime $2 $3 $4 $5 $6;;
 	wipe_cache) wipe_cache $2;;
 	wipe_data) wipe_data $2;;
 	check_sizes) check_sizes $2;;	

@@ -134,7 +134,7 @@ public class AppListFragment extends ListFragment
 					String currentVersion = myAppVersion();
 					String previousVersion = getPrefs.getString("oldVersion", "1.1.5");
 					if (! currentVersion.equals(previousVersion)) showChangelog();
-					showChangelog();
+					//showChangelog();
 				}
 				freeSpaceAvailable();
 	}

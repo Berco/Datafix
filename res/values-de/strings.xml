@@ -84,6 +84,8 @@
 	<string name="AdvancedSummary">bei unerwartetem Verhalten</string>
 	<string name="ScriptTitle">Script Checks</string>
 	<string name="ScriptSummary">wie der verfügbare Platz geprüft wird</string>
+	<string name="AddonTitle">Nach ROM-flash weiter verfügbar</string>
+	<string name="AddonSummary">init-Skript bleibt durch Nutzen von addon.d installiert</string>	
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">alphabetisch sortieren</string>

@@ -84,6 +84,8 @@
 	<string name="AdvancedSummary">"pour les comportements inattendus"</string>
 	<string name="ScriptTitle">"Script de vérification"</string>
 	<string name="ScriptSummary">"méthode utilisée pour vérifier l'espace disponible"</string>
+	<string name="AddonTitle">"Survivre à un flashage de ROM"</string>
+	<string name="AddonSummary">"utiliser addon.d pour conserver le script init.d installé"</string>
 	
 	<!--  Sort Dialog -->
 	<string name="rbAlpha">"Classer par ordre alphabétique"</string>

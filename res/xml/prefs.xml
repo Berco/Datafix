@@ -17,6 +17,13 @@
 		android:summary="@string/NotificationSummary">
 	</CheckBoxPreference>
 	
+  	<CheckBoxPreference
+		android:title="@string/AddonTitle"
+		android:defaultValue="true"
+		android:key="useAddonD"
+		android:summary="@string/AddonSummary">
+	</CheckBoxPreference>
+	
   	<ListPreference
         android:title="@string/LanguageTitle"
         android:summary="@string/LanguageSummary"

@@ -85,6 +85,8 @@
 	<string name="AdvancedSummary">voor onverwacht gedrag</string>
 	<string name="ScriptTitle">Script checks</string>
 	<string name="ScriptSummary">methode om beschikbare ruimte vast te stellen</string>
+	<string name="AddonTitle">Overleef ROM-flashes</string>
+	<string name="AddonSummary">gebruik addon.d om het init.d script geinstalleerd te laten</string>
 	
 	<!--  Sort Dialog -->
 	<string name = "rbAlpha">Sorteer alfabetisch</string>
