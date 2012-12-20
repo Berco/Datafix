@@ -84,7 +84,7 @@
         	android:layout_centerHorizontal="true"
         	android:layout_marginBottom="5dp"
         	android:src="@drawable/sort_down" />
-
+		
 		<View
 		    android:id="@+id/vTopListDiscription"
 		    android:layout_width="fill_parent"
